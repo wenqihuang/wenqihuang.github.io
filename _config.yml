@@ -85,7 +85,7 @@ author:
   bio              : "PhD Student on MRI reconstruction"
   location         : "Munich, Germany"
   employer         :
-  pubmed           : "https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
+  pubmed           : #"https://www.ncbi.nlm.nih.gov/pubmed/?term=john+snow"
   googlescholar    : "https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en"
   email            : "wenqi.huang@tum.de"
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
