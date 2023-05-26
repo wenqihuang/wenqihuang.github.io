@@ -21,6 +21,7 @@ Selected Publications
 Information Processing in Medical Imaging, 2023. \[[code](https://github.com/wenqihuang/NIK_MRI)\]<br />
 <br />
 
+----
 
 <img align="left" width="300" src="/images/works/lsnet.png" style="margin-right: 15px" /> 
 
@@ -29,6 +30,7 @@ Information Processing in Medical Imaging, 2023. \[[code](https://github.com/wen
 Medical Image Analysis, 2021. \[[code](https://github.com/wenqihuang/LS-Net-Dynamic-MRI)\]<br />
 <br />
 
+----
 
 <img align="left" width="300" src="/images/works/slrnet.png" style="margin-right: 15px" /> 
 
