@@ -11,10 +11,10 @@ redirect_from:
 
 Education
 ======
-* B.S. in GitHub, GitHub University, 2012
-* M.S. in Jekyll, GitHub University, 2014
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
+* B.Eng. in Information Engineering, Soochow University, 2018
+* M.Sc. in Pattern Recognition and Intelligent Systems, Shenzhen Institute of Advanced Technology, Chinese Academy of Sciences, 2021
 
+<!-- 
 Work experience
 ======
 * Summer 2015: Research Assistant
@@ -56,4 +56,4 @@ Teaching
   
 Service and leadership
 ======
-* Currently signed in to 43 different slack teams
+* Currently signed in to 43 different slack teams -->
