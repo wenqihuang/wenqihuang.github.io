@@ -4,7 +4,7 @@ collection: talks
 type: "Talk"
 permalink: /talks/2022-siam-mds22
 venue: "zoom"
-date: 2013-03-01
+date: 09/2022
 location: "Online"
 ---
 
