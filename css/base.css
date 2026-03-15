@@ -160,7 +160,7 @@ h1, h2, h3 {
   height: 2px;
   background: var(--color-text);
   border-radius: 2px;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+  transition: transform 0.3s ease, opacity 0.15s ease;
 }
 
 .nav-links {
@@ -430,34 +430,6 @@ h1, h2, h3 {
   transform: translateX(-50%) translateY(0);
 }
 
-/* --- Scroll hint --- */
-.scroll-hint {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--color-text-secondary);
-  opacity: 0;
-  pointer-events: none;
-  animation: scrollBounce 2s ease-in-out infinite;
-  transition: opacity 0.3s ease;
-}
-
-@media (max-width: 768px) {
-  .scroll-hint {
-    opacity: 0.4;
-  }
-}
-
-.scroll-hint.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-@keyframes scrollBounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50% { transform: translateX(-50%) translateY(6px); }
-}
 
 /* --- Wave Divider --- */
 .wave-divider {
@@ -1061,15 +1033,14 @@ h1, h2, h3 {
     transform: translateY(-10px);
     pointer-events: none;
     visibility: hidden;
-    transition: transform 0.25s ease 0s, visibility 0s linear 0.25s;
+    transition: transform 0.3s ease, visibility 0s linear 0.3s;
   }
 
   .nav-toggle-input:checked ~ .nav-links {
-    -webkit-transform: translateY(0) translateZ(0);
     transform: translateY(0);
     pointer-events: auto;
     visibility: visible;
-    transition: transform 0.25s ease 0.15s, visibility 0s linear 0s;
+    transition: transform 0.3s ease, visibility 0s linear 0s;
   }
 
   .nav-toggle-input:checked ~ .nav-toggle-label span:nth-child(1) {
