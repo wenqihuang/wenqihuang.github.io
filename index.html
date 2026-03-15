@@ -15,8 +15,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400&family=Noto+Sans+SC:wght@400&family=Noto+Serif+SC:wght@400;600;700&text=%E9%BB%84%E6%96%87%E9%BA%92&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400&family=Noto+Sans+SC:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&text=%E9%BB%84%E6%96%87%E9%BA%92&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/theme-warm.css" id="theme-css">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
@@ -463,6 +465,26 @@
           <strong>MICCAI</strong>,
           <strong>ISMRM</strong>
         </p>
+      </div>
+
+      <!-- Academic Footprint -->
+      <div class="subsection">
+        <h3 class="subsection-title">Academic Footprint</h3>
+        <div id="academic-map" class="academic-map"></div>
+        <div class="map-legend">
+          <span><span class="legend-dot" style="background:#A8613D;"></span>Lived / studied</span>
+          <span><span class="legend-dot" style="background:#4A90D9;"></span>Conference / visit</span>
+          <span><span class="legend-dot" style="background:#6BAF6B;"></span>Collaborator</span>
+        </div>
+      </div>
+
+      <!-- Visitors -->
+      <div class="subsection">
+        <h3 class="subsection-title">Visitors</h3>
+        <div class="clustrmaps-wrap">
+          <script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=uWaLaz86939Us8zC5bV-VYPIQ0DB11K7SoTLO_yepzs&cl=ffffff&w=a"></script>
+          <noscript><a href="https://clustrmaps.com/site/1c9gg" title="ClustrMaps"><img src="//www.clustrmaps.com/map_v2.png?d=uWaLaz86939Us8zC5bV-VYPIQ0DB11K7SoTLO_yepzs&cl=ffffff" alt="Visitor Map"></a></noscript>
+        </div>
       </div>
 
       <!-- Personal -->
@@ -924,6 +946,95 @@
         }
       }, { threshold: 0.5 });
       obs.observe(divider);
+    })();
+  </script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script>
+    // ---- Academic Map ----
+    (function() {
+      const mapEl = document.getElementById('academic-map');
+      if (!mapEl || mapEl.offsetHeight === 0) return;
+      const map = L.map('academic-map', {
+        scrollWheelZoom: false,
+        attributionControl: true
+      }).setView([20, 0], 1);
+      setTimeout(function() { map.invalidateSize(); }, 200);
+
+      // Tile layer — use light style
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const tileUrl = isDark
+        ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+        : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+      let tileLayer = L.tileLayer(tileUrl, {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      // Switch tiles on theme change
+      const obs = new MutationObserver(() => {
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const url = dark
+          ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+          : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+        tileLayer.setUrl(url);
+      });
+      obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+      function dot(color, r) {
+        return L.divIcon({
+          className: '',
+          html: '<div style="width:' + r*2 + 'px;height:' + r*2 + 'px;border-radius:50%;background:' + color + ';opacity:0.85;border:1.5px solid #fff;"></div>',
+          iconSize: [r*2, r*2],
+          iconAnchor: [r, r]
+        });
+      }
+
+      var accent = '#A8613D', blue = '#4A90D9', green = '#6BAF6B';
+
+      // Lived / Studied (accent)
+      var lived = [
+        [48.1351, 11.5820, 'Munich — TUM (PhD, 2021–present)'],
+        [22.5431, 114.0579, 'Shenzhen — SIAT, CAS (M.Sc., 2018–2021)'],
+        [31.2989, 120.5853, 'Suzhou — Soochow University (B.Eng., 2014–2018)'],
+      ];
+
+      // Conferences / Visits (blue)
+      var conferences = [
+        [37.4419, -122.1430, 'Stanford — Visiting Researcher (Jan–Mar 2025)'],
+        [34.8697, -111.7610, 'Sedona — ISMRM Workshop (2023 & 2026)'],
+        [21.3069, -157.8583, 'Honolulu — ISMRM 2025'],
+        [36.8930, 27.2878, 'Kos Island — IPMI 2025'],
+        [1.3521, 103.8198, 'Singapore — ISMRM 2024'],
+        [-41.1335, -71.3103, 'Bariloche — IPMI 2023'],
+        [36.3504, 127.3845, 'Daejeon — MICCAI 2025'],
+        [39.9042, 116.4074, 'Beijing'],
+        [41.8057, 123.4315, 'Shenyang'],
+        [51.7520, -1.2577, 'Oxford'],
+        [32.0603, 118.7969, 'Nanjing — Southeast University'],
+      ];
+
+      // Collaborators (green) — will be updated with research results
+      var collabs = [
+        [37.4419, -122.1430, 'Stanford University'],
+        [51.4988, -0.1749, 'Imperial College London / King\'s College London'],
+        [48.5216, 9.0576, 'University of Tübingen'],
+        [-33.4489, -70.6693, 'Pontificia Universidad Católica de Chile'],
+        [42.3601, -71.0589, 'MGH / Boston Children\'s Hospital'],
+        [37.7749, -122.4194, 'UCSF'],
+        [42.2808, -83.7430, 'University of Michigan'],
+        [22.5431, 114.0579, 'SIAT, Chinese Academy of Sciences'],
+        [30.5728, 114.3526, 'Innovation Academy for Precision Measurement Science and Technology, CAS'],
+      ];
+
+      lived.forEach(function(p) {
+        L.marker([p[0], p[1]], { icon: dot(accent, 7) }).addTo(map).bindPopup(p[2]);
+      });
+      conferences.forEach(function(p) {
+        L.marker([p[0], p[1]], { icon: dot(blue, 5) }).addTo(map).bindPopup(p[2]);
+      });
+      collabs.forEach(function(p) {
+        L.marker([p[0], p[1]], { icon: dot(green, 5) }).addTo(map).bindPopup(p[2]);
+      });
     })();
   </script>
   <!-- f(x,y) → continuous, compact, queryable at any resolution. Just like this site. -->
