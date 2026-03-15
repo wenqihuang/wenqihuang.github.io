@@ -898,16 +898,26 @@
       });
     })();
 
-    // ---- Fourier divider — trigger draw animation on scroll ----
+    // ---- Fourier divider — draw on scroll, then drift ----
     (function() {
       const divider = document.querySelector('.wave-divider');
       if (!divider) return;
       const paths = divider.querySelectorAll('svg path');
-      // Pause animations until visible
       paths.forEach(p => p.style.animationPlayState = 'paused');
       const obs = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting) {
           paths.forEach(p => p.style.animationPlayState = 'running');
+          // After draw animation finishes, start continuous drift
+          setTimeout(() => {
+            let t = 0;
+            function drift() {
+              t += 0.008;
+              if (paths[1]) paths[1].style.transform = 'translateX(' + (Math.sin(t) * 10) + 'px)';
+              if (paths[2]) paths[2].style.transform = 'translateX(' + (Math.sin(t * 1.6) * 15) + 'px)';
+              requestAnimationFrame(drift);
+            }
+            drift();
+          }, 3000); // wait for draw animation to finish
           obs.disconnect();
         }
       }, { threshold: 0.5 });
