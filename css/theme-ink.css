@@ -1,0 +1,387 @@
+/* ========================================
+   THEME: Minimalist Ink
+   Pure black and white, no accent color,
+   clean serif headings, sans-serif body,
+   no shadows, minimal borders.
+   ======================================== */
+
+:root {
+  /* Colors — pure black on white, no accent */
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-text: #000000;
+  --color-text-secondary: #555555;
+  --color-accent: #000000;
+  --color-accent-hover: #333333;
+  --color-accent-glow: rgba(0, 0, 0, 0.04);
+  --color-highlight: #000000;
+  --color-divider: #e0e0e0;
+  --color-nav-bg: rgba(255, 255, 255, 0.96);
+
+  /* Typography — serif headings, clean sans body */
+  --font-heading: 'Source Serif 4', 'Noto Serif SC', Georgia, serif;
+  --font-body: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Menlo', monospace;
+  --font-size-base: 16px;
+
+  /* Type scale */
+  --size-xs: 0.694rem;
+  --size-sm: 0.833rem;
+  --size-base: 1rem;
+  --size-lg: 1.2rem;
+  --size-xl: 1.44rem;
+  --size-2xl: 1.728rem;
+  --size-3xl: 2.488rem;
+
+  /* Spacing */
+  --space-section: 4rem;
+  --space-page-x: 1.5rem;
+  --content-width: 780px;
+
+  /* Shapes — circular profile, no card radius */
+  --profile-radius: 50%;
+  --card-radius: 0;
+
+  /* Shadows — none */
+  --shadow-sm: none;
+  --shadow-md: none;
+
+  /* Timeline */
+  --timeline-gradient: linear-gradient(to bottom, #000000, #888888);
+}
+
+/* Dark mode — inverted ink */
+[data-theme="dark"] {
+  --color-bg: #111111;
+  --color-surface: #181818;
+  --color-text: #eeeeee;
+  --color-text-secondary: #999999;
+  --color-accent: #eeeeee;
+  --color-accent-hover: #cccccc;
+  --color-accent-glow: rgba(238, 238, 238, 0.04);
+  --color-highlight: #eeeeee;
+  --color-divider: #2a2a2a;
+  --color-nav-bg: rgba(17, 17, 17, 0.96);
+  --shadow-sm: none;
+  --shadow-md: none;
+}
+
+/* ---- Tags — minimal, text-only feel ---- */
+.tag-journal {
+  background: #000000;
+  color: #ffffff;
+}
+
+.tag-oral {
+  background: #333333;
+  color: #ffffff;
+}
+
+.tag-invited {
+  background: #555555;
+  color: #ffffff;
+}
+
+.tag-poster {
+  background: transparent;
+  color: #555555;
+  border: 1px solid #aaaaaa;
+}
+
+.tag-preprint {
+  background: transparent;
+  color: #555555;
+  border: 1px solid #aaaaaa;
+}
+
+[data-theme="dark"] .tag-journal {
+  background: #eeeeee;
+  color: #111111;
+}
+
+[data-theme="dark"] .tag-oral {
+  background: #cccccc;
+  color: #111111;
+}
+
+[data-theme="dark"] .tag-invited {
+  background: #999999;
+  color: #111111;
+}
+
+[data-theme="dark"] .tag-poster {
+  background: transparent;
+  color: #999999;
+  border: 1px solid #444444;
+}
+
+[data-theme="dark"] .tag-preprint {
+  background: transparent;
+  color: #999999;
+  border: 1px solid #444444;
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: #000000;
+  color: #ffffff;
+}
+
+[data-theme="dark"] ::selection {
+  background: #eeeeee;
+  color: #111111;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-divider); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-secondary); }
+
+/* ---- Section title — clean serif with thin rule ---- */
+.section-title {
+  position: relative;
+  display: inline-block;
+  font-size: var(--size-xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--color-text);
+  margin-top: 0.5rem;
+}
+
+/* ---- Subsection title ---- */
+.subsection-title {
+  font-family: var(--font-heading);
+  font-size: var(--size-lg);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-bottom-color: var(--color-divider);
+  border-bottom-width: 1px;
+}
+
+/* ---- Card hover — border only, no shadow ---- */
+.pub-card {
+  transition: border-color 0.2s ease,
+              background-color 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.pub-card:hover {
+  box-shadow: none;
+  border-color: var(--color-text);
+}
+
+/* ---- Publication title ---- */
+.pub-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--size-base);
+  letter-spacing: -0.01em;
+}
+
+/* ---- Publication links ---- */
+.pub-links a {
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-divider);
+  padding-bottom: 1px;
+  transition: border-color 0.2s ease;
+}
+
+.pub-links a:hover {
+  border-bottom-color: var(--color-text);
+}
+
+/* ---- News hover ---- */
+.news-item {
+  transition: background-color 0.2s ease;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 0;
+}
+
+.news-item:hover {
+  background: var(--color-accent-glow);
+}
+
+/* ---- Presentation hover ---- */
+.pres-item {
+  transition: background-color 0.2s ease;
+}
+
+.pres-item:hover {
+  background: var(--color-accent-glow);
+}
+
+/* ---- Hero name — elegant serif ---- */
+.hero-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  font-size: var(--size-3xl);
+}
+
+/* ---- Hero Chinese name ---- */
+.hero-name-cn {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 400;
+  font-size: var(--size-xl);
+}
+
+/* ---- Pronunciation ---- */
+.hero-pronunciation {
+  font-size: var(--size-sm);
+}
+
+.hero-pronunciation em {
+  font-style: italic;
+}
+
+/* ---- Profile image — circular, clean ---- */
+.profile-img {
+  border: none;
+  box-shadow: none;
+}
+
+.profile-img:hover {
+  box-shadow: none;
+  opacity: 0.9;
+}
+
+[data-theme="dark"] .profile-img:hover {
+  box-shadow: none;
+  opacity: 0.9;
+}
+
+/* ---- Links — underline only ---- */
+a {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: var(--color-text-secondary);
+}
+
+/* ---- Nav ---- */
+.nav-links a {
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+  font-size: var(--size-sm);
+  text-decoration: none;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--color-text);
+}
+
+.nav-links a::after {
+  background: var(--color-text);
+  height: 1px;
+}
+
+.nav .nav-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--size-lg);
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+/* ---- Wave divider ---- */
+.wave-divider {
+  color: var(--color-text);
+  opacity: 0.15;
+}
+
+.wave-divider svg path {
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  animation: drawWave 3s ease forwards;
+}
+
+.wave-divider svg path:nth-child(1) {
+  stroke-width: 1;
+  opacity: 0.4;
+  animation-delay: 0s;
+}
+
+.wave-divider svg path:nth-child(2) {
+  stroke-width: 0.6;
+  opacity: 0.2;
+  animation-delay: 0.4s;
+}
+
+.wave-divider svg path:nth-child(3) {
+  stroke-width: 0.3;
+  opacity: 0.1;
+  animation-delay: 0.8s;
+}
+
+@keyframes drawWave {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ---- Footer ---- */
+.footer-links a {
+  font-family: var(--font-body);
+  font-size: var(--size-sm);
+  text-decoration: none;
+}
+
+/* ---- Timeline ---- */
+.timeline-dot {
+  width: 8px;
+  height: 8px;
+  border-width: 1px;
+}
+
+.timeline-current .timeline-dot {
+  background: var(--color-text);
+  border-color: var(--color-text);
+}
+
+/* ---- Dates ---- */
+.news-date,
+.pres-date {
+  font-family: var(--font-mono);
+  font-size: var(--size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ---- Tags ---- */
+.pres-tag {
+  font-family: var(--font-body);
+  font-size: var(--size-xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ---- Publication venue ---- */
+.pub-venue {
+  font-family: var(--font-heading);
+  font-style: italic;
+}
+
+/* ---- Map legend dots — grayscale ---- */
+.dot-lived { background: #000000; }
+.dot-conference { background: #666666; }
+.dot-collaborator { background: #aaaaaa; }
+
+[data-theme="dark"] .dot-lived { background: #eeeeee; }
+[data-theme="dark"] .dot-conference { background: #999999; }
+[data-theme="dark"] .dot-collaborator { background: #555555; }
+
+/* ---- Pub tag ---- */
+.pub-tag {
+  font-family: var(--font-body);
+}

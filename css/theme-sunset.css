@@ -1,0 +1,382 @@
+/* ========================================
+   THEME: Sunset Warm
+   Warm cream background, orange accent,
+   rounded corners, soft shadows,
+   circular profile photo.
+   ======================================== */
+
+:root {
+  /* Colors — warm sunset palette */
+  --color-bg: #fff5eb;
+  --color-surface: #ffffff;
+  --color-text: #2d1b0e;
+  --color-text-secondary: #7a6252;
+  --color-accent: #e85d26;
+  --color-accent-hover: #d04a18;
+  --color-accent-glow: rgba(232, 93, 38, 0.08);
+  --color-highlight: #e85d26;
+  --color-divider: #e8d8c8;
+  --color-nav-bg: rgba(255, 245, 235, 0.94);
+
+  /* Typography — rounded, friendly feel */
+  --font-heading: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Menlo', monospace;
+  --font-size-base: 16px;
+
+  /* Type scale */
+  --size-xs: 0.694rem;
+  --size-sm: 0.833rem;
+  --size-base: 1rem;
+  --size-lg: 1.2rem;
+  --size-xl: 1.44rem;
+  --size-2xl: 1.728rem;
+  --size-3xl: 2.488rem;
+
+  /* Spacing */
+  --space-section: 3.5rem;
+  --space-page-x: 1.5rem;
+  --content-width: 780px;
+
+  /* Shapes — very rounded */
+  --profile-radius: 50%;
+  --card-radius: 12px;
+
+  /* Shadows — soft and warm */
+  --shadow-sm: 0 1px 3px rgba(45, 27, 14, 0.06);
+  --shadow-md: 0 4px 16px rgba(45, 27, 14, 0.08);
+
+  /* Timeline */
+  --timeline-gradient: linear-gradient(to bottom, #e85d26, #f0825c);
+}
+
+/* Dark mode — deep warm night */
+[data-theme="dark"] {
+  --color-bg: #1a0f0a;
+  --color-surface: #241810;
+  --color-text: #f5e6d3;
+  --color-text-secondary: #a08870;
+  --color-accent: #f0825c;
+  --color-accent-hover: #f59a78;
+  --color-accent-glow: rgba(240, 130, 92, 0.08);
+  --color-highlight: #f0825c;
+  --color-divider: #3a2a1e;
+  --color-nav-bg: rgba(26, 15, 10, 0.94);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* ---- Tags — warm sunset tones ---- */
+.tag-journal {
+  background: #e85d26;
+  color: #ffffff;
+  border-radius: 20px;
+}
+
+.tag-oral {
+  background: #2d8a4e;
+  color: #ffffff;
+  border-radius: 20px;
+}
+
+.tag-invited {
+  background: #6b52a8;
+  color: #ffffff;
+  border-radius: 20px;
+}
+
+.tag-poster {
+  background: #c4a882;
+  color: #3a2a1e;
+  border-radius: 20px;
+}
+
+.tag-preprint {
+  background: #d4b8a0;
+  color: #3a2a1e;
+  border-radius: 20px;
+}
+
+[data-theme="dark"] .tag-journal {
+  background: #c04818;
+  color: #f5e6d3;
+  border-radius: 20px;
+}
+
+[data-theme="dark"] .tag-oral {
+  background: #1e6a38;
+  color: #d0e8d0;
+  border-radius: 20px;
+}
+
+[data-theme="dark"] .tag-invited {
+  background: #4a3880;
+  color: #d0c8e0;
+  border-radius: 20px;
+}
+
+[data-theme="dark"] .tag-poster {
+  background: #3a2a1e;
+  color: #c4a882;
+  border-radius: 20px;
+}
+
+[data-theme="dark"] .tag-preprint {
+  background: #3a2a1e;
+  color: #d4b8a0;
+  border-radius: 20px;
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: rgba(232, 93, 38, 0.2);
+  color: inherit;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-divider); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+
+/* ---- Section title ---- */
+.section-title {
+  position: relative;
+  display: inline-block;
+  font-size: var(--size-xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 3px;
+  background: var(--color-accent);
+  margin-top: 0.4rem;
+  border-radius: 2px;
+}
+
+/* ---- Subsection title ---- */
+.subsection-title {
+  font-family: var(--font-heading);
+  font-size: var(--size-lg);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-bottom-color: var(--color-divider);
+  border-bottom-width: 1px;
+}
+
+/* ---- Card hover ---- */
+.pub-card {
+  transition: box-shadow 0.3s cubic-bezier(.22, 1, .36, 1),
+              border-color 0.2s ease,
+              background-color 0.3s ease,
+              transform 0.2s ease;
+}
+
+.pub-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+/* ---- Publication title ---- */
+.pub-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--size-base);
+  letter-spacing: -0.01em;
+}
+
+/* ---- Publication links ---- */
+.pub-links a {
+  color: var(--color-accent);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: border-color 0.2s ease;
+}
+
+.pub-links a:hover {
+  border-bottom-color: var(--color-accent);
+}
+
+/* ---- News hover ---- */
+.news-item {
+  transition: background-color 0.2s ease;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 8px;
+}
+
+.news-item:hover {
+  background: var(--color-accent-glow);
+}
+
+/* ---- Presentation hover ---- */
+.pres-item {
+  transition: background-color 0.2s ease;
+}
+
+.pres-item:hover {
+  background: var(--color-accent-glow);
+}
+
+/* ---- Hero name ---- */
+.hero-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: var(--size-3xl);
+}
+
+/* ---- Hero Chinese name ---- */
+.hero-name-cn {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 400;
+  font-size: var(--size-xl);
+}
+
+/* ---- Pronunciation ---- */
+.hero-pronunciation {
+  font-size: var(--size-sm);
+}
+
+.hero-pronunciation em {
+  font-style: italic;
+}
+
+/* ---- Profile image — circular, soft shadow ---- */
+.profile-img {
+  border: 3px solid var(--color-surface);
+  box-shadow: 0 4px 20px rgba(45, 27, 14, 0.12);
+}
+
+.profile-img:hover {
+  box-shadow: 0 8px 30px rgba(232, 93, 38, 0.2);
+}
+
+[data-theme="dark"] .profile-img {
+  border: 3px solid var(--color-surface);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .profile-img:hover {
+  box-shadow: 0 8px 30px rgba(240, 130, 92, 0.2);
+}
+
+/* ---- Links ---- */
+a {
+  color: var(--color-accent);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+/* ---- Nav ---- */
+.nav-links a {
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--color-text);
+}
+
+.nav-links a::after {
+  background: var(--color-accent);
+  height: 2px;
+  border-radius: 1px;
+}
+
+.nav .nav-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--size-lg);
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+/* ---- Wave divider ---- */
+.wave-divider {
+  color: var(--color-accent);
+}
+
+.wave-divider svg path {
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  animation: drawWave 3s ease forwards;
+}
+
+.wave-divider svg path:nth-child(1) {
+  stroke-width: 1.2;
+  opacity: 0.4;
+  animation-delay: 0s;
+}
+
+.wave-divider svg path:nth-child(2) {
+  stroke-width: 0.8;
+  opacity: 0.25;
+  animation-delay: 0.4s;
+}
+
+.wave-divider svg path:nth-child(3) {
+  stroke-width: 0.5;
+  opacity: 0.15;
+  animation-delay: 0.8s;
+}
+
+@keyframes drawWave {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ---- Footer ---- */
+.footer-links a {
+  font-family: var(--font-body);
+  font-size: var(--size-sm);
+}
+
+/* ---- Timeline ---- */
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-width: 2px;
+}
+
+.timeline-current .timeline-dot {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* ---- Dates ---- */
+.news-date,
+.pres-date {
+  font-family: var(--font-mono);
+  font-size: var(--size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ---- Tags ---- */
+.pres-tag {
+  font-family: var(--font-body);
+  font-size: var(--size-xs);
+  letter-spacing: 0.06em;
+}
+
+/* ---- Publication venue ---- */
+.pub-venue {
+  font-family: var(--font-heading);
+}
+
+/* ---- Map legend dots ---- */
+.dot-lived { background: #e85d26; }
+.dot-conference { background: #3a8dd2; }
+.dot-collaborator { background: #2d8a4e; }
+
+/* ---- Pub tag ---- */
+.pub-tag {
+  font-family: var(--font-body);
+}

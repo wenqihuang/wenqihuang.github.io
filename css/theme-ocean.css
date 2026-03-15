@@ -1,0 +1,225 @@
+/* ========================================
+   THEME: Ocean
+   Deep blue tones, calm and professional.
+   Inspired by ocean depths and clear skies.
+   ======================================== */
+
+:root {
+  --color-bg: #f0f5fa;
+  --color-surface: #ffffff;
+  --color-text: #1a2744;
+  --color-text-secondary: #5a6d8a;
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-accent-glow: rgba(37, 99, 235, 0.08);
+  --color-highlight: #2563eb;
+  --color-divider: #c7d5e6;
+  --color-nav-bg: rgba(240, 245, 250, 0.92);
+
+  --font-heading: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Menlo', monospace;
+  --font-size-base: 16px;
+
+  --size-xs: 0.694rem;
+  --size-sm: 0.833rem;
+  --size-base: 1rem;
+  --size-lg: 1.2rem;
+  --size-xl: 1.44rem;
+  --size-2xl: 1.728rem;
+  --size-3xl: 2.488rem;
+
+  --space-section: 3.5rem;
+  --space-page-x: 1.5rem;
+  --content-width: 780px;
+
+  --profile-radius: 50%;
+  --card-radius: 8px;
+
+  --shadow-sm: 0 1px 3px rgba(26, 39, 68, 0.06);
+  --shadow-md: 0 4px 14px rgba(37, 99, 235, 0.1);
+
+  --timeline-gradient: linear-gradient(to bottom, #2563eb, #06b6d4);
+}
+
+[data-theme="dark"] {
+  --color-bg: #0f172a;
+  --color-surface: #1e293b;
+  --color-text: #e2e8f0;
+  --color-text-secondary: #7a8bab;
+  --color-accent: #60a5fa;
+  --color-accent-hover: #93c5fd;
+  --color-accent-glow: rgba(96, 165, 250, 0.08);
+  --color-highlight: #60a5fa;
+  --color-divider: #2a3a54;
+  --color-nav-bg: rgba(15, 23, 42, 0.92);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 4px 14px rgba(96, 165, 250, 0.12);
+}
+
+/* Tags */
+.tag-journal { background: #dbeafe; color: #1e40af; }
+.tag-oral { background: #e0e7ff; color: #3730a3; }
+.tag-invited { background: #cffafe; color: #155e75; }
+.tag-poster { background: #e2e8f0; color: #475569; }
+.tag-preprint { background: #f1f5f9; color: #64748b; }
+
+[data-theme="dark"] .tag-journal { background: #1e3a5f; color: #93c5fd; }
+[data-theme="dark"] .tag-oral { background: #2e2a5f; color: #a5b4fc; }
+[data-theme="dark"] .tag-invited { background: #164e63; color: #67e8f9; }
+[data-theme="dark"] .tag-poster { background: #2a3a54; color: #94a3b8; }
+[data-theme="dark"] .tag-preprint { background: #1e293b; color: #64748b; }
+
+::selection { background: rgba(37, 99, 235, 0.2); color: inherit; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-divider); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-accent); }
+
+.section-title {
+  position: relative;
+  display: inline-block;
+  font-size: var(--size-xl);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 3px;
+  background: linear-gradient(to right, #2563eb, #06b6d4);
+  margin-top: 0.4rem;
+  border-radius: 2px;
+}
+
+.subsection-title {
+  font-family: var(--font-heading);
+  font-size: var(--size-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  border-bottom-color: var(--color-divider);
+  border-bottom-width: 1px;
+}
+
+.pub-card {
+  transition: box-shadow 0.3s ease, border-color 0.2s ease, background-color 0.3s ease, transform 0.2s ease;
+}
+
+.pub-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+}
+
+.pub-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--size-base);
+}
+
+.pub-links a {
+  color: var(--color-accent);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: border-color 0.2s ease;
+}
+
+.pub-links a:hover { border-bottom-color: var(--color-accent); }
+
+.news-item {
+  transition: background-color 0.2s ease;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 4px;
+}
+
+.news-item:hover { background: var(--color-accent-glow); }
+
+.pres-item { transition: background-color 0.2s ease; }
+.pres-item:hover { background: var(--color-accent-glow); }
+
+.hero-name {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: var(--size-3xl);
+}
+
+.hero-name-cn {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 400;
+  font-size: var(--size-xl);
+}
+
+.hero-pronunciation { font-size: var(--size-sm); }
+.hero-pronunciation em { font-style: italic; }
+
+.profile-img {
+  border: 3px solid var(--color-accent);
+  box-shadow: var(--shadow-md);
+}
+
+.profile-img:hover {
+  box-shadow: 0 6px 24px rgba(37, 99, 235, 0.2);
+}
+
+[data-theme="dark"] .profile-img:hover {
+  box-shadow: 0 6px 24px rgba(96, 165, 250, 0.2);
+}
+
+a { color: var(--color-accent); }
+a:hover { color: var(--color-accent-hover); }
+
+.nav-links a {
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+}
+
+.nav-links a:hover, .nav-links a.active { color: var(--color-text); }
+.nav-links a::after { background: var(--color-accent); height: 2px; }
+
+.nav .nav-logo {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: var(--size-lg);
+  color: var(--color-accent);
+  letter-spacing: -0.02em;
+}
+
+.wave-divider { color: var(--color-accent); }
+
+.wave-divider svg path {
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  animation: drawWave 3s ease forwards;
+}
+
+.wave-divider svg path:nth-child(1) { stroke-width: 1.2; opacity: 0.4; animation-delay: 0s; }
+.wave-divider svg path:nth-child(2) { stroke-width: 0.8; opacity: 0.25; animation-delay: 0.4s; }
+.wave-divider svg path:nth-child(3) { stroke-width: 0.5; opacity: 0.15; animation-delay: 0.8s; }
+
+@keyframes drawWave { to { stroke-dashoffset: 0; } }
+
+.footer-links a { font-family: var(--font-body); font-size: var(--size-sm); }
+
+.timeline-dot { width: 10px; height: 10px; border-width: 2px; }
+.timeline-current .timeline-dot { background: var(--color-accent); border-color: var(--color-accent); }
+
+.news-date, .pres-date {
+  font-family: var(--font-mono);
+  font-size: var(--size-sm);
+  color: var(--color-text-secondary);
+}
+
+.pres-tag { font-family: var(--font-body); font-size: var(--size-xs); letter-spacing: 0.06em; }
+.pub-venue { font-family: var(--font-heading); font-style: italic; }
+
+.dot-lived { background: #2563eb; }
+.dot-conference { background: #06b6d4; }
+.dot-collaborator { background: #10b981; }
+
+.pub-tag { font-family: var(--font-body); }

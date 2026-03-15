@@ -910,6 +910,60 @@ h1, h2, h3 {
 }
 
 
+/* Theme picker — hidden in footer */
+.theme-picker {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.theme-picker-toggle {
+  font-family: var(--font-mono, monospace);
+  font-size: var(--size-xs, 0.694rem);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+  list-style: none;
+}
+
+.theme-picker-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.theme-picker-toggle:hover {
+  opacity: 0.8;
+}
+
+.theme-picker-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.theme-btn {
+  font-family: var(--font-mono, monospace);
+  font-size: var(--size-xs, 0.694rem);
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--color-divider);
+  border-radius: 3px;
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.theme-btn:hover {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.theme-btn.active {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
 .footer-easter-egg {
   font-size: var(--size-xs, 0.694rem);
   color: var(--color-divider);

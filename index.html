@@ -525,6 +525,20 @@
         <p class="footer-visitors-label">Visitor Map</p>
         <a href="https://clustrmaps.com/site/1c9gg" title="Visitor Map" class="footer-clustrmaps"><img src="https://www.clustrmaps.com/map_v2.png?d=uWaLaz86939Us8zC5bV-VYPIQ0DB11K7SoTLO_yepzs&cl=e8e4de&co=9c9589&cmo=A8613D&cmn=d4915e&t=n" alt="Visitor Map" width="140" height="90" loading="lazy" onerror="this.closest('.footer-visitors').style.display='none'"></a>
       </div>
+      <details class="theme-picker">
+        <summary class="theme-picker-toggle">Themes</summary>
+        <div class="theme-picker-options">
+          <button data-theme-file="theme-warm" class="theme-btn active">Warm</button>
+          <button data-theme-file="theme-ocean" class="theme-btn">Ocean</button>
+          <button data-theme-file="theme-sunset" class="theme-btn">Sunset</button>
+          <button data-theme-file="theme-cyber" class="theme-btn">Cyber</button>
+          <button data-theme-file="theme-terminal" class="theme-btn">Terminal</button>
+          <button data-theme-file="theme-paper" class="theme-btn">Paper</button>
+          <button data-theme-file="theme-retro" class="theme-btn">Retro</button>
+          <button data-theme-file="theme-scan" class="theme-btn">Scan</button>
+          <button data-theme-file="theme-ink" class="theme-btn">Ink</button>
+        </div>
+      </details>
       <p class="footer-easter-egg">Have you found all the Easter eggs on this page?</p>
     </div>
   </footer>
@@ -632,6 +646,28 @@
         logo.classList.toggle('scrolled', !entries[0].isIntersecting);
       }, { threshold: 0 });
       obs.observe(hero);
+    })();
+
+    // Theme picker
+    (function() {
+      var btns = document.querySelectorAll('.theme-btn');
+      var link = document.getElementById('theme-css');
+      var saved = localStorage.getItem('site-theme');
+      if (saved && link) {
+        link.href = 'css/' + saved + '.css';
+        btns.forEach(function(b) {
+          b.classList.toggle('active', b.getAttribute('data-theme-file') === saved);
+        });
+      }
+      btns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var file = btn.getAttribute('data-theme-file');
+          link.href = 'css/' + file + '.css';
+          localStorage.setItem('site-theme', file);
+          btns.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+        });
+      });
     })();
 
     // Close mobile nav on link click
