@@ -229,7 +229,6 @@ h1, h2, h3 {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: var(--hero-pattern-opacity, 0.04);
 }
 
 .hero-content {
@@ -294,6 +293,31 @@ h1, h2, h3 {
   transform: scale(1.1);
 }
 
+/* Tooltip for social icons */
+.hero-links a[data-tooltip] {
+  position: relative;
+}
+
+.hero-links a[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: -1.8rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.7rem;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.hero-links a[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 /* --- Wave Divider --- */
 .wave-divider {
   max-width: var(--content-width);
@@ -320,6 +344,7 @@ h1, h2, h3 {
   gap: 1rem;
   padding: 0.5rem 0;
   border-bottom: 1px solid var(--color-divider);
+  position: relative;
 }
 
 .news-date {
@@ -328,7 +353,21 @@ h1, h2, h3 {
   font-size: 0.85rem;
   color: var(--color-accent);
   flex-shrink: 0;
-  min-width: 3.5rem;
+  min-width: 4rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* VISTA mask canvas fills left side of news-item, behind the date */
+.news-item canvas.vista-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 0;
+  border-radius: 3px;
+  opacity: 0.1;
+  pointer-events: none;
 }
 
 /* Old news: hidden by default with animation */
@@ -660,9 +699,42 @@ h1, h2, h3 {
   color: var(--color-accent);
 }
 
+.footer-easter-egg {
+  font-size: 0.75rem;
+  color: var(--color-divider);
+  margin-bottom: 0.5rem;
+  cursor: default;
+  transition: color 0.3s ease;
+  user-select: none;
+}
+
+.footer-easter-egg:hover {
+  color: var(--color-accent);
+}
+
 .footer-copy {
   font-size: 0.8rem;
   color: var(--color-text-secondary);
+}
+
+.back-to-top {
+  display: block;
+  margin: 0 auto 1.5rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--color-divider);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.back-to-top:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transform: translateY(-2px);
 }
 
 /* --- Animations --- */
@@ -681,6 +753,18 @@ h1, h2, h3 {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* MRI reconstruction animation — k-space progressive filling */
+@keyframes reconstruct {
+  0%   { filter: blur(12px) saturate(0.4); opacity: 0.3; }
+  25%  { filter: blur(6px) saturate(0.6);  opacity: 0.5; }
+  55%  { filter: blur(2px) saturate(0.85); opacity: 0.8; }
+  100% { filter: blur(0) saturate(1);      opacity: 1; }
+}
+
+.anim-reconstruct {
+  animation: reconstruct 1.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
 /* Scroll-triggered fade (progressive enhancement) */

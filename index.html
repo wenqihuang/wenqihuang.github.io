@@ -47,10 +47,10 @@
 
   <!-- ====== HERO / ABOUT ====== -->
   <header class="section hero" id="about">
-    <div class="hero-bg-pattern" aria-hidden="true"></div>
+    <canvas class="hero-bg-pattern" id="spiral-canvas" aria-hidden="true"></canvas>
     <div class="hero-content">
       <div class="hero-photo">
-        <img src="images/profile.jpg" alt="Wenqi Huang" class="profile-img" width="180" height="180">
+        <img src="images/profile.jpg" alt="Wenqi Huang" class="profile-img anim-reconstruct" width="180" height="180">
       </div>
       <div class="hero-text">
         <h1 class="hero-name anim-fade-up">Wenqi Huang <span class="hero-name-cn">黄文麒</span></h1>
@@ -69,16 +69,16 @@
           or anywhere worth discovering. Occasionally I'm also a photographer or cyclist.
         </p>
         <div class="hero-links anim-fade-up anim-delay-3">
-          <a href="https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar">
+          <a href="https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar" data-tooltip="Scholar">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-2a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM1.5 9L12 0l10.5 9h-4v3.07A8.96 8.96 0 0 0 12 9.07a8.96 8.96 0 0 0-6.5 2.93V9h-4z"/></svg>
           </a>
-          <a href="https://github.com/wenqihuang" target="_blank" rel="noopener" aria-label="GitHub">
+          <a href="https://github.com/wenqihuang" target="_blank" rel="noopener" aria-label="GitHub" data-tooltip="GitHub">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
           </a>
-          <a href="https://www.linkedin.com/in/wenqi-huang-tum/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/wenqi-huang-tum/" target="_blank" rel="noopener" aria-label="LinkedIn" data-tooltip="LinkedIn">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </a>
-          <a href="mailto:wenqi.huang@tum.de" aria-label="Email">
+          <a href="mailto:wenqi.huang@tum.de" aria-label="Email" data-tooltip="Email">
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           </a>
         </div>
@@ -87,9 +87,9 @@
   </header>
 
   <main>
-    <!-- ====== SECTION DIVIDER ====== -->
+    <!-- ====== FOURIER HARMONIC DIVIDER — 3 sine waves at f, 2.5f, 5.5f ====== -->
     <div class="wave-divider" aria-hidden="true">
-      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20 C150,35 350,5 500,20 C650,35 850,5 1000,20 C1050,25 1150,15 1200,20" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20.0L15,21.3L30,22.5L45,23.6L60,24.7L75,25.7L90,26.5L105,27.1L120,27.6L135,27.9L150,28.0L165,27.9L180,27.6L195,27.1L210,26.5L225,25.7L240,24.7L255,23.6L270,22.5L285,21.3L300,20.0L315,18.7L330,17.5L345,16.4L360,15.3L375,14.3L390,13.5L405,12.9L420,12.4L435,12.1L450,12.0L465,12.1L480,12.4L495,12.9L510,13.5L525,14.3L540,15.3L555,16.4L570,17.5L585,18.7L600,20.0L615,21.3L630,22.5L645,23.6L660,24.7L675,25.7L690,26.5L705,27.1L720,27.6L735,27.9L750,28.0L765,27.9L780,27.6L795,27.1L810,26.5L825,25.7L840,24.7L855,23.6L870,22.5L885,21.3L900,20.0L915,18.7L930,17.5L945,16.4L960,15.3L975,14.3L990,13.5L1005,12.9L1020,12.4L1035,12.1L1050,12.0L1065,12.1L1080,12.4L1095,12.9L1110,13.5L1125,14.3L1140,15.3L1155,16.4L1170,17.5L1185,18.7L1200,20.0" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><path d="M0,22.6L15,23.6L30,24.0L45,23.8L60,23.1L75,21.8L90,20.3L105,18.8L120,17.4L135,16.4L150,16.0L165,16.2L180,16.9L195,18.2L210,19.7L225,21.2L240,22.6L255,23.6L270,24.0L285,23.8L300,23.1L315,21.8L330,20.3L345,18.8L360,17.4L375,16.4L390,16.0L405,16.2L420,16.9L435,18.2L450,19.7L465,21.2L480,22.6L495,23.6L510,24.0L525,23.8L540,23.1L555,21.8L570,20.3L585,18.8L600,17.4L615,16.4L630,16.0L645,16.2L660,16.9L675,18.2L690,19.7L705,21.2L720,22.6L735,23.6L750,24.0L765,23.8L780,23.1L795,21.8L810,20.3L825,18.8L840,17.4L855,16.4L870,16.0L885,16.2L900,16.9L915,18.2L930,19.7L945,21.2L960,22.6L975,23.6L990,24.0L1005,23.8L1020,23.1L1035,21.8L1050,20.3L1065,18.8L1080,17.4L1095,16.4L1110,16.0L1125,16.2L1140,16.9L1155,18.2L1170,19.7L1185,21.2L1200,22.6" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.3"/><path d="M0,21.9L15,21.7L30,20.2L45,18.6L60,18.0L75,18.8L90,20.4L105,21.7L120,21.9L135,20.7L150,19.0L165,18.0L180,18.4L195,19.9L210,21.5L225,22.0L240,21.1L255,19.4L270,18.2L285,18.2L300,19.5L315,21.1L330,22.0L345,21.5L360,19.9L375,18.4L390,18.0L405,19.0L420,20.7L435,21.9L450,21.7L465,20.4L480,18.8L495,18.0L510,18.6L525,20.2L540,21.7L555,21.9L570,20.8L585,19.2L600,18.1L615,18.3L630,19.8L645,21.4L660,22.0L675,21.2L690,19.6L705,18.3L720,18.1L735,19.3L750,21.0L765,22.0L780,21.6L795,20.1L810,18.5L825,18.0L840,18.9L855,20.6L870,21.8L885,21.8L900,20.5L915,18.9L930,18.0L945,18.5L960,20.1L975,21.6L990,22.0L1005,21.0L1020,19.3L1035,18.1L1050,18.3L1065,19.6L1080,21.2L1095,22.0L1110,21.4L1125,19.8L1140,18.3L1155,18.1L1170,19.2L1185,20.8L1200,21.9" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.2"/></svg>
     </div>
 
     <!-- ====== NEWS ====== -->
@@ -276,16 +276,6 @@
 
       <ul class="pres-list">
         <li class="pres-item">
-          <span class="pres-tag tag-invited">Invited</span>
-          <div class="pres-content">
-            <div class="pres-header">
-              <span><strong>Seminar on DL for Inverse Problems in Medical Imaging</strong> <span class="pres-location">&middot; Munich</span></span>
-              <span class="pres-date">Jul 2025</span>
-            </div>
-            <span class="pres-title">Implicit Neural Representations for MRI Reconstruction</span>
-          </div>
-        </li>
-        <li class="pres-item">
           <span class="pres-tag tag-poster">Poster</span>
           <div class="pres-content">
             <div class="pres-header">
@@ -293,6 +283,16 @@
               <span class="pres-date">Jan 2026</span>
             </div>
             <span class="pres-title">Joint B&#x2080; Estimation and Distortion-Free Reconstruction from Rotated-View EPI</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-tag tag-invited">Invited</span>
+          <div class="pres-content">
+            <div class="pres-header">
+              <span><strong>Seminar on DL for Inverse Problems in Medical Imaging</strong> <span class="pres-location">&middot; Munich</span></span>
+              <span class="pres-date">Jul 2025</span>
+            </div>
+            <span class="pres-title">Implicit Neural Representations for MRI Reconstruction</span>
           </div>
         </li>
         <li class="pres-item">
@@ -339,8 +339,8 @@
           <span class="pres-tag tag-oral">Oral</span>
           <div class="pres-content">
             <div class="pres-header">
-              <span><strong>IPMI 2023</strong> <span class="pres-location">&middot; Bariloche</span></span>
-              <span class="pres-date">Jun 2023</span>
+              <span><strong>JIS Summit 2023</strong> <span class="pres-location">&middot; Virtual</span></span>
+              <span class="pres-date">Nov 2023</span>
             </div>
             <span class="pres-title">Neural Implicit k-Space for Binning-free Non-Cartesian Cardiac MR Imaging</span>
           </div>
@@ -349,8 +349,8 @@
           <span class="pres-tag tag-oral">Oral</span>
           <div class="pres-content">
             <div class="pres-header">
-              <span><strong>JIS Summit 2023</strong> <span class="pres-location">&middot; Virtual</span></span>
-              <span class="pres-date">Nov 2023</span>
+              <span><strong>IPMI 2023</strong> <span class="pres-location">&middot; Bariloche</span></span>
+              <span class="pres-date">Jun 2023</span>
             </div>
             <span class="pres-title">Neural Implicit k-Space for Binning-free Non-Cartesian Cardiac MR Imaging</span>
           </div>
@@ -380,7 +380,7 @@
 
     <!-- ====== MORE ====== -->
     <section class="section" id="more">
-      <h2 class="section-title">More</h2>
+      <h2 class="section-title">&amp; More</h2>
 
       <!-- Education -->
       <div class="subsection">
@@ -479,13 +479,15 @@
   <!-- ====== FOOTER ====== -->
   <footer class="footer">
     <div class="footer-inner">
+      <button class="back-to-top" id="back-to-top" aria-label="Back to top">&uarr;</button>
       <div class="footer-links">
         <a href="https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
         <a href="https://github.com/wenqihuang" target="_blank" rel="noopener">GitHub</a>
         <a href="https://www.linkedin.com/in/wenqi-huang-tum/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="mailto:wenqi.huang@tum.de">Email</a>
       </div>
-      <p class="footer-copy">&copy; 2026 Wenqi Huang. Built with HTML, CSS &amp; vanilla JS.</p>
+      <p class="footer-easter-egg">Have you found all the Easter eggs on this page? &hearts;</p>
+      <p class="footer-copy">&copy; <span id="footer-year"></span> Wenqi Huang. Built with HTML, CSS &amp; vanilla JS.</p>
     </div>
   </footer>
 
@@ -547,11 +549,22 @@
       btn.addEventListener('click', () => {
         const expanded = list.classList.toggle('news-expanded');
         btn.textContent = expanded ? '\u25B4 Show less' : '\u25BE Show older news';
-        if (!expanded) {
+        if (expanded) {
+          // Draw VISTA masks on newly revealed items
+          if (window._drawVistaMasks) window._drawVistaMasks();
+        } else {
           document.getElementById('news').scrollIntoView({ behavior: 'smooth' });
         }
       });
     })();
+
+    // Auto year in footer
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // Back to top
+    document.getElementById('back-to-top').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
     // Close mobile nav on link click
     document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
@@ -559,6 +572,211 @@
         document.getElementById('nav-toggle').checked = false;
       });
     });
+
+    // ---- k-Space trajectories: radial + spiral + EPI (canvas) ----
+    (function() {
+      const canvas = document.getElementById('spiral-canvas');
+      if (!canvas) return;
+      const parent = canvas.parentElement;
+      const dpr = window.devicePixelRatio || 1;
+      let w, h;
+      // Three trajectories with independent motion
+      const trajR = 80; // radius of each trajectory shape
+      const traj = [
+        { type: 'radial',  angle: 0, vr: 0.003, x: -150, y: -30, vx: 0.3, vy: 0.2 },
+        { type: 'spiral',  angle: 0, vr: -0.002, x: 130, y: 20, vx: -0.25, vy: 0.3 },
+        { type: 'epi',     angle: 0, vr: 0.001, x: 20, y: -50, vx: 0.2, vy: -0.25 }
+      ];
+
+      function resize() {
+        w = parent.offsetWidth; h = parent.offsetHeight;
+        canvas.width = w * dpr; canvas.height = h * dpr;
+        canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+      }
+      resize();
+
+      function drawRadial(ctx, cx, cy, R, rot) {
+        const spokes = 12;
+        for (let i = 0; i < spokes; i++) {
+          const a = (i / spokes) * Math.PI + rot;
+          ctx.beginPath();
+          ctx.moveTo(cx - R * Math.cos(a), cy - R * Math.sin(a));
+          ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a));
+          ctx.stroke();
+        }
+      }
+
+      function drawSpiral(ctx, cx, cy, R, rot) {
+        const turns = 6, steps = turns * 40;
+        ctx.beginPath();
+        for (let i = 0; i <= steps; i++) {
+          const t = i / steps;
+          const theta = t * turns * 2 * Math.PI + rot;
+          const r = t * R;
+          const x = cx + r * Math.cos(theta);
+          const y = cy + r * Math.sin(theta);
+          i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+
+      function drawEPI(ctx, cx, cy, R, rot) {
+        const lines = 12;
+        const cosR = Math.cos(rot), sinR = Math.sin(rot);
+        ctx.beginPath();
+        for (let i = 0; i < lines; i++) {
+          const y0 = -R + (i / (lines - 1)) * 2 * R;
+          const dir = i % 2 === 0 ? 1 : -1;
+          const x1 = dir > 0 ? -R : R;
+          const x2 = dir > 0 ? R : -R;
+          const px1 = cx + x1 * cosR - y0 * sinR;
+          const py1 = cy + x1 * sinR + y0 * cosR;
+          const px2 = cx + x2 * cosR - y0 * sinR;
+          const py2 = cy + x2 * sinR + y0 * cosR;
+          i === 0 ? ctx.moveTo(px1, py1) : ctx.lineTo(px1, py1);
+          ctx.lineTo(px2, py2);
+        }
+        ctx.stroke();
+      }
+
+      function frame() {
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, w * dpr, h * dpr);
+        ctx.save();
+        ctx.scale(dpr, dpr);
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        ctx.strokeStyle = isDark ? 'rgba(224,160,112,0.08)' : 'rgba(168,97,61,0.045)';
+        ctx.lineWidth = 0.6;
+
+        // Move
+        traj.forEach(t => {
+          t.angle += t.vr;
+          t.x += t.vx; t.y += t.vy;
+          // Wall bounce
+          const bx = w / 2 - trajR - 10, by = h / 2 - trajR - 10;
+          if (t.x > bx || t.x < -bx) { t.vx *= -1; t.x = Math.max(-bx, Math.min(bx, t.x)); }
+          if (t.y > by || t.y < -by) { t.vy *= -1; t.y = Math.max(-by, Math.min(by, t.y)); }
+        });
+
+        // Collision between trajectories
+        for (let i = 0; i < traj.length; i++) {
+          for (let j = i + 1; j < traj.length; j++) {
+            const a = traj[i], b = traj[j];
+            const dx = a.x - b.x, dy = a.y - b.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const minDist = trajR * 2;
+            if (dist < minDist && dist > 0) {
+              // Swap velocities along collision axis
+              const nx = dx / dist, ny = dy / dist;
+              const dvx = a.vx - b.vx, dvy = a.vy - b.vy;
+              const dot = dvx * nx + dvy * ny;
+              if (dot < 0) { // approaching
+                a.vx -= dot * nx; a.vy -= dot * ny;
+                b.vx += dot * nx; b.vy += dot * ny;
+              }
+              // Push apart
+              const overlap = (minDist - dist) / 2;
+              a.x += nx * overlap; a.y += ny * overlap;
+              b.x -= nx * overlap; b.y -= ny * overlap;
+            }
+          }
+        }
+
+        // Draw
+        traj.forEach(t => {
+          const cx = w / 2 + t.x, cy = h / 2 + t.y;
+          if (t.type === 'radial') drawRadial(ctx, cx, cy, trajR, t.angle);
+          else if (t.type === 'spiral') drawSpiral(ctx, cx, cy, trajR, t.angle);
+          else drawEPI(ctx, cx, cy, trajR, t.angle);
+        });
+
+        ctx.restore();
+        requestAnimationFrame(frame);
+      }
+      frame();
+      window.addEventListener('resize', resize);
+    })();
+
+    // ---- VISTA undersampling masks on news items ----
+    (function() {
+      function mulberry32(a) {
+        return function() {
+          a |= 0; a = a + 0x6D2B79F5 | 0;
+          var t = Math.imul(a ^ a >>> 15, 1 | a);
+          t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+          return ((t ^ t >>> 14) >>> 0) / 4294967296;
+        };
+      }
+      // Collect mask canvases for animation
+      window._vistaCanvases = [];
+      window._drawVistaMasks = function() {
+        const items = document.querySelectorAll('.news-item');
+        items.forEach((item, idx) => {
+          if (item.querySelector('.vista-mask')) return;
+          const dateEl = item.querySelector('.news-date');
+          const dateW = dateEl.offsetWidth + 16;
+          const itemH = item.offsetHeight;
+          if (itemH === 0) return;
+          const c = document.createElement('canvas');
+          c.className = 'vista-mask';
+          const dpr = window.devicePixelRatio || 1;
+          c.width = dateW * dpr; c.height = itemH * dpr;
+          c.style.width = dateW + 'px'; c.style.height = itemH + 'px';
+          item.prepend(c);
+          window._vistaCanvases.push({ canvas: c, idx: idx, w: dateW, h: itemH, dpr: dpr });
+        });
+      };
+      window._drawVistaMasks();
+
+      // Animate: all masks scroll right in sync, wrap around
+      (function() {
+        let shift = 0;
+        function drawFrame() {
+          shift += 0.03; // pixels per frame
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          const color = isDark ? 'rgba(224,160,112,0.5)' : 'rgba(168,97,61,0.5)';
+          const R = 6;
+          const spacing = 1.5;
+          window._vistaCanvases.forEach(({ canvas, idx, w, h, dpr }) => {
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, w * dpr, h * dpr);
+            ctx.save();
+            ctx.scale(dpr, dpr);
+            ctx.fillStyle = color;
+            const totalLines = Math.ceil(w / spacing) + R;
+            const offset = idx % R;
+            const pixelShift = shift % (R * spacing);
+            for (let col = -R; col < totalLines; col++) {
+              if ((col + offset) % R === 0) {
+                const x = col * spacing + pixelShift;
+                if (x >= 0 && x < w) {
+                  ctx.fillRect(x, 0, 1, h);
+                }
+              }
+            }
+            ctx.restore();
+          });
+          requestAnimationFrame(drawFrame);
+        }
+        drawFrame();
+      })();
+    })();
+
+    // ---- Fourier divider — trigger draw animation on scroll ----
+    (function() {
+      const divider = document.querySelector('.wave-divider');
+      if (!divider) return;
+      const paths = divider.querySelectorAll('svg path');
+      // Pause animations until visible
+      paths.forEach(p => p.style.animationPlayState = 'paused');
+      const obs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          paths.forEach(p => p.style.animationPlayState = 'running');
+          obs.disconnect();
+        }
+      }, { threshold: 0.5 });
+      obs.observe(divider);
+    })();
   </script>
 
 </body>
