@@ -1,0 +1,33 @@
+# Wenqi Huang — Personal Academic Homepage
+
+## About
+Wenqi Huang (黄文麒) is a PhD student in Computer Science at the Technical University of Munich (TUM), supervised by Prof. Daniel Rueckert. His research focuses on novel representations for fast MRI reconstruction, with minimal or no training data. He was a visiting researcher at Stanford University (Jan–Mar 2025) with Prof. Kawin Setsompop.
+
+## Research Interests
+- MRI Reconstruction
+- Implicit Neural Representations
+- Physics-driven Deep Learning
+- Scan-specific / Self-supervised Methods
+
+## Selected First-Author Publications
+- Gabor Primitives for Accelerated Cardiac Cine MRI Reconstruction (arXiv, 2026)
+- Physics-Informed INRs for Joint B0 Estimation and Echo Planar Imaging (MICCAI 2025)
+- Subspace INRs for Real-Time Cardiac Cine MR Imaging (IPMI 2025)
+- Neural Implicit k-Space for Binning-free Non-Cartesian Cardiac MR Imaging (IPMI 2023, Oral)
+- Deep Low-Rank Plus Sparse Network for Dynamic MR Imaging (Medical Image Analysis, 2021)
+- Learned Low-Rank Priors in Dynamic MR Imaging (IEEE TMI, 2021)
+
+## Education
+- PhD, Computer Science, TUM (2021–present)
+- Visiting Researcher, Stanford University (Jan–Mar 2025)
+- M.Sc., Pattern Recognition & Intelligent Systems, SIAT CAS (2018–2021)
+- B.Eng., Information Engineering, Soochow University (2014–2018)
+
+## Contact
+- Email: wenqi.huang@tum.de
+- Google Scholar: https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en
+- GitHub: https://github.com/wenqihuang
+- LinkedIn: https://www.linkedin.com/in/wenqi-huang-tum/
+
+## Academic Service
+Reviewer for IEEE TMI, Medical Image Analysis, Magnetic Resonance in Medicine, IEEE TBME, Advanced Science, MICCAI, ISMRM
