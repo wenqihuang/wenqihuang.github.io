@@ -93,9 +93,6 @@
         </div>
       </div>
     </div>
-    <div class="scroll-hint" id="scroll-hint" aria-hidden="true">
-      <svg width="20" height="12" viewBox="0 0 20 12"><path d="M1 1l9 9 9-9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-    </div>
   </header>
 
   <main>
@@ -588,8 +585,6 @@
         const y = window.scrollY;
         btn.classList.toggle('visible', y > 400);
         nav.classList.toggle('scrolled', y > 20);
-        const hint = document.getElementById('scroll-hint');
-        if (hint) hint.classList.toggle('hidden', y > 50);
       }, { passive: true });
     })();
 
