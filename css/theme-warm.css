@@ -364,6 +364,11 @@ a:hover {
   font-family: var(--font-heading);
 }
 
+/* ---- Map legend dots — colors work in both light & dark ---- */
+.dot-lived { background: #C47A50; }
+.dot-conference { background: #5A9BD5; }
+.dot-collaborator { background: #7BC47B; }
+
 /* ---- Pub tag ---- */
 .pub-tag {
   font-family: var(--font-body);
