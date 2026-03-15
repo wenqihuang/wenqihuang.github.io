@@ -1,0 +1,347 @@
+/* ========================================
+   THEME: Editorial Warm
+
+   Design principles applied:
+   - Font pairing: Source Serif 4 (headings) + Inter (body)
+     Same design ecosystem → natural harmony
+   - CJK: Noto Sans SC fallback for Chinese characters
+     Similar x-height and proportions to Inter
+   - Type scale: Minor Third (1.2x) ratio
+   - Color: Near-monochrome + single warm accent (#C2785C)
+     Warm off-white bg avoids clinical sterility
+   - Line-height: 1.6 body, 1.3 headings
+   - Letter-spacing: -0.02em on headings (tighter at large sizes)
+   ======================================== */
+
+:root {
+  /* --- Colors ---
+     Near-monochrome palette with warm undertone.
+     Single accent color for restraint. */
+  --color-bg: #FAF9F7;
+  --color-surface: #FFFFFF;
+  --color-text: #1D1D1F;
+  --color-text-secondary: #636366;
+  --color-accent: #A8613D;
+  --color-accent-hover: #8B4E30;
+  --color-accent-glow: rgba(168, 97, 61, 0.1);
+  --color-highlight: #A8613D;
+  --color-divider: #D5D0C8;
+  --color-nav-bg: rgba(250, 249, 247, 0.92);
+
+  /* --- Typography ---
+     Source Serif 4: optical sizes, elegant but readable
+     Inter: high x-height, excellent screen rendering
+     Noto Sans SC: CJK fallback, harmonizes with Inter */
+  --font-heading: 'Source Serif 4', 'Noto Serif SC', Georgia, serif;
+  --font-body: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Menlo', monospace;
+  --font-size-base: 16px;
+
+  /* Type scale — Minor Third (1.2x) */
+  --size-xs: 0.694rem;
+  --size-sm: 0.833rem;
+  --size-base: 1rem;
+  --size-lg: 1.2rem;
+  --size-xl: 1.44rem;
+  --size-2xl: 1.728rem;
+  --size-3xl: 2.488rem;
+
+  /* --- Spacing --- */
+  --space-section: 3.5rem;
+  --space-page-x: 1.5rem;
+  --content-width: 780px;
+
+  /* --- Shapes --- */
+  --profile-radius: 12px;
+  --card-radius: 6px;
+
+  /* --- Shadows --- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.07);
+
+  /* --- Timeline --- */
+  --timeline-gradient: linear-gradient(to bottom, #1D1D1F, #A8613D);
+
+  /* --- Hero pattern --- */
+  --hero-pattern-opacity: 0.045;
+}
+
+/* ---- Dark Mode ---- */
+[data-theme="dark"] {
+  --color-bg: #1A1917;
+  --color-surface: #23221F;
+  --color-text: #E8E8E3;
+  --color-text-secondary: #94938E;
+  --color-accent: #E0A070;
+  --color-accent-hover: #EBB88A;
+  --color-accent-glow: rgba(224, 160, 112, 0.1);
+  --color-highlight: #E0A070;
+  --color-divider: #36342F;
+  --color-nav-bg: rgba(26, 25, 23, 0.92);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ---- Tags ----
+   Filled pill style, position unified before venue */
+.tag-journal {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.tag-oral {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.tag-invited {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.tag-poster {
+  background: var(--color-divider);
+  color: var(--color-text);
+}
+
+.tag-preprint {
+  background: var(--color-divider);
+  color: var(--color-text-secondary);
+}
+
+[data-theme="dark"] .tag-poster,
+[data-theme="dark"] .tag-preprint {
+  background: #38362F;
+  color: #E8E8E3;
+}
+
+/* ---- Hero topographic pattern ---- */
+.hero-bg-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500' viewBox='0 0 500 500'%3E%3Cpath d='M25,250 Q125,200 250,250 Q375,300 475,250' fill='none' stroke='%23A8613D' stroke-width='0.5'/%3E%3Cpath d='M25,200 Q150,150 250,200 Q350,250 475,200' fill='none' stroke='%23A8613D' stroke-width='0.5'/%3E%3Cpath d='M25,300 Q100,250 250,300 Q400,350 475,300' fill='none' stroke='%23A8613D' stroke-width='0.5'/%3E%3Cpath d='M25,150 Q175,100 250,150 Q325,200 475,150' fill='none' stroke='%23A8613D' stroke-width='0.5'/%3E%3Cpath d='M25,350 Q75,300 250,350 Q425,400 475,350' fill='none' stroke='%23A8613D' stroke-width='0.5'/%3E%3Ccircle cx='250' cy='250' r='40' fill='none' stroke='%23A8613D' stroke-width='0.4'/%3E%3Ccircle cx='250' cy='250' r='80' fill='none' stroke='%23A8613D' stroke-width='0.35'/%3E%3C/svg%3E");
+  background-size: 500px 500px;
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: rgba(168, 97, 61, 0.2);
+  color: inherit;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-divider); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-text-secondary); }
+
+/* ---- Section title ----
+   Serif heading with accent underline */
+.section-title {
+  position: relative;
+  display: inline-block;
+  font-size: var(--size-xl);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--color-accent);
+  margin-top: 0.4rem;
+  border-radius: 1px;
+}
+
+/* ---- Subsection title ---- */
+.subsection-title {
+  font-family: var(--font-heading);
+  font-size: var(--size-lg);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-bottom-color: var(--color-divider);
+  border-bottom-width: 1px;
+}
+
+/* ---- Card hover ---- */
+.pub-card {
+  transition: box-shadow 0.3s cubic-bezier(.22, 1, .36, 1),
+              border-color 0.2s ease,
+              background-color 0.3s ease;
+}
+
+.pub-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-accent);
+}
+
+/* ---- Publication title — serif ---- */
+.pub-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Publication links ---- */
+.pub-links a {
+  color: var(--color-accent);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: border-color 0.2s ease;
+}
+
+.pub-links a:hover {
+  border-bottom-color: var(--color-accent);
+}
+
+/* ---- News hover ---- */
+.news-item {
+  transition: background-color 0.2s ease;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 4px;
+}
+
+.news-item:hover {
+  background: var(--color-accent-glow);
+}
+
+/* ---- Presentation hover ---- */
+.pres-item {
+  transition: background-color 0.2s ease;
+}
+
+.pres-item:hover {
+  background: var(--color-accent-glow);
+}
+
+/* ---- Hero name — serif ---- */
+.hero-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  font-size: var(--size-3xl);
+}
+
+/* ---- Hero Chinese name ---- */
+.hero-name-cn {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 400;
+  font-size: var(--size-xl);
+}
+
+/* ---- Pronunciation ---- */
+.hero-pronunciation {
+  font-size: var(--size-sm);
+}
+
+.hero-pronunciation em {
+  font-style: italic;
+}
+
+/* ---- Profile image ---- */
+.profile-img {
+  border: none;
+  box-shadow: var(--shadow-md);
+}
+
+.profile-img:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .profile-img:hover {
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
+}
+
+/* ---- Links ---- */
+a {
+  color: var(--color-accent);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+}
+
+/* ---- Nav ---- */
+.nav-links a {
+  color: var(--color-text-secondary);
+  font-family: var(--font-body);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--color-text);
+}
+
+.nav-links a::after {
+  background: var(--color-accent);
+  height: 1.5px;
+}
+
+.nav-logo {
+  font-family: var(--font-heading) !important;
+  font-weight: 700 !important;
+  font-size: 1.3rem !important;
+  color: var(--color-text) !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* ---- Wave divider ---- */
+.wave-divider svg path {
+  stroke-width: 1;
+  opacity: 0.4;
+}
+
+/* ---- Footer ---- */
+.footer {
+  border-top-color: var(--color-divider);
+  border-top-width: 1px;
+}
+
+.footer-links a {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+}
+
+/* ---- Timeline ---- */
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-width: 2px;
+}
+
+.timeline-current .timeline-dot {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* ---- Dates — mono for tabular alignment ---- */
+.news-date {
+  font-family: var(--font-mono);
+  font-size: var(--size-sm);
+  color: var(--color-text-secondary);
+}
+
+.pres-date {
+  font-family: var(--font-mono);
+  font-size: var(--size-sm);
+}
+
+/* ---- Tags ---- */
+.pres-tag {
+  font-family: var(--font-body);
+  font-size: var(--size-xs);
+  letter-spacing: 0.06em;
+}
+
+/* ---- Publication venue — serif ---- */
+.pub-venue {
+  font-family: var(--font-heading);
+}
+
+/* ---- Pub tag ---- */
+.pub-tag {
+  font-family: var(--font-body);
+}

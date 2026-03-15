@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wenqi Huang | PhD Student &mdash; AI in Medicine, TUM</title>
+  <meta name="description" content="Wenqi Huang &mdash; PhD student at Technical University of Munich, researching MRI reconstruction with implicit neural representations and deep learning.">
+  <meta property="og:title" content="Wenqi Huang | PhD Student &mdash; AI in Medicine, TUM">
+  <meta property="og:description" content="PhD student at TUM researching MRI reconstruction with implicit neural representations and deep learning.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wenqihuang.github.io">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400&family=Noto+Sans+SC:wght@400&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/theme-warm.css" id="theme-css">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+  <a href="#about" class="skip-link">Skip to content</a>
+
+  <!-- ====== NAVIGATION ====== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#about" class="nav-logo">WH</a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle navigation">
+      <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </label>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#presentations">Presentations</a></li>
+        <li><a href="#more">More</a></li>
+        <li>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ====== HERO / ABOUT ====== -->
+  <header class="section hero" id="about">
+    <div class="hero-bg-pattern" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="hero-photo">
+        <img src="images/profile.jpg" alt="Wenqi Huang" class="profile-img" width="180" height="180">
+      </div>
+      <div class="hero-text">
+        <h1 class="hero-name anim-fade-up">Wenqi Huang <span class="hero-name-cn">黄文麒</span></h1>
+        <p class="hero-pronunciation anim-fade-up anim-delay-1">Pronounced: <em>WEN-chee HWAHNG</em></p>
+        <p class="hero-bio anim-fade-up anim-delay-2">
+          Hi there! I'm a PhD student at the
+          <a href="https://kiinformatik.mri.tum.de/en/chair-artificial-intelligence-healthcare-and-medicine" target="_blank" rel="noopener">Chair of AI in Healthcare and Medicine</a>,
+          Technical University of Munich (TUM).
+          I was also a visiting researcher at Stanford University.
+          My research focuses on magnetic resonance imaging reconstruction
+          using implicit neural representations and deep learning.
+        </p>
+        <p class="hero-bio hero-bio-personal anim-fade-up anim-delay-3">
+          On weekdays I study MRI, on weekends my wife and I love exploring
+          interesting places around the world &mdash; hiking trails, hidden towns,
+          or anywhere worth discovering. Occasionally I'm also a photographer or cyclist.
+        </p>
+        <div class="hero-links anim-fade-up anim-delay-3">
+          <a href="https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-2a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM1.5 9L12 0l10.5 9h-4v3.07A8.96 8.96 0 0 0 12 9.07a8.96 8.96 0 0 0-6.5 2.93V9h-4z"/></svg>
+          </a>
+          <a href="https://github.com/wenqihuang" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/wenqi-huang-tum/" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="mailto:wenqi.huang@tum.de" aria-label="Email">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ====== SECTION DIVIDER ====== -->
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20 C150,35 350,5 500,20 C650,35 850,5 1000,20 C1050,25 1150,15 1200,20" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+    </div>
+
+    <!-- ====== NEWS ====== -->
+    <section class="section" id="news">
+      <h2 class="section-title">News</h2>
+      <ul class="news-list">
+        <li class="news-item">
+          <span class="news-date">2026.03</span>
+          <span class="news-text">Two new preprints out! <a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener"><em>Gabor Primitives for Cardiac Cine MRI</em></a> and <a href="https://arxiv.org/abs/2603.03749" target="_blank" rel="noopener"><em>WSI-INR</em></a> (with Y. Wu et al.) &mdash; guess which conference ;)</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2026.01</span>
+          <span class="news-text">Finally made it to Sedona in person for the <strong>ISMRM Workshop on Data Sampling &amp; Image Reconstruction</strong>! Presented our extended work on physics-informed INRs for EPI.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2025.11</span>
+          <span class="news-text"><a href="https://arxiv.org/abs/2501.09403" target="_blank" rel="noopener"><em>PISCO</em></a> (V. Spieker et al.) published in <strong>Medical Image Analysis</strong>. Also a new preprint: <a href="https://arxiv.org/abs/2511.03762" target="_blank" rel="noopener"><em>Reconstruction-free Segmentation</em></a> (Y. Zhang et al.)</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2025.09</span>
+          <span class="news-text">Two collaborative papers at <strong>MICCAI 2025 Workshops</strong> in Daejeon: <a href="https://arxiv.org/abs/2509.04888" target="_blank" rel="noopener"><em>INR Meets Multi-contrast MRI</em></a> (N. Niessen et al.) and <em>Neural Space-Time Modeling</em> (A. Nurdinova et al.)</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2025.07</span>
+          <span class="news-text">Gave a guest lecture on INRs for MRI at the <strong>TUM Seminar on DL for Inverse Problems</strong>.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2025.06</span>
+          <span class="news-text">Our Stanford collaboration on EPI is going to <strong>MICCAI 2025</strong>: <a href="https://arxiv.org/abs/2503.00230" target="_blank" rel="noopener"><em>Physics-Informed INRs for Joint B0 Estimation and EPI</em></a></span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2025.05</span>
+          <span class="news-text">Oral presentation at <strong>ISMRM 2025</strong> in Honolulu &mdash; great to share our Subspace INR work with the MR community.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2025.02</span>
+          <span class="news-text"><a href="https://arxiv.org/abs/2412.12742" target="_blank" rel="noopener"><em>Subspace INRs for Real-Time Cardiac Cine MRI</em></a> accepted at <strong>IPMI 2025</strong>!</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2025.01</span>
+          <span class="news-text">Spent a wonderful winter quarter at <strong>Stanford University</strong> working with Prof. Kawin Setsompop on physics-informed EPI reconstruction.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2025.01</span>
+          <span class="news-text">Honored to give an invited talk at <strong>NVIDIA Research Radar</strong> on our INR work for cardiac MR imaging.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2024.07</span>
+          <span class="news-text"><a href="https://arxiv.org/abs/2302.02504" target="_blank" rel="noopener"><em>Motion-compensated MR CINE Reconstruction</em></a> (J. Pan et al.) published in <strong>IEEE TMI</strong>.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2024.06</span>
+          <span class="news-text"><a href="https://arxiv.org/abs/2404.08350" target="_blank" rel="noopener"><em>Self-supervised k-Space Regularization</em></a> (V. Spieker et al.) accepted at <strong>MICCAI 2024</strong>.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2024.03</span>
+          <span class="news-text"><em>Direct Cardiac Segmentation from Undersampled k-Space</em> (Y. Zhang et al.) accepted at <strong>ISBI 2024</strong>.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2024.02</span>
+          <span class="news-text">Presenting <em>TransGRAPPA</em> and <em>DE-NIK</em> (V. Spieker et al.) at <strong>ISMRM 2024</strong> in Singapore.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2024.01</span>
+          <span class="news-text">Proud to see my student&rsquo;s work accepted &mdash; <em>Neural Implicit k-Space with Trainable Periodic Activations</em> (PT Haft et al.) at <strong>BVM 2024</strong> as oral!</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2023.11</span>
+          <span class="news-text">Another student project published! <em>Self-supervised L+S Network for Radial MRI</em> (A. Mancu et al.) at <strong>NeurIPS 2023 Workshop</strong>.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2023.11</span>
+          <span class="news-text">Presented Neural Implicit k-Space at <strong>JIS Summit 2023</strong> (virtual).</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2023.10</span>
+          <span class="news-text"><em>Unrolled Motion-compensated Reconstruction for Cardiac CINE</em> (J. Pan et al.) accepted at <strong>Medical Image Analysis</strong>.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2023.06</span>
+          <span class="news-text">Oral at <strong>IPMI 2023</strong> in beautiful Bariloche! Presenting <a href="https://arxiv.org/abs/2212.08479" target="_blank" rel="noopener"><em>Neural Implicit k-Space</em></a>.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2023.06</span>
+          <span class="news-text">Busy MICCAI season &mdash; three collaborative papers accepted: <a href="https://arxiv.org/abs/2308.08830" target="_blank" rel="noopener"><em>ICoNIK</em></a> (V. Spieker et al.), <em>Generalised INRs for Registration</em> (V. Zimmer et al.), and <em>Uncertainty Propagation</em> (L. Feiner et al.)</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2023.01</span>
+          <span class="news-text">Oral accepted at the <strong>ISMRM Workshop</strong> in Sedona &mdash; couldn&rsquo;t attend due to visa issues, but Prof. Rueckert kindly presented on my behalf.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">2022.09</span>
+          <span class="news-text">Gave an invited talk at <strong>SIAM MDS 2022</strong> (virtual) on algorithm unrolling for MRI reconstruction.</span>
+        </li>
+      </ul>
+      <button class="news-toggle" id="news-toggle">&#x25BE; Show older news</button>
+    </section>
+
+    <!-- ====== PUBLICATIONS ====== -->
+    <section class="section" id="publications">
+      <h2 class="section-title">Selected Publications</h2>
+      <p class="section-subtitle">Full list on <a href="https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+
+      <div class="pub-list">
+
+        <article class="pub-card">
+          <div class="pub-content">
+            <h3 class="pub-title">Gabor Primitives for Accelerated Cardiac Cine MRI Reconstruction</h3>
+            <p class="pub-authors">W Huang, V Spieker, N Stolt-Ansó, N Niessen, M Dannecker, SG Kafali, S Kurugol, JA Schnabel, D Rueckert</p>
+            <p class="pub-venue"><span class="pub-tag tag-preprint">Preprint</span> arXiv, 2026</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener">Paper</a>
+              <span class="pub-link-soon">Code coming soon</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-card">
+          <div class="pub-content">
+            <h3 class="pub-title">Physics-Informed Implicit Neural Representations for Joint B0 Estimation and Echo Planar Imaging</h3>
+            <p class="pub-authors">W Huang, N Wang, C Liao, Y Lin, M Gao, D Rueckert, K Setsompop</p>
+            <p class="pub-venue"><span class="pub-tag tag-poster">Poster</span> MICCAI 2025</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2503.00230" target="_blank" rel="noopener">Paper</a>
+              <span class="pub-link-soon">Code coming soon</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-card">
+          <div class="pub-content">
+            <h3 class="pub-title">Subspace Implicit Neural Representations for Real-Time Cardiac Cine MR Imaging</h3>
+            <p class="pub-authors">W Huang, V Spieker, S Xu, G Cruz, C Prieto, JA Schnabel, K Hammernik, T Kuestner, D Rueckert</p>
+            <p class="pub-venue"><span class="pub-tag tag-poster">Poster</span> IPMI 2025</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2412.12742" target="_blank" rel="noopener">Paper</a>
+              <a href="https://github.com/wenqihuang/SubspaceINR-CMR" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-card">
+          <div class="pub-content">
+            <h3 class="pub-title">Neural Implicit k-Space for Binning-free Non-Cartesian Cardiac MR Imaging</h3>
+            <p class="pub-authors">W Huang, H Li, J Pan, G Cruz, D Rueckert, K Hammernik</p>
+            <p class="pub-venue"><span class="pub-tag tag-oral">Oral</span> IPMI 2023</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2212.08479" target="_blank" rel="noopener">Paper</a>
+              <a href="https://github.com/wenqihuang/NIK_MRI" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-card">
+          <div class="pub-content">
+            <h3 class="pub-title">Deep Low-Rank Plus Sparse Network for Dynamic MR Imaging</h3>
+            <p class="pub-authors">W Huang, Z Ke, ZX Cui, J Cheng, Z Qiu, S Jia, L Ying, Y Zhu, D Liang</p>
+            <p class="pub-venue"><span class="pub-tag tag-journal">Journal</span> Medical Image Analysis, 2021</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2010.13677" target="_blank" rel="noopener">Paper</a>
+              <a href="https://github.com/wenqihuang/LS-Net-Dynamic-MRI" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-card">
+          <div class="pub-content">
+            <h3 class="pub-title">Learned Low-Rank Priors in Dynamic MR Imaging</h3>
+            <p class="pub-authors">Z Ke*, W Huang*, ZX Cui, J Cheng, S Jia, H Wang, X Liu, H Zheng, L Ying, Y Zhu, D Liang</p>
+            <p class="pub-venue"><span class="pub-tag tag-journal">Journal</span> IEEE Transactions on Medical Imaging, 2021</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2006.12090" target="_blank" rel="noopener">Paper</a>
+              <a href="https://github.com/Keziwen/SLR-Net" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ====== PRESENTATIONS ====== -->
+    <section class="section" id="presentations">
+      <h2 class="section-title">Presentations</h2>
+
+      <ul class="pres-list">
+        <li class="pres-item">
+          <span class="pres-tag tag-invited">Invited</span>
+          <div class="pres-content">
+            <div class="pres-header">
+              <span><strong>Seminar on DL for Inverse Problems in Medical Imaging</strong> <span class="pres-location">&middot; Munich</span></span>
+              <span class="pres-date">Jul 2025</span>
+            </div>
+            <span class="pres-title">Implicit Neural Representations for MRI Reconstruction</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-tag tag-poster">Poster</span>
+          <div class="pres-content">
+            <div class="pres-header">
+              <span><strong>ISMRM Workshop on Data Sampling &amp; Image Reconstruction</strong> <span class="pres-location">&middot; Sedona</span></span>
+              <span class="pres-date">Jan 2026</span>
+            </div>
+            <span class="pres-title">Joint B&#x2080; Estimation and Distortion-Free Reconstruction from Rotated-View EPI</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-tag tag-poster">Poster</span>
+          <div class="pres-content">
+            <div class="pres-header">
+              <span><strong>IPMI 2025</strong> <span class="pres-location">&middot; Kos Island</span></span>
+              <span class="pres-date">Jun 2025</span>
+            </div>
+            <span class="pres-title">Subspace INRs for Real-Time Cardiac Cine MRI (extended full paper)</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-tag tag-oral">Oral</span>
+          <div class="pres-content">
+            <div class="pres-header">
+              <span><strong>ISMRM 2025</strong> <span class="pres-location">&middot; Honolulu</span></span>
+              <span class="pres-date">May 2025</span>
+            </div>
+            <span class="pres-title">Subspace INRs for Real-Time Cardiac Cine MRI (abstract)</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-tag tag-invited">Invited</span>
+          <div class="pres-content">
+            <div class="pres-header">
+              <span><strong>NVIDIA Research Radar Talk</strong> <span class="pres-location">&middot; Online</span></span>
+              <span class="pres-date">Jan 2025</span>
+            </div>
+            <span class="pres-title">Implicit Neural Representations for Non-Cartesian Cardiac MR Imaging</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-tag tag-poster">Poster</span>
+          <div class="pres-content">
+            <div class="pres-header">
+              <span><strong>ISMRM 2024</strong> <span class="pres-location">&middot; Singapore</span></span>
+              <span class="pres-date">May 2024</span>
+            </div>
+            <span class="pres-title">TransGRAPPA: Self-supervised Transformer Network for k-Space Interpolation</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-tag tag-oral">Oral</span>
+          <div class="pres-content">
+            <div class="pres-header">
+              <span><strong>IPMI 2023</strong> <span class="pres-location">&middot; Bariloche</span></span>
+              <span class="pres-date">Jun 2023</span>
+            </div>
+            <span class="pres-title">Neural Implicit k-Space for Binning-free Non-Cartesian Cardiac MR Imaging</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-tag tag-oral">Oral</span>
+          <div class="pres-content">
+            <div class="pres-header">
+              <span><strong>JIS Summit 2023</strong> <span class="pres-location">&middot; Virtual</span></span>
+              <span class="pres-date">Nov 2023</span>
+            </div>
+            <span class="pres-title">Neural Implicit k-Space for Binning-free Non-Cartesian Cardiac MR Imaging</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-tag tag-oral">Oral</span>
+          <div class="pres-content">
+            <div class="pres-header">
+              <span><strong>ISMRM Workshop on Data Sampling &amp; Image Reconstruction</strong> <span class="pres-location">&middot; Sedona</span></span>
+              <span class="pres-date">Jan 2023</span>
+            </div>
+            <span class="pres-title">Universal K-Space Interpolation Network for Non-Cartesian CINE Imaging</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-tag tag-invited">Invited</span>
+          <div class="pres-content">
+            <div class="pres-header">
+              <span><strong>SIAM MDS 2022</strong> <span class="pres-location">&middot; Virtual</span></span>
+              <span class="pres-date">Sep 2022</span>
+            </div>
+            <span class="pres-title">Algorithm Unrolling: Key for Physics-Based Learning in MRI Reconstruction</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ====== MORE ====== -->
+    <section class="section" id="more">
+      <h2 class="section-title">More</h2>
+
+      <!-- Education -->
+      <div class="subsection">
+        <h3 class="subsection-title">Education</h3>
+        <div class="timeline">
+          <div class="timeline-item timeline-current">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">2021 &ndash; present</span>
+              <strong>PhD in Computer Science</strong>
+              <span class="timeline-place">Technical University of Munich (TUM), Germany</span>
+              <span class="timeline-detail">Topic: Advanced Algorithms for Fast MRI &middot; Supervisor: Prof. Daniel Rueckert</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">Jan &ndash; Mar 2025</span>
+              <strong>Visiting Student Researcher</strong>
+              <span class="timeline-place">Stanford University, USA</span>
+              <span class="timeline-detail">Supervisor: Prof. Kawin Setsompop</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">2018 &ndash; 2021</span>
+              <strong>M.Sc. in Pattern Recognition &amp; Intelligent Systems</strong>
+              <span class="timeline-place">Shenzhen Institute of Advanced Technology, Chinese Academy of Sciences</span>
+              <span class="timeline-detail">Supervisor: Prof. Dong Liang</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">2014 &ndash; 2018</span>
+              <strong>B.Eng. in Information Engineering</strong>
+              <span class="timeline-place">Soochow University, China</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Teaching -->
+      <div class="subsection">
+        <h3 class="subsection-title">Teaching &amp; Supervision</h3>
+        <ul class="detail-list">
+          <li>
+            <strong>Jul 2025</strong> &mdash; Guest Lecture: Implicit Neural Representations for MRI Reconstruction
+            <span class="detail-meta">Seminar on Deep Learning for Inverse Problems in Medical Imaging, TUM</span>
+          </li>
+          <li>
+            <strong>2023 &ndash; 2024</strong> &mdash; Applied Deep Learning in Medicine: Implicit Neural Representations for MRI
+            <span class="detail-meta">Master Practical Course Supervisor, TUM</span>
+          </li>
+          <li>
+            <strong>Sep &ndash; Dec 2023</strong> &mdash; Neural Implicit k-Space with Trainable Periodic Activation Functions for Cardiac MR Imaging
+            <span class="detail-meta">Master Interdisciplinary Project Advisor &middot; Published at BVM 2024 (Oral)</span>
+          </li>
+          <li>
+            <strong>Jul 2022 &ndash; Sep 2023</strong> &mdash; Self-supervised Low-rank plus Sparse Network for Radial MRI Reconstruction
+            <span class="detail-meta">Master Interdisciplinary Project Co-supervisor &middot; Published at NeurIPS 2023 Workshop</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Academic Service -->
+      <div class="subsection">
+        <h3 class="subsection-title">Academic Service</h3>
+        <p class="service-text">
+          Reviewer for
+          <strong>IEEE Transactions on Medical Imaging (TMI)</strong>,
+          <strong>Medical Image Analysis (MedIA)</strong>,
+          <strong>Magnetic Resonance in Medicine (MRM)</strong>,
+          <strong>IEEE Transactions on Biomedical Engineering (TBME)</strong>,
+          <strong>Advanced Science</strong>,
+          <strong>MICCAI</strong>,
+          <strong>ISMRM</strong>
+        </p>
+      </div>
+
+      <!-- Personal -->
+      <div class="subsection">
+        <h3 class="subsection-title">Beyond Research</h3>
+        <p class="personal-text">
+          When I'm not in the lab, my wife and I love exploring the world &mdash;
+          from Alpine trails to hidden corners of European towns.
+          I also enjoy photography and the occasional long bike ride.
+          Feel free to reach out if you share similar interests or want to chat about MRI, deep learning, or travel!
+        </p>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+        <a href="https://github.com/wenqihuang" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/wenqi-huang-tum/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:wenqi.huang@tum.de">Email</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 Wenqi Huang. Built with HTML, CSS &amp; vanilla JS.</p>
+    </div>
+  </footer>
+
+  <!-- ====== INLINE JS ====== -->
+  <script>
+    // Dark mode toggle
+    (function() {
+      const toggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      const stored = localStorage.getItem('theme');
+      if (stored) {
+        html.setAttribute('data-theme', stored);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        html.setAttribute('data-theme', 'dark');
+      }
+      toggle.addEventListener('click', () => {
+        const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    })();
+
+    // Active nav highlighting
+    (function() {
+      const sections = document.querySelectorAll('.section');
+      const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(link => link.classList.remove('active'));
+            const active = document.querySelector('.nav-links a[href="#' + entry.target.id + '"]');
+            if (active) active.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -60% 0px' });
+      sections.forEach(s => observer.observe(s));
+    })();
+
+    // News expand/collapse — auto-hide items older than 1 year
+    (function() {
+      const btn = document.getElementById('news-toggle');
+      const list = document.querySelector('.news-list');
+      const items = list.querySelectorAll('.news-item');
+      const cutoff = new Date();
+      cutoff.setFullYear(cutoff.getFullYear() - 1);
+      let hasOld = false;
+      items.forEach(item => {
+        const dateStr = item.querySelector('.news-date').textContent.trim();
+        const parts = dateStr.split('.');
+        const year = parseInt(parts[0]);
+        const month = parts[1] ? parseInt(parts[1]) - 1 : 0;
+        const itemDate = new Date(year, month);
+        if (itemDate < cutoff) {
+          item.classList.add('news-old');
+          hasOld = true;
+        }
+      });
+      if (!hasOld) btn.style.display = 'none';
+      btn.addEventListener('click', () => {
+        const expanded = list.classList.toggle('news-expanded');
+        btn.textContent = expanded ? '\u25B4 Show less' : '\u25BE Show older news';
+        if (!expanded) {
+          document.getElementById('news').scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    })();
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('nav-toggle').checked = false;
+      });
+    });
+  </script>
+
+</body>
+</html>
