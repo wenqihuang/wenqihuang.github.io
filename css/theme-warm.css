@@ -355,15 +355,11 @@ a:hover {
 }
 
 /* ---- Dates — mono for tabular alignment ---- */
-.news-date {
-  font-family: var(--font-mono);
-  font-size: var(--size-sm);
-  color: var(--color-text-secondary);
-}
-
+.news-date,
 .pres-date {
   font-family: var(--font-mono);
   font-size: var(--size-sm);
+  color: var(--color-text-secondary);
 }
 
 /* ---- Tags ---- */
