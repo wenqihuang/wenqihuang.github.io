@@ -603,12 +603,24 @@
       obs.observe(hero);
     })();
 
-    // Close mobile nav on link click
-    document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('nav-toggle').checked = false;
+    // Mobile nav: sync menu-open class + close on link click
+    (function() {
+      const toggle = document.getElementById('nav-toggle');
+      const nav = document.getElementById('nav');
+      toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+          nav.classList.add('menu-open');
+        } else {
+          setTimeout(() => nav.classList.remove('menu-open'), 300);
+        }
       });
-    });
+      document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+        link.addEventListener('click', () => {
+          toggle.checked = false;
+          setTimeout(() => nav.classList.remove('menu-open'), 300);
+        });
+      });
+    })();
 
     // ---- k-Space trajectories: radial + spiral + EPI (canvas) ----
     (function() {
