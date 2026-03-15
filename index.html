@@ -603,6 +603,21 @@
       obs.observe(hero);
     })();
 
+    // Scroll reveal
+    (function() {
+      var items = document.querySelectorAll('.section-title, .pub-card, .pres-item, .timeline-item, .news-item, .subsection, .wave-divider');
+      items.forEach(function(el) { el.classList.add('scroll-reveal'); });
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('in-view');
+            obs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      items.forEach(function(el) { obs.observe(el); });
+    })();
+
     // Close mobile nav on link click
     document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
       link.addEventListener('click', () => {

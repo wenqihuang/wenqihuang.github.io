@@ -984,19 +984,16 @@ h1, h2, h3 {
   animation: reconstruct 1.4s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
 }
 
-/* Scroll-triggered fade (progressive enhancement) */
-@supports (animation-timeline: view()) {
-  .section-title,
-  .pub-card,
-  .pres-item,
-  .timeline-item,
-  .news-item {
-    opacity: 0;
-    transform: translateY(12px);
-    animation: fadeSlideUp 0.4s ease forwards;
-    animation-timeline: view();
-    animation-range: entry 0% entry 30%;
-  }
+/* Scroll-triggered fade — JS adds .in-view */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.scroll-reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* --- Responsive --- */
@@ -1035,7 +1032,6 @@ h1, h2, h3 {
   }
   .nav-toggle-input:checked ~ .nav-toggle-label span:nth-child(2) {
     opacity: 0;
-    transform: scaleX(0);
   }
   .nav-toggle-input:checked ~ .nav-toggle-label span:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
@@ -1090,6 +1086,11 @@ h1, h2, h3 {
 
   .hero-bg-pattern {
     display: none;
+  }
+
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
