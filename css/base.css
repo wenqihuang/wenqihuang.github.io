@@ -448,7 +448,7 @@ h1, h2, h3 {
 .pub-list {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .pub-card {
@@ -703,6 +703,10 @@ h1, h2, h3 {
   margin-top: 0.75rem;
   position: relative;
   z-index: 0;
+}
+
+[data-theme="dark"] .academic-map {
+  filter: sepia(0.15) hue-rotate(-10deg);
 }
 
 .map-legend {
