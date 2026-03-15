@@ -993,7 +993,7 @@ h1, h2, h3 {
   .news-item,
   .subsection {
     opacity: 0;
-    transform: translateY(40px);
+    transform: translateY(80px);
     animation: fadeSlideUp 1s ease forwards;
     animation-timeline: view();
     animation-range: entry 0% entry 40%;
