@@ -84,36 +84,55 @@
 }
 
 /* ---- Tags ----
-   Filled pill style, position unified before venue */
+   Different colors, equal visual weight — no hierarchy */
 .tag-journal {
-  background: var(--color-text);
-  color: var(--color-bg);
+  background: #D5C8B8;
+  color: #5C4E3C;
 }
 
 .tag-oral {
-  background: var(--color-accent);
-  color: #fff;
+  background: #C8D5C8;
+  color: #3C5C3C;
 }
 
 .tag-invited {
-  background: var(--color-text);
-  color: var(--color-bg);
+  background: #C8CED8;
+  color: #3C4A5C;
 }
 
 .tag-poster {
-  background: var(--color-divider);
-  color: var(--color-text);
+  background: #D8CFC8;
+  color: #5C4F42;
 }
 
 .tag-preprint {
-  background: var(--color-divider);
-  color: var(--color-text-secondary);
+  background: #D0CDD5;
+  color: #4A475C;
 }
 
-[data-theme="dark"] .tag-poster,
+[data-theme="dark"] .tag-journal {
+  background: #4A4235;
+  color: #D5C8B8;
+}
+
+[data-theme="dark"] .tag-oral {
+  background: #354A35;
+  color: #C8D5C8;
+}
+
+[data-theme="dark"] .tag-invited {
+  background: #353A4A;
+  color: #C8CED8;
+}
+
+[data-theme="dark"] .tag-poster {
+  background: #4A4235;
+  color: #D8CFC8;
+}
+
 [data-theme="dark"] .tag-preprint {
-  background: #38362F;
-  color: #E8E8E3;
+  background: #3E3B4A;
+  color: #D0CDD5;
 }
 
 /* ---- Hero spiral k-space trajectory (drawn via JS canvas) ---- */
