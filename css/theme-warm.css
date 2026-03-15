@@ -332,10 +332,6 @@ a:hover {
 }
 
 /* ---- Footer ---- */
-.footer {
-  border-top-color: var(--color-divider);
-  border-top-width: 1px;
-}
 
 .footer-links a {
   font-family: var(--font-body);
