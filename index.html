@@ -607,17 +607,23 @@
     (function() {
       const toggle = document.getElementById('nav-toggle');
       const nav = document.getElementById('nav');
+      function closeMenu() {
+        nav.classList.remove('menu-open');
+        nav.classList.add('menu-closing');
+        setTimeout(() => nav.classList.remove('menu-closing'), 500);
+      }
       toggle.addEventListener('change', () => {
         if (toggle.checked) {
+          nav.classList.remove('menu-closing');
           nav.classList.add('menu-open');
         } else {
-          setTimeout(() => nav.classList.remove('menu-open'), 300);
+          closeMenu();
         }
       });
       document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
         link.addEventListener('click', () => {
           toggle.checked = false;
-          setTimeout(() => nav.classList.remove('menu-open'), 300);
+          closeMenu();
         });
       });
     })();
