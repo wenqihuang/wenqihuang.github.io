@@ -572,22 +572,17 @@
     // Auto year in footer
     document.getElementById('footer-year').textContent = new Date().getFullYear();
 
-    // Back to top — floating button
+    // Back to top + nav shadow — single scroll listener
     (function() {
       const btn = document.getElementById('back-to-top');
+      const nav = document.getElementById('nav');
       btn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
       window.addEventListener('scroll', () => {
-        btn.classList.toggle('visible', window.scrollY > 400);
-      }, { passive: true });
-    })();
-
-    // Nav shadow + logo: respond to scroll
-    (function() {
-      const nav = document.getElementById('nav');
-      window.addEventListener('scroll', () => {
-        nav.classList.toggle('scrolled', window.scrollY > 20);
+        const y = window.scrollY;
+        btn.classList.toggle('visible', y > 400);
+        nav.classList.toggle('scrolled', y > 20);
       }, { passive: true });
     })();
 
