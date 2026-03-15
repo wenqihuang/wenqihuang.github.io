@@ -579,7 +579,7 @@
           // Draw VISTA masks on newly revealed items
           if (window._drawVistaMasks) window._drawVistaMasks();
         } else {
-          document.getElementById('news').scrollIntoView({ behavior: 'smooth' });
+          btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       });
     })();
