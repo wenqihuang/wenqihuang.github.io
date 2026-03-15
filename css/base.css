@@ -370,6 +370,17 @@ h1, h2, h3 {
   margin-bottom: 0.75rem;
 }
 
+.hero-bio a {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.hero-bio a:hover {
+  text-decoration-color: currentColor;
+}
+
 .hero-bio-personal {
   color: var(--color-text-secondary);
   font-style: italic;
@@ -417,6 +428,35 @@ h1, h2, h3 {
 .hero-links a[data-tooltip]:hover::after {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+/* --- Scroll hint --- */
+.scroll-hint {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-text-secondary);
+  opacity: 0;
+  pointer-events: none;
+  animation: scrollBounce 2s ease-in-out infinite;
+  transition: opacity 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .scroll-hint {
+    opacity: 0.4;
+  }
+}
+
+.scroll-hint.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(6px); }
 }
 
 /* --- Wave Divider --- */
@@ -504,6 +544,17 @@ h1, h2, h3 {
 
 .news-text {
   font-size: var(--size-base, 1rem);
+}
+
+.news-text a {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 2px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.news-text a:hover {
+  text-decoration-color: currentColor;
 }
 
 /* --- Publications --- */
