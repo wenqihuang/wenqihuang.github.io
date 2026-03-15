@@ -9,10 +9,13 @@
   <meta property="og:description" content="PhD student at TUM researching MRI reconstruction with implicit neural representations and deep learning.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wenqihuang.github.io">
+  <meta property="og:image" content="https://wenqihuang.github.io/images/og-card.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://wenqihuang.github.io/images/og-card.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400&family=Noto+Sans+SC:wght@400&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400&family=Noto+Sans+SC:wght@400&family=Noto+Serif+SC:wght@400;600;700&text=%E9%BB%84%E6%96%87%E9%BA%92&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/theme-warm.css" id="theme-css">
@@ -34,7 +37,7 @@
         <li><a href="#news">News</a></li>
         <li><a href="#publications">Publications</a></li>
         <li><a href="#presentations">Presentations</a></li>
-        <li><a href="#more">More</a></li>
+        <li><a href="#more">&amp; More</a></li>
         <li>
           <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
             <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -486,7 +489,7 @@
         <a href="https://www.linkedin.com/in/wenqi-huang-tum/" target="_blank" rel="noopener">LinkedIn</a>
         <a href="mailto:wenqi.huang@tum.de">Email</a>
       </div>
-      <p class="footer-easter-egg">Have you found all the Easter eggs on this page? &hearts;</p>
+      <p class="footer-easter-egg">Have you found all the Easter eggs on this page?</p>
       <p class="footer-copy">&copy; <span id="footer-year"></span> Wenqi Huang. Built with HTML, CSS &amp; vanilla JS.</p>
     </div>
   </footer>
@@ -577,6 +580,8 @@
     (function() {
       const canvas = document.getElementById('spiral-canvas');
       if (!canvas) return;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reducedMotion) { canvas.style.display = 'none'; return; }
       const parent = canvas.parentElement;
       const dpr = window.devicePixelRatio || 1;
       let w, h;
@@ -639,7 +644,10 @@
         ctx.stroke();
       }
 
+      let paused = false;
+      document.addEventListener('visibilitychange', () => { paused = document.hidden; });
       function frame() {
+        if (paused) { requestAnimationFrame(frame); return; }
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, w * dpr, h * dpr);
         ctx.save();
@@ -731,7 +739,10 @@
       // Animate: all masks scroll right in sync, wrap around
       (function() {
         let shift = 0;
+        let vPaused = false;
+        document.addEventListener('visibilitychange', () => { vPaused = document.hidden; });
         function drawFrame() {
+          if (vPaused) { requestAnimationFrame(drawFrame); return; }
           shift += 0.03; // pixels per frame
           const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
           const color = isDark ? 'rgba(224,160,112,0.5)' : 'rgba(168,97,61,0.5)';
@@ -762,6 +773,131 @@
       })();
     })();
 
+    // ---- Console ASCII art Easter egg ----
+    console.log([
+      '%c',
+      '  Welcome to my k-space!',
+      '',
+      '  . . . . . . . . . . . . .',
+      '  . . . . . . . . . . . . .',
+      '  . . . . o o o o o . . . .',
+      '  . . . o o O O O o o . . .',
+      '  . . o O O # # # O O o . .',
+      '  . . o O # # # # # O o . .',
+      '  . . o O # # # # # O o . .',
+      '  . . o O O # # # O O o . .',
+      '  . . . o o O O O o o . . .',
+      '  . . . . o o o o o . . . .',
+      '  . . . . . . . . . . . . .',
+      '  . . . . . . . . . . . . .',
+      '',
+      '  F(image) = k-space',
+      '',
+      '  Wenqi Huang | wenqi.huang@tum.de',
+      '  Think we could collaborate? Drop me a line!',
+    ].join('\n'), 'color: #A8613D; font-family: monospace; font-size: 13px; line-height: 1.5;');
+
+    // ---- MRI glitch on rapid dark mode toggle ----
+    (function() {
+      let clicks = 0, timer = null;
+      const glitches = [
+        // Classic MRI hardware fails
+        { effect: 'skew(-1deg, 2deg) scale(0.99)', msg: '🧊 Quench detected — helium boil-off in progress!' },
+        { effect: 'skew(-2deg, 1deg) scale(0.98)', msg: '📡 RF interference — who opened the Faraday cage?!' },
+        { effect: 'skew(2deg, 1deg) scale(1.01)', msg: '⚠️ PNS limit exceeded — gradient slew rate too high!' },
+        // Funny scan-room scenarios
+        { effect: 'skew(1deg, -1deg) scale(1.02)', msg: '🏃 Severe motion artifact — the volunteer escaped the bore!' },
+        { effect: 'skew(1deg, 1deg) scale(1.03)', msg: '🪑 Ferromagnetic object detected — a chair is flying toward the magnet!' },
+        { effect: 'skew(-1deg, -1deg) scale(0.97)', msg: '😤 Patient breathed during breath-hold — 45 min scan ruined!' },
+        // k-Space & reconstruction humor (Wenqi's research)
+        { effect: 'skew(1deg, 2deg) scale(1.01)', msg: '🌀 Wrap-around artifact — your nose is now behind your head!' },
+        { effect: 'skew(-2deg, -1deg) scale(0.99)', msg: '📉 Loss = NaN — the unrolled network just unrolled itself!' },
+        { effect: 'skew(2deg, -1deg) scale(1.02)', msg: '🔥 CUDA out of memory — the reconstruction ate all the VRAM!' },
+        { effect: 'skew(-1deg, 2deg) scale(0.98)', msg: '🤖 Network hallucinating anatomy — knee in brain now!' },
+        { effect: 'skew(1deg, -2deg) scale(1.01)', msg: '⏳ Iterative recon still running — estimated finish: next week' },
+        { effect: 'skew(2deg, 2deg) scale(0.98)', msg: '🔄 Congratulations — you reconstructed noise!' },
+      ];
+      const toggle = document.getElementById('theme-toggle');
+      const origClick = toggle.onclick;
+      toggle.addEventListener('click', function() {
+        clicks++;
+        clearTimeout(timer);
+        timer = setTimeout(() => { clicks = 0; }, 1200);
+        if (clicks >= 5) {
+          clicks = 0;
+          const g = glitches[Math.floor(Math.random() * glitches.length)];
+          const body = document.body;
+          // Full-screen glitch overlay
+          const overlay = document.createElement('div');
+          overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;pointer-events:none;' +
+            'background:rgba(0,0,0,0.92);display:flex;flex-direction:column;align-items:center;' +
+            'justify-content:center;animation:fadeIn 0.15s ease;';
+          // Scanlines
+          overlay.innerHTML = '<div style="position:absolute;inset:0;background:repeating-linear-gradient(' +
+            'to bottom,transparent,transparent 2px,rgba(255,0,0,0.03) 2px,rgba(255,0,0,0.03) 4px);"></div>' +
+            '<div style="position:relative;text-align:center;">' +
+            '<div style="font-family:var(--font-mono);font-size:0.75rem;color:#ff4444;letter-spacing:0.3em;' +
+            'text-transform:uppercase;margin-bottom:1rem;opacity:0.7;">⚠ SYSTEM ERROR ⚠</div>' +
+            '<div style="font-family:var(--font-mono);font-size:1.4rem;color:#ff6666;font-weight:700;' +
+            'text-shadow:0 0 20px rgba(255,68,68,0.5),2px 2px 0 rgba(255,0,0,0.3),-2px -2px 0 rgba(0,255,255,0.2);' +
+            'letter-spacing:0.05em;">' + g.msg + '</div>' +
+            '<div style="font-family:var(--font-mono);font-size:0.7rem;color:#666;margin-top:1.5rem;' +
+            'letter-spacing:0.1em;">SCAN ABORTED — RESTARTING...</div></div>';
+          document.documentElement.appendChild(overlay);
+          // Body glitch
+          body.style.transition = 'transform 0.05s';
+          let glitchInterval = setInterval(() => {
+            body.style.transform = 'translate(' + (Math.random()*4-2) + 'px,' + (Math.random()*4-2) + 'px)';
+          }, 50);
+          setTimeout(() => {
+            clearInterval(glitchInterval);
+            body.style.transform = '';
+            overlay.style.opacity = '0';
+            overlay.style.transition = 'opacity 0.8s';
+            setTimeout(() => overlay.remove(), 800);
+          }, 5000);
+        }
+      });
+    })();
+
+    // ---- "cardiac" secret: heartbeat color pulse ----
+    (function() {
+      let buffer = '';
+      const keyword = 'cardiac';
+      let beating = false;
+      document.addEventListener('keydown', e => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        buffer += e.key.toLowerCase();
+        if (buffer.length > keyword.length) buffer = buffer.slice(-keyword.length);
+        if (buffer === keyword && !beating) {
+          beating = true;
+          const style = document.createElement('style');
+          style.id = 'cardiac-style';
+          style.textContent = `
+            @keyframes heartbeat {
+              0%, 100% { background-color: var(--color-bg); }
+              8% { background-color: color-mix(in srgb, var(--color-accent) 6%, var(--color-bg)); }
+              16% { background-color: var(--color-bg); }
+              24% { background-color: color-mix(in srgb, var(--color-accent) 10%, var(--color-bg)); }
+              36% { background-color: var(--color-bg); }
+            }
+            body.cardiac-mode {
+              animation: heartbeat 1s ease-in-out infinite;
+            }
+          `;
+          document.head.appendChild(style);
+          document.body.classList.add('cardiac-mode');
+          // Stop after 5 seconds
+          setTimeout(() => {
+            document.body.classList.remove('cardiac-mode');
+            style.remove();
+            beating = false;
+            buffer = '';
+          }, 5000);
+        }
+      });
+    })();
+
     // ---- Fourier divider — trigger draw animation on scroll ----
     (function() {
       const divider = document.querySelector('.wave-divider');
@@ -778,6 +914,6 @@
       obs.observe(divider);
     })();
   </script>
-
+  <!-- f(x,y) → continuous, compact, queryable at any resolution. Just like this site. -->
 </body>
 </html>
