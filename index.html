@@ -695,9 +695,11 @@
       ];
 
       function resize() {
-        w = parent.offsetWidth; h = parent.offsetHeight;
-        canvas.width = w * dpr; canvas.height = h * dpr;
-        canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+        requestAnimationFrame(function() {
+          w = parent.offsetWidth; h = parent.offsetHeight;
+          canvas.width = w * dpr; canvas.height = h * dpr;
+          canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+        });
       }
       resize();
 
@@ -823,8 +825,10 @@
         items.forEach((item, idx) => {
           if (item.querySelector('.vista-mask')) return;
           const dateEl = item.querySelector('.news-date');
-          const dateW = dateEl.offsetWidth + 16;
-          const itemH = item.offsetHeight;
+          const rect = dateEl.getBoundingClientRect();
+          const itemRect = item.getBoundingClientRect();
+          const dateW = rect.width + 16;
+          const itemH = itemRect.height;
           if (itemH === 0) return;
           const c = document.createElement('canvas');
           c.className = 'vista-mask';
