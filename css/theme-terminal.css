@@ -1,0 +1,401 @@
+/* ========================================
+   THEME: Terminal / Hacker
+   Pure black background, Matrix green text,
+   monospace everything, command-line aesthetic.
+   ======================================== */
+
+:root {
+  /* Colors — dark terminal with green phosphor glow */
+  --color-bg: #1a1a1a;
+  --color-surface: #222222;
+  --color-text: #d0d0d0;
+  --color-text-secondary: #808080;
+  --color-accent: #00ff41;
+  --color-accent-hover: #33ff66;
+  --color-accent-glow: rgba(0, 255, 65, 0.08);
+  --color-highlight: #00ff41;
+  --color-divider: #333333;
+  --color-nav-bg: rgba(26, 26, 26, 0.95);
+
+  /* Typography — all monospace */
+  --font-heading: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --font-body: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  --font-size-base: 15px;
+
+  /* Type scale */
+  --size-xs: 0.694rem;
+  --size-sm: 0.833rem;
+  --size-base: 1rem;
+  --size-lg: 1.2rem;
+  --size-xl: 1.44rem;
+  --size-2xl: 1.728rem;
+  --size-3xl: 2.488rem;
+
+  /* Spacing */
+  --space-section: 3.5rem;
+  --space-page-x: 1.5rem;
+  --content-width: 780px;
+
+  /* Shapes */
+  --profile-radius: 4px;
+  --card-radius: 2px;
+
+  /* Shadows — minimal, glow-based */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 255, 65, 0.06);
+
+  /* Timeline */
+  --timeline-gradient: linear-gradient(to bottom, #00ff41, #008f11);
+}
+
+/* Dark mode — pure black, full Matrix */
+[data-theme="dark"] {
+  --color-bg: #000000;
+  --color-surface: #0a0a0a;
+  --color-text: #00ff41;
+  --color-text-secondary: #008f11;
+  --color-accent: #00ff41;
+  --color-accent-hover: #66ff88;
+  --color-accent-glow: rgba(0, 255, 65, 0.1);
+  --color-highlight: #00ff41;
+  --color-divider: #1a3a1a;
+  --color-nav-bg: rgba(0, 0, 0, 0.95);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 4px 16px rgba(0, 255, 65, 0.1);
+}
+
+/* ---- Tags — green outline style ---- */
+.tag-journal {
+  background: transparent;
+  color: #00ff41;
+  border: 1px solid #00ff41;
+}
+
+.tag-oral {
+  background: transparent;
+  color: #00cc33;
+  border: 1px solid #00cc33;
+}
+
+.tag-invited {
+  background: transparent;
+  color: #66ff88;
+  border: 1px solid #66ff88;
+}
+
+.tag-poster {
+  background: transparent;
+  color: #808080;
+  border: 1px solid #555555;
+}
+
+.tag-preprint {
+  background: transparent;
+  color: #808080;
+  border: 1px solid #555555;
+}
+
+[data-theme="dark"] .tag-journal {
+  background: transparent;
+  color: #00ff41;
+  border: 1px solid #00ff41;
+}
+
+[data-theme="dark"] .tag-oral {
+  background: transparent;
+  color: #00cc33;
+  border: 1px solid #00cc33;
+}
+
+[data-theme="dark"] .tag-invited {
+  background: transparent;
+  color: #66ff88;
+  border: 1px solid #66ff88;
+}
+
+[data-theme="dark"] .tag-poster {
+  background: transparent;
+  color: #008f11;
+  border: 1px solid #1a3a1a;
+}
+
+[data-theme="dark"] .tag-preprint {
+  background: transparent;
+  color: #008f11;
+  border: 1px solid #1a3a1a;
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: rgba(0, 255, 65, 0.3);
+  color: inherit;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #333333; border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: #00ff41; }
+
+/* ---- Section title ---- */
+.section-title {
+  position: relative;
+  display: inline-block;
+  font-size: var(--size-xl);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.section-title::before {
+  content: '> ';
+  color: var(--color-accent);
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--color-accent);
+  margin-top: 0.4rem;
+  box-shadow: 0 0 6px var(--color-accent);
+}
+
+/* ---- Subsection title ---- */
+.subsection-title {
+  font-family: var(--font-heading);
+  font-size: var(--size-lg);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-bottom-color: var(--color-divider);
+  border-bottom-width: 1px;
+}
+
+/* ---- Card hover ---- */
+.pub-card {
+  transition: box-shadow 0.3s ease,
+              border-color 0.2s ease,
+              background-color 0.3s ease;
+  border: 1px solid var(--color-divider);
+}
+
+.pub-card:hover {
+  box-shadow: 0 0 12px rgba(0, 255, 65, 0.15);
+  border-color: var(--color-accent);
+}
+
+/* ---- Publication title ---- */
+.pub-title {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: var(--size-base);
+  letter-spacing: 0;
+}
+
+/* ---- Publication links ---- */
+.pub-links a {
+  color: var(--color-accent);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: border-color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.pub-links a:hover {
+  border-bottom-color: var(--color-accent);
+  text-shadow: 0 0 6px rgba(0, 255, 65, 0.4);
+}
+
+/* ---- News hover ---- */
+.news-item {
+  transition: background-color 0.2s ease;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 0;
+}
+
+.news-item:hover {
+  background: var(--color-accent-glow);
+}
+
+/* ---- Presentation hover ---- */
+.pres-item {
+  transition: background-color 0.2s ease;
+}
+
+.pres-item:hover {
+  background: var(--color-accent-glow);
+}
+
+/* ---- Hero name ---- */
+.hero-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  font-size: var(--size-3xl);
+  text-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+}
+
+/* ---- Hero Chinese name ---- */
+.hero-name-cn {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 400;
+  font-size: var(--size-xl);
+  opacity: 0.6;
+}
+
+/* ---- Pronunciation ---- */
+.hero-pronunciation {
+  font-size: var(--size-sm);
+}
+
+.hero-pronunciation em {
+  font-style: normal;
+  color: var(--color-accent);
+}
+
+/* ---- Profile image ---- */
+.profile-img {
+  border: 1px solid var(--color-accent);
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.15);
+}
+
+.profile-img:hover {
+  box-shadow: 0 0 25px rgba(0, 255, 65, 0.3);
+}
+
+[data-theme="dark"] .profile-img:hover {
+  box-shadow: 0 0 30px rgba(0, 255, 65, 0.4);
+}
+
+/* ---- Links ---- */
+a {
+  color: var(--color-accent);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+  text-shadow: 0 0 6px rgba(0, 255, 65, 0.3);
+}
+
+/* ---- Nav ---- */
+.nav-links a {
+  color: var(--color-text-secondary);
+  font-family: var(--font-heading);
+  font-size: var(--size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--color-accent);
+  text-shadow: 0 0 8px rgba(0, 255, 65, 0.4);
+}
+
+.nav-links a::after {
+  background: var(--color-accent);
+  height: 1.5px;
+  box-shadow: 0 0 6px var(--color-accent);
+}
+
+.nav .nav-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--size-lg);
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+}
+
+/* ---- Wave divider ---- */
+.wave-divider {
+  color: var(--color-accent);
+  opacity: 0.5;
+}
+
+.wave-divider svg path {
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  animation: drawWave 3s ease forwards;
+  filter: drop-shadow(0 0 3px var(--color-accent));
+}
+
+.wave-divider svg path:nth-child(1) {
+  stroke-width: 1.2;
+  opacity: 0.5;
+  animation-delay: 0s;
+}
+
+.wave-divider svg path:nth-child(2) {
+  stroke-width: 0.8;
+  opacity: 0.3;
+  animation-delay: 0.4s;
+}
+
+.wave-divider svg path:nth-child(3) {
+  stroke-width: 0.5;
+  opacity: 0.2;
+  animation-delay: 0.8s;
+}
+
+@keyframes drawWave {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ---- Footer ---- */
+.footer-links a {
+  font-family: var(--font-heading);
+  font-size: var(--size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ---- Timeline ---- */
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-width: 2px;
+}
+
+.timeline-current .timeline-dot {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 10px var(--color-accent);
+}
+
+/* ---- Dates ---- */
+.news-date,
+.pres-date {
+  font-family: var(--font-mono);
+  font-size: var(--size-sm);
+  color: var(--color-accent);
+  opacity: 0.7;
+}
+
+/* ---- Tags ---- */
+.pres-tag {
+  font-family: var(--font-heading);
+  font-size: var(--size-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ---- Publication venue ---- */
+.pub-venue {
+  font-family: var(--font-body);
+  font-style: normal;
+}
+
+/* ---- Map legend dots ---- */
+.dot-lived { background: #00ff41; box-shadow: 0 0 6px #00ff41; }
+.dot-conference { background: #00cc33; box-shadow: 0 0 6px #00cc33; }
+.dot-collaborator { background: #66ff88; box-shadow: 0 0 6px #66ff88; }
+
+/* ---- Pub tag ---- */
+.pub-tag {
+  font-family: var(--font-heading);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}

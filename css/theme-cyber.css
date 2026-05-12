@@ -1,0 +1,465 @@
+/* ========================================
+   THEME: Cyber Research
+   Deep dark background, neon accents,
+   scanline textures, terminal vibes.
+   MRI control console aesthetic.
+   ======================================== */
+
+:root {
+  /* Colors — deep dark with neon cyan accent */
+  --color-bg: #0a0e17;
+  --color-surface: #111827;
+  --color-text: #e0e7ff;
+  --color-text-secondary: #7c85a6;
+  --color-accent: #00e5ff;
+  --color-accent-hover: #40efff;
+  --color-accent-glow: rgba(0, 229, 255, 0.08);
+  --color-highlight: #00e5ff;
+  --color-divider: #1e2940;
+  --color-nav-bg: rgba(10, 14, 23, 0.92);
+
+  /* Typography */
+  --font-heading: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-body: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Menlo', monospace;
+  --font-size-base: 16px;
+
+  /* Type scale */
+  --size-xs: 0.694rem;
+  --size-sm: 0.833rem;
+  --size-base: 1rem;
+  --size-lg: 1.2rem;
+  --size-xl: 1.44rem;
+  --size-2xl: 1.728rem;
+  --size-3xl: 2.488rem;
+
+  /* Spacing */
+  --space-section: 3.5rem;
+  --space-page-x: 1.5rem;
+  --content-width: 780px;
+
+  /* Shapes */
+  --profile-radius: 4px;
+  --card-radius: 2px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 16px rgba(0, 229, 255, 0.1);
+
+  /* Timeline */
+  --timeline-gradient: linear-gradient(to bottom, #00e5ff, #7c3aed);
+}
+
+/* Light mode — clinical lab white with cyan accents */
+[data-theme="light"] {
+  --color-bg: #f0f4f8;
+  --color-surface: #ffffff;
+  --color-text: #0a0e17;
+  --color-text-secondary: #4a5568;
+  --color-accent: #0891b2;
+  --color-accent-hover: #06748d;
+  --color-accent-glow: rgba(8, 145, 178, 0.08);
+  --color-highlight: #0891b2;
+  --color-divider: #cbd5e1;
+  --color-nav-bg: rgba(240, 244, 248, 0.92);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(8, 145, 178, 0.1);
+}
+
+[data-theme="light"] .hero-name {
+  text-shadow: none;
+}
+
+[data-theme="light"] .profile-img {
+  border-color: var(--color-divider);
+  box-shadow: var(--shadow-md);
+}
+
+[data-theme="light"] .section-title::after {
+  box-shadow: none;
+}
+
+[data-theme="light"] .tag-journal {
+  color: #0891b2;
+  border-color: #0891b2;
+}
+
+[data-theme="light"] .tag-oral {
+  color: #7c3aed;
+  border-color: #7c3aed;
+}
+
+[data-theme="light"] .tag-invited {
+  color: #db2777;
+  border-color: #db2777;
+}
+
+[data-theme="light"] .tag-poster,
+[data-theme="light"] .tag-preprint {
+  color: #4a5568;
+  border-color: #cbd5e1;
+}
+
+[data-theme="light"] .wave-divider svg path {
+  filter: none;
+}
+
+[data-theme="light"] .dot-lived,
+[data-theme="light"] .dot-conference,
+[data-theme="light"] .dot-collaborator {
+  box-shadow: none;
+}
+
+[data-theme="light"] .back-to-top {
+  box-shadow: var(--shadow-sm);
+}
+
+[data-theme="light"] a:hover {
+  text-shadow: none;
+}
+
+/* ---- Tags ---- */
+.tag-journal {
+  background: transparent;
+  color: #00e5ff;
+  border: 1px solid #00e5ff;
+}
+
+.tag-oral {
+  background: transparent;
+  color: #a78bfa;
+  border: 1px solid #a78bfa;
+}
+
+.tag-invited {
+  background: transparent;
+  color: #f472b6;
+  border: 1px solid #f472b6;
+}
+
+.tag-poster {
+  background: transparent;
+  color: #7c85a6;
+  border: 1px solid #2e3a54;
+}
+
+.tag-preprint {
+  background: transparent;
+  color: #7c85a6;
+  border: 1px solid #2e3a54;
+}
+
+[data-theme="dark"] .tag-journal,
+[data-theme="dark"] .tag-oral,
+[data-theme="dark"] .tag-invited,
+[data-theme="dark"] .tag-poster,
+[data-theme="dark"] .tag-preprint {
+  /* same as light — it's always dark */
+}
+
+/* ---- Hero spiral k-space trajectory (drawn via JS canvas) ---- */
+
+/* ---- Selection ---- */
+::selection {
+  background: rgba(0, 229, 255, 0.3);
+  color: inherit;
+}
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0e17; }
+::-webkit-scrollbar-thumb { background: #1e2940; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #00e5ff; }
+
+/* ---- Section title ---- */
+.section-title {
+  position: relative;
+  display: inline-block;
+  font-size: var(--size-xl);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background: var(--color-accent);
+  margin-top: 0.4rem;
+  box-shadow: 0 0 8px var(--color-accent);
+}
+
+/* ---- Subsection title ---- */
+.subsection-title {
+  font-family: var(--font-heading);
+  font-size: var(--size-lg);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-bottom-color: var(--color-divider);
+  border-bottom-width: 1px;
+}
+
+/* ---- Card hover ---- */
+.pub-card {
+  transition: box-shadow 0.3s ease,
+              border-color 0.2s ease,
+              background-color 0.3s ease;
+  border: 1px solid var(--color-divider);
+}
+
+.pub-card:hover {
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.15);
+  border-color: var(--color-accent);
+}
+
+/* ---- Publication title ---- */
+.pub-title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--size-base);
+  letter-spacing: 0;
+}
+
+/* ---- Publication links ---- */
+.pub-links a {
+  color: var(--color-accent);
+  border-bottom: 1px solid transparent;
+  padding-bottom: 1px;
+  transition: border-color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.pub-links a:hover {
+  border-bottom-color: var(--color-accent);
+  text-shadow: 0 0 8px var(--color-accent);
+}
+
+/* ---- News hover ---- */
+.news-item {
+  transition: background-color 0.2s ease;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 2px;
+}
+
+.news-item:hover {
+  background: var(--color-accent-glow);
+}
+
+/* ---- Presentation hover ---- */
+.pres-item {
+  transition: background-color 0.2s ease;
+}
+
+.pres-item:hover {
+  background: var(--color-accent-glow);
+}
+
+/* ---- Hero name ---- */
+.hero-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  font-size: var(--size-3xl);
+  text-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+}
+
+/* ---- Hero Chinese name ---- */
+.hero-name-cn {
+  font-family: 'Noto Serif SC', serif;
+  font-weight: 400;
+  font-size: var(--size-xl);
+  opacity: 0.6;
+}
+
+/* ---- Pronunciation ---- */
+.hero-pronunciation {
+  font-size: var(--size-sm);
+}
+
+.hero-pronunciation em {
+  font-style: normal;
+  color: var(--color-accent);
+}
+
+/* ---- Profile image ---- */
+.profile-img {
+  border: 1px solid var(--color-accent);
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.2);
+}
+
+.profile-img:hover {
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.4);
+}
+
+/* ---- Links ---- */
+a {
+  color: var(--color-accent);
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+  text-shadow: 0 0 6px rgba(0, 229, 255, 0.3);
+}
+
+/* ---- Nav ---- */
+.nav-links a {
+  color: var(--color-text-secondary);
+  font-family: var(--font-heading);
+  font-size: var(--size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--color-accent);
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.3);
+}
+
+.nav-links a::after {
+  background: var(--color-accent);
+  height: 1.5px;
+  box-shadow: 0 0 6px var(--color-accent);
+}
+
+.nav .nav-logo {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--size-lg);
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+}
+
+/* ---- Wave divider — Fourier harmonics ---- */
+.wave-divider {
+  color: var(--color-accent);
+  opacity: 0.6;
+}
+
+.wave-divider svg path {
+  stroke-dasharray: 2400;
+  stroke-dashoffset: 2400;
+  animation: drawWave 3s ease forwards;
+  filter: drop-shadow(0 0 4px var(--color-accent));
+}
+
+.wave-divider svg path:nth-child(1) {
+  stroke-width: 1.2;
+  opacity: 0.5;
+  animation-delay: 0s;
+}
+
+.wave-divider svg path:nth-child(2) {
+  stroke-width: 0.8;
+  opacity: 0.3;
+  animation-delay: 0.4s;
+}
+
+.wave-divider svg path:nth-child(3) {
+  stroke-width: 0.5;
+  opacity: 0.2;
+  animation-delay: 0.8s;
+}
+
+@keyframes drawWave {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ---- Footer ---- */
+.footer-links a {
+  font-family: var(--font-heading);
+  font-size: var(--size-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ---- Timeline ---- */
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-width: 2px;
+}
+
+.timeline-current .timeline-dot {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 10px var(--color-accent);
+}
+
+/* ---- Dates ---- */
+.news-date,
+.pres-date {
+  font-family: var(--font-mono);
+  font-size: var(--size-sm);
+  color: var(--color-accent);
+  opacity: 0.7;
+}
+
+/* ---- Tags ---- */
+.pres-tag {
+  font-family: var(--font-heading);
+  font-size: var(--size-xs);
+  letter-spacing: 0.08em;
+}
+
+/* ---- Publication venue ---- */
+.pub-venue {
+  font-family: var(--font-body);
+  font-style: italic;
+}
+
+/* ---- Map legend dots ---- */
+.dot-lived { background: #00e5ff; box-shadow: 0 0 6px #00e5ff; }
+.dot-conference { background: #a78bfa; box-shadow: 0 0 6px #a78bfa; }
+.dot-collaborator { background: #34d399; box-shadow: 0 0 6px #34d399; }
+
+/* ---- Pub tag ---- */
+.pub-tag {
+  font-family: var(--font-heading);
+  letter-spacing: 0.06em;
+}
+
+/* ---- Scanline overlay on sections ---- */
+#news::before,
+#presentations::before {
+  opacity: 0.02;
+}
+
+#news::before {
+  background-image: radial-gradient(var(--color-accent) 0.5px, transparent 0.5px);
+  background-size: 10px 10px;
+}
+
+#presentations::before {
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      var(--color-accent) 0px, var(--color-accent) 0.5px,
+      transparent 0.5px, transparent 12px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      var(--color-accent) 0px, var(--color-accent) 0.5px,
+      transparent 0.5px, transparent 12px
+    );
+}
+
+/* ---- Dark map ---- */
+[data-theme="dark"] .academic-map,
+.academic-map {
+  filter: none;
+}
+
+/* ---- Back to top glow ---- */
+.back-to-top {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+}
+
+.back-to-top:hover {
+  box-shadow: 0 0 20px rgba(0, 229, 255, 0.5);
+}

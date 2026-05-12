@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wenqi Huang | PhD Student &mdash; AI in Healthcare and Medicine, TUM</title>
+  <meta name="description" content="Wenqi Huang &mdash; PhD student at Technical University of Munich, researching novel representations for fast MRI reconstruction.">
+  <meta property="og:title" content="Wenqi Huang | PhD Student &mdash; AI in Healthcare and Medicine, TUM">
+  <meta property="og:description" content="PhD student at TUM researching novel representations for fast MRI reconstruction.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://wenqihuang.me">
+  <meta property="og:image" content="https://wenqihuang.me/images/og-card.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://wenqihuang.me/images/og-card.jpg">
+
+  <link rel="dns-prefetch" href="https://a.basemaps.cartocdn.com">
+  <link rel="dns-prefetch" href="https://unpkg.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400&family=Noto+Sans+SC:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&text=%E9%BB%84%E6%96%87%E9%BA%92&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/theme-warm.css" id="theme-css">
+  <meta name="google-site-verification" content="39KJACaH5nxXK0I59ZdmhyQOw5RdZhPLmrWh38CW0CM">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://wenqihuang.me/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Wenqi Huang",
+    "alternateName": "黄文麒",
+    "url": "https://wenqihuang.me",
+    "image": "https://wenqihuang.me/images/profile.webp",
+    "jobTitle": "PhD Student",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Technical University of Munich",
+      "url": "https://www.tum.de"
+    },
+    "alumniOf": [
+      {"@type": "Organization", "name": "Technical University of Munich"},
+      {"@type": "Organization", "name": "Stanford University"},
+      {"@type": "Organization", "name": "Shenzhen Institute of Advanced Technology, CAS"},
+      {"@type": "Organization", "name": "Soochow University"}
+    ],
+    "knowsAbout": ["MRI Reconstruction", "Implicit Neural Representations", "Deep Learning", "Medical Imaging"],
+    "sameAs": [
+      "https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en",
+      "https://github.com/wenqihuang",
+      "https://www.linkedin.com/in/wenqi-huang-tum/"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a href="#about" class="skip-link">Skip to content</a>
+
+  <!-- ====== NAVIGATION ====== -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#about" class="nav-logo"><span class="nav-logo-name">Wenqi Huang</span></a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle navigation">
+      <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </label>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#presentations">Presentations</a></li>
+        <li><a href="#more">&amp; More</a></li>
+        <li>
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+            <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ====== HERO / ABOUT ====== -->
+  <header class="section hero" id="about">
+    <canvas class="hero-bg-pattern" id="spiral-canvas" aria-hidden="true"></canvas>
+    <div class="hero-content">
+      <div class="hero-photo">
+        <img src="images/profile.webp" alt="Wenqi Huang" class="profile-img anim-reconstruct" width="180" height="180" fetchpriority="high">
+        <span class="recon-label anim-recon-label">Reconstructing...</span>
+      </div>
+      <div class="hero-text">
+        <h1 class="hero-name anim-fade-up">Wenqi Huang <span class="hero-name-cn">黄文麒</span></h1>
+        <p class="hero-pronunciation anim-fade-up anim-delay-1">Pronounced: <em>WEN-chee HWAHNG</em></p>
+        <p class="hero-bio anim-fade-up anim-delay-2">
+          Hi there! I'm a PhD student at the
+          <a href="https://kiinformatik.mri.tum.de/en/chair-artificial-intelligence-healthcare-and-medicine" target="_blank" rel="noopener">Chair of AI in Healthcare and Medicine</a>,
+          Technical University of Munich (TUM), supervised by
+          <a href="https://www.professoren.tum.de/en/rueckert-daniel" target="_blank" rel="noopener">Prof. Daniel Rueckert</a>.
+          My research focuses on novel representations for fast MRI reconstruction, with minimal or no training data.
+        </p>
+        <p class="hero-bio hero-bio-personal anim-fade-up anim-delay-3">
+          Outside of research, my wife and I love exploring the world &mdash;
+          hiking trails, birdwatching spots, hidden towns, and great Chinese restaurants.
+          We collect fridge magnets and postcards from every place we visit.
+          Occasionally I'm also a photographer or cyclist. We wish for world peace.
+        </p>
+        <div class="hero-links anim-fade-up anim-delay-3">
+          <a href="https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar" data-tooltip="Scholar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-2a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM1.5 9L12 0l10.5 9h-4v3.07A8.96 8.96 0 0 0 12 9.07a8.96 8.96 0 0 0-6.5 2.93V9h-4z"/></svg>
+          </a>
+          <a href="https://github.com/wenqihuang" target="_blank" rel="noopener" aria-label="GitHub" data-tooltip="GitHub">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/in/wenqi-huang-tum/" target="_blank" rel="noopener" aria-label="LinkedIn" data-tooltip="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="mailto:wenqi.huang@tum.de" aria-label="Email" data-tooltip="Email">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ====== FOURIER HARMONIC DIVIDER — 3 sine waves at f, 2.5f, 5.5f ====== -->
+    <div class="wave-divider" aria-hidden="true">
+      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20.0L15,21.3L30,22.5L45,23.6L60,24.7L75,25.7L90,26.5L105,27.1L120,27.6L135,27.9L150,28.0L165,27.9L180,27.6L195,27.1L210,26.5L225,25.7L240,24.7L255,23.6L270,22.5L285,21.3L300,20.0L315,18.7L330,17.5L345,16.4L360,15.3L375,14.3L390,13.5L405,12.9L420,12.4L435,12.1L450,12.0L465,12.1L480,12.4L495,12.9L510,13.5L525,14.3L540,15.3L555,16.4L570,17.5L585,18.7L600,20.0L615,21.3L630,22.5L645,23.6L660,24.7L675,25.7L690,26.5L705,27.1L720,27.6L735,27.9L750,28.0L765,27.9L780,27.6L795,27.1L810,26.5L825,25.7L840,24.7L855,23.6L870,22.5L885,21.3L900,20.0L915,18.7L930,17.5L945,16.4L960,15.3L975,14.3L990,13.5L1005,12.9L1020,12.4L1035,12.1L1050,12.0L1065,12.1L1080,12.4L1095,12.9L1110,13.5L1125,14.3L1140,15.3L1155,16.4L1170,17.5L1185,18.7L1200,20.0" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><path d="M0,22.6L15,23.6L30,24.0L45,23.8L60,23.1L75,21.8L90,20.3L105,18.8L120,17.4L135,16.4L150,16.0L165,16.2L180,16.9L195,18.2L210,19.7L225,21.2L240,22.6L255,23.6L270,24.0L285,23.8L300,23.1L315,21.8L330,20.3L345,18.8L360,17.4L375,16.4L390,16.0L405,16.2L420,16.9L435,18.2L450,19.7L465,21.2L480,22.6L495,23.6L510,24.0L525,23.8L540,23.1L555,21.8L570,20.3L585,18.8L600,17.4L615,16.4L630,16.0L645,16.2L660,16.9L675,18.2L690,19.7L705,21.2L720,22.6L735,23.6L750,24.0L765,23.8L780,23.1L795,21.8L810,20.3L825,18.8L840,17.4L855,16.4L870,16.0L885,16.2L900,16.9L915,18.2L930,19.7L945,21.2L960,22.6L975,23.6L990,24.0L1005,23.8L1020,23.1L1035,21.8L1050,20.3L1065,18.8L1080,17.4L1095,16.4L1110,16.0L1125,16.2L1140,16.9L1155,18.2L1170,19.7L1185,21.2L1200,22.6" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.3"/><path d="M0,21.9L15,21.7L30,20.2L45,18.6L60,18.0L75,18.8L90,20.4L105,21.7L120,21.9L135,20.7L150,19.0L165,18.0L180,18.4L195,19.9L210,21.5L225,22.0L240,21.1L255,19.4L270,18.2L285,18.2L300,19.5L315,21.1L330,22.0L345,21.5L360,19.9L375,18.4L390,18.0L405,19.0L420,20.7L435,21.9L450,21.7L465,20.4L480,18.8L495,18.0L510,18.6L525,20.2L540,21.7L555,21.9L570,20.8L585,19.2L600,18.1L615,18.3L630,19.8L645,21.4L660,22.0L675,21.2L690,19.6L705,18.3L720,18.1L735,19.3L750,21.0L765,22.0L780,21.6L795,20.1L810,18.5L825,18.0L840,18.9L855,20.6L870,21.8L885,21.8L900,20.5L915,18.9L930,18.0L945,18.5L960,20.1L975,21.6L990,22.0L1005,21.0L1020,19.3L1035,18.1L1050,18.3L1065,19.6L1080,21.2L1095,22.0L1110,21.4L1125,19.8L1140,18.3L1155,18.1L1170,19.2L1185,20.8L1200,21.9" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.2"/></svg>
+    </div>
+
+    <!-- ====== NEWS ====== -->
+    <section class="section" id="news">
+      <h2 class="section-title">News</h2>
+      <ul class="news-list">
+        <li class="news-item">
+          <span class="news-date">May 2026</span>
+          <span class="news-text"><a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener"><em>Gabor Primitives for Cardiac Cine MRI</em></a> got provisionally accepted at <strong>MICCAI 2026</strong>!</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Mar 2026</span>
+          <span class="news-text">Two new preprints out! <a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener"><em>Gabor Primitives for Cardiac Cine MRI</em></a> and <a href="https://arxiv.org/abs/2603.03749" target="_blank" rel="noopener"><em>WSI-INR</em></a> (with Y. Wu et al.) &mdash; guess which conference ;)</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Jan 2026</span>
+          <span class="news-text">Finally made it to Sedona in person for the <strong>ISMRM Workshop on Data Sampling &amp; Image Reconstruction</strong>! Presented our extended work on physics-informed INRs for EPI.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Nov 2025</span>
+          <span class="news-text"><a href="https://arxiv.org/abs/2501.09403" target="_blank" rel="noopener"><em>PISCO</em></a> (V. Spieker et al.) published in <strong>Medical Image Analysis</strong>. Also a new preprint: <a href="https://arxiv.org/abs/2511.03762" target="_blank" rel="noopener"><em>Reconstruction-free Segmentation</em></a> (Y. Zhang et al.)</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Sep 2025</span>
+          <span class="news-text">Two collaborative papers at <strong>MICCAI 2025 Workshops</strong> in Daejeon: <a href="https://arxiv.org/abs/2509.04888" target="_blank" rel="noopener"><em>INR Meets Multi-contrast MRI</em></a> (N. Niessen et al.) and <a href="https://link.springer.com/chapter/10.1007/978-3-032-06103-4_12" target="_blank" rel="noopener"><em>Neural Space-Time Modeling for Motion-Corrected MR Reconstruction</em></a> (A. Nurdinova et al.)</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Jul 2025</span>
+          <span class="news-text">Gave a guest lecture on INRs for MRI at the <strong>TUM Seminar on DL for Inverse Problems</strong>.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">May 2025</span>
+          <span class="news-text">Our Stanford collaboration on EPI is accepted at <strong>MICCAI 2025</strong> (early accept): <a href="https://arxiv.org/abs/2503.00230" target="_blank" rel="noopener"><em>Physics-Informed INRs for Joint B0 Estimation and EPI</em></a></span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">May 2025</span>
+          <span class="news-text">Oral presentation at <strong>ISMRM 2025</strong> in Honolulu &mdash; great to share our Subspace INR work with the MR community.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Apr 2025</span>
+          <span class="news-text">Spent a wonderful winter quarter (Jan&ndash;Mar) at <strong>Stanford University</strong> working with <a href="https://med.stanford.edu/profiles/kawin-setsompop" target="_blank" rel="noopener">Prof. Kawin Setsompop</a> on physics-informed EPI reconstruction.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Feb 2025</span>
+          <span class="news-text"><a href="https://arxiv.org/abs/2412.12742" target="_blank" rel="noopener"><em>Subspace INRs for Real-Time Cardiac Cine MRI</em></a> accepted at <strong>IPMI 2025</strong>!</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Jan 2025</span>
+          <span class="news-text">Honored to give an invited talk at <strong>NVIDIA Research Radar</strong> on our INR work for cardiac MR imaging.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Jul 2024</span>
+          <span class="news-text"><a href="https://arxiv.org/abs/2302.02504" target="_blank" rel="noopener"><em>Motion-compensated MR CINE Reconstruction</em></a> (J. Pan et al.) published in <strong>IEEE TMI</strong>.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Jun 2024</span>
+          <span class="news-text"><a href="https://arxiv.org/abs/2404.08350" target="_blank" rel="noopener"><em>Self-supervised k-Space Regularization</em></a> (V. Spieker et al.) accepted at <strong>MICCAI 2024</strong>.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Mar 2024</span>
+          <span class="news-text"><a href="https://arxiv.org/abs/2406.00192" target="_blank" rel="noopener"><em>Direct Cardiac Segmentation from Undersampled k-Space</em></a> (Y. Zhang et al.) accepted at <strong>ISBI 2024</strong>.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Feb 2024</span>
+          <span class="news-text">Presenting <em>TransGRAPPA</em> and <em>DE-NIK</em> (V. Spieker et al.) at <strong>ISMRM 2024</strong> in Singapore.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Jan 2024</span>
+          <span class="news-text">Proud to see my student&rsquo;s work accepted &mdash; <a href="https://link.springer.com/chapter/10.1007/978-3-658-44037-4_26" target="_blank" rel="noopener"><em>Neural Implicit k-Space with Trainable Periodic Activations</em></a> (PT Haft et al.) at <strong>BVM 2024</strong> as oral!</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Nov 2023</span>
+          <span class="news-text">Another student project published! <a href="https://openreview.net/forum?id=hUOHV4SKNw" target="_blank" rel="noopener"><em>Self-supervised L+S Network for Radial MRI</em></a> (A. Mancu et al.) at <strong>NeurIPS 2023 Workshop</strong>.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Nov 2023</span>
+          <span class="news-text">Presented Neural Implicit k-Space at <strong>JIS Summit 2023</strong> (virtual).</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Oct 2023</span>
+          <span class="news-text"><a href="https://www.sciencedirect.com/science/article/pii/S1361841523002773" target="_blank" rel="noopener"><em>Unrolled Motion-compensated Reconstruction for Cardiac CINE</em></a> (J. Pan et al.) accepted at <strong>Medical Image Analysis</strong>.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Jun 2023</span>
+          <span class="news-text">Oral at <strong>IPMI 2023</strong> in beautiful Bariloche! Presenting <a href="https://arxiv.org/abs/2212.08479" target="_blank" rel="noopener"><em>Neural Implicit k-Space</em></a>.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Jun 2023</span>
+          <span class="news-text">Busy MICCAI season &mdash; three collaborative papers accepted: <a href="https://arxiv.org/abs/2308.08830" target="_blank" rel="noopener"><em>ICoNIK</em></a> (V. Spieker et al.), <a href="https://link.springer.com/chapter/10.1007/978-3-031-53767-7_5" target="_blank" rel="noopener"><em>Generalised INRs for Registration</em></a> (V. Zimmer et al.), and <a href="https://arxiv.org/abs/2309.16831" target="_blank" rel="noopener"><em>Uncertainty Propagation</em></a> (L. Feiner et al.)</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Jan 2023</span>
+          <span class="news-text">Oral accepted at the <strong>ISMRM Workshop</strong> in Sedona &mdash; couldn&rsquo;t attend due to visa issues, but Prof. Rueckert kindly presented on my behalf.</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Sep 2022</span>
+          <span class="news-text">Gave an invited talk at <strong>SIAM MDS 2022</strong> (virtual) on algorithm unrolling for MRI reconstruction.</span>
+        </li>
+      </ul>
+      <button class="news-toggle" id="news-toggle">&#x25BE; Show older news</button>
+    </section>
+
+    <!-- ====== PUBLICATIONS ====== -->
+    <section class="section" id="publications">
+      <h2 class="section-title">Selected Publications</h2>
+      <p class="section-subtitle">Full list on <a href="https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
+
+      <div class="pub-list">
+
+        <article class="pub-card">
+          <div class="pub-content">
+            <h3 class="pub-title">Gabor Primitives for Accelerated Cardiac Cine MRI Reconstruction</h3>
+            <p class="pub-authors">W Huang, V Spieker, N Stolt-Ansó, N Niessen, M Dannecker, SG Kafali, S Kurugol, JA Schnabel, D Rueckert</p>
+            <p class="pub-venue"><span class="pub-tag tag-preprint">Preprint</span> arXiv, 2026</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener">Paper</a>
+              <span class="pub-link-soon">Code coming soon</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-card">
+          <div class="pub-content">
+            <h3 class="pub-title">Physics-Informed Implicit Neural Representations for Joint B0 Estimation and Echo Planar Imaging</h3>
+            <p class="pub-authors">W Huang, N Wang, C Liao, Y Lin, M Gao, D Rueckert, K Setsompop</p>
+            <p class="pub-venue"><span class="pub-tag tag-poster">Poster</span> MICCAI 2025</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2503.00230" target="_blank" rel="noopener">Paper</a>
+              <span class="pub-link-soon">Code coming soon</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-card">
+          <div class="pub-content">
+            <h3 class="pub-title">Subspace Implicit Neural Representations for Real-Time Cardiac Cine MR Imaging</h3>
+            <p class="pub-authors">W Huang, V Spieker, S Xu, G Cruz, C Prieto, JA Schnabel, K Hammernik, T Kuestner, D Rueckert</p>
+            <p class="pub-venue"><span class="pub-tag tag-poster">Poster</span> IPMI 2025</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2412.12742" target="_blank" rel="noopener">Paper</a>
+              <a href="https://github.com/wenqihuang/SubspaceINR-CMR" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-card">
+          <div class="pub-content">
+            <h3 class="pub-title">Neural Implicit k-Space for Binning-free Non-Cartesian Cardiac MR Imaging</h3>
+            <p class="pub-authors">W Huang, H Li, J Pan, G Cruz, D Rueckert, K Hammernik</p>
+            <p class="pub-venue"><span class="pub-tag tag-oral">Oral</span> IPMI 2023</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2212.08479" target="_blank" rel="noopener">Paper</a>
+              <a href="https://github.com/wenqihuang/NIK_MRI" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-card">
+          <div class="pub-content">
+            <h3 class="pub-title">Deep Low-Rank Plus Sparse Network for Dynamic MR Imaging</h3>
+            <p class="pub-authors">W Huang, Z Ke, ZX Cui, J Cheng, Z Qiu, S Jia, L Ying, Y Zhu, D Liang</p>
+            <p class="pub-venue"><span class="pub-tag tag-journal">Journal</span> Medical Image Analysis, 2021</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2010.13677" target="_blank" rel="noopener">Paper</a>
+              <a href="https://github.com/wenqihuang/LS-Net-Dynamic-MRI" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="pub-card">
+          <div class="pub-content">
+            <h3 class="pub-title">Learned Low-Rank Priors in Dynamic MR Imaging</h3>
+            <p class="pub-authors">Z Ke*, W Huang*, ZX Cui, J Cheng, S Jia, H Wang, X Liu, H Zheng, L Ying, Y Zhu, D Liang</p>
+            <p class="pub-venue"><span class="pub-tag tag-journal">Journal</span> IEEE Transactions on Medical Imaging, 2021</p>
+            <div class="pub-links">
+              <a href="https://arxiv.org/abs/2006.12090" target="_blank" rel="noopener">Paper</a>
+              <a href="https://github.com/Keziwen/SLR-Net" target="_blank" rel="noopener">Code</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ====== PRESENTATIONS ====== -->
+    <section class="section" id="presentations">
+      <h2 class="section-title">Presentations</h2>
+
+      <ul class="pres-list">
+        <li class="pres-item">
+          <span class="pres-date">Jan 2026</span>
+          <div class="pres-content">
+            <span class="pres-tag tag-poster">Poster</span>
+            <strong>ISMRM Workshop on Data Sampling &amp; Image Reconstruction</strong> <span class="pres-location">&middot; Sedona</span>
+            <span class="pres-title">Joint B&#x2080; Estimation and Distortion-Free Reconstruction from Rotated-View EPI</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-date">Jul 2025</span>
+          <div class="pres-content">
+            <span class="pres-tag tag-invited">Invited</span>
+            <strong>Seminar on DL for Inverse Problems in Medical Imaging</strong> <span class="pres-location">&middot; Munich</span>
+            <span class="pres-title">Implicit Neural Representations for MRI Reconstruction</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-date">Jun 2025</span>
+          <div class="pres-content">
+            <span class="pres-tag tag-poster">Poster</span>
+            <strong>IPMI 2025</strong> <span class="pres-location">&middot; Kos Island</span>
+            <span class="pres-title">Subspace INRs for Real-Time Cardiac Cine MRI (extended full paper)</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-date">May 2025</span>
+          <div class="pres-content">
+            <span class="pres-tag tag-oral">Oral</span>
+            <strong>ISMRM 2025</strong> <span class="pres-location">&middot; Honolulu</span>
+            <span class="pres-title">Subspace INRs for Real-Time Cardiac Cine MRI (abstract)</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-date">Jan 2025</span>
+          <div class="pres-content">
+            <span class="pres-tag tag-invited">Invited</span>
+            <strong>NVIDIA Research Radar Talk</strong> <span class="pres-location">&middot; Online</span>
+            <span class="pres-title">Implicit Neural Representations for Non-Cartesian Cardiac MR Imaging</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-date">May 2024</span>
+          <div class="pres-content">
+            <span class="pres-tag tag-poster">Poster</span>
+            <strong>ISMRM 2024</strong> <span class="pres-location">&middot; Singapore</span>
+            <span class="pres-title">TransGRAPPA: Self-supervised Transformer Network for k-Space Interpolation</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-date">Nov 2023</span>
+          <div class="pres-content">
+            <span class="pres-tag tag-oral">Oral</span>
+            <strong>JIS Summit 2023</strong> <span class="pres-location">&middot; Virtual</span>
+            <span class="pres-title">Neural Implicit k-Space for Binning-free Non-Cartesian Cardiac MR Imaging</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-date">Jun 2023</span>
+          <div class="pres-content">
+            <span class="pres-tag tag-oral">Oral</span>
+            <strong>IPMI 2023</strong> <span class="pres-location">&middot; Bariloche</span>
+            <span class="pres-title">Neural Implicit k-Space for Binning-free Non-Cartesian Cardiac MR Imaging</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-date">Jan 2023</span>
+          <div class="pres-content">
+            <span class="pres-tag tag-oral">Oral</span>
+            <strong>ISMRM Workshop on Data Sampling &amp; Image Reconstruction</strong> <span class="pres-location">&middot; Sedona</span>
+            <span class="pres-title">Universal K-Space Interpolation Network for Non-Cartesian CINE Imaging</span>
+          </div>
+        </li>
+        <li class="pres-item">
+          <span class="pres-date">Sep 2022</span>
+          <div class="pres-content">
+            <span class="pres-tag tag-invited">Invited</span>
+            <strong>SIAM MDS 2022</strong> <span class="pres-location">&middot; Virtual</span>
+            <span class="pres-title">Algorithm Unrolling: Key for Physics-Based Learning in MRI Reconstruction</span>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ====== MORE ====== -->
+    <section class="section" id="more">
+      <h2 class="section-title">&amp; More</h2>
+
+      <!-- Education -->
+      <div class="subsection">
+        <h3 class="subsection-title">Education</h3>
+        <div class="timeline">
+          <div class="timeline-item timeline-current">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">2021 &ndash; present</span>
+              <strong>PhD in Computer Science</strong>
+              <span class="timeline-place">Technical University of Munich (TUM), Germany</span>
+              <span class="timeline-detail">Topic: Advanced Algorithms for Fast MRI &middot; Supervisor: Prof. Daniel Rueckert</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">Jan &ndash; Mar 2025</span>
+              <strong>Visiting Student Researcher</strong>
+              <span class="timeline-place">Stanford University, USA</span>
+              <span class="timeline-detail">Supervisor: Prof. Kawin Setsompop</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">2018 &ndash; 2021</span>
+              <strong>M.Sc. in Pattern Recognition &amp; Intelligent Systems</strong>
+              <span class="timeline-place">Shenzhen Institute of Advanced Technology, Chinese Academy of Sciences</span>
+              <span class="timeline-detail">Supervisor: Prof. Dong Liang</span>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">2014 &ndash; 2018</span>
+              <strong>B.Eng. in Information Engineering</strong>
+              <span class="timeline-place">Soochow University, China</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Teaching -->
+      <div class="subsection">
+        <h3 class="subsection-title">Teaching &amp; Supervision</h3>
+        <ul class="detail-list">
+          <li>
+            <strong>Jul 2025</strong> &mdash; Guest Lecture: Implicit Neural Representations for MRI Reconstruction
+            <span class="detail-meta">Seminar on Deep Learning for Inverse Problems in Medical Imaging, TUM</span>
+          </li>
+          <li>
+            <strong>WiSe 2023/24 &amp; SoSe 2024</strong> &mdash; Applied Deep Learning in Medicine: Implicit Neural Representations for MRI
+            <span class="detail-meta">Master Practical Course Supervisor, TUM</span>
+          </li>
+          <li>
+            <strong>Sep &ndash; Dec 2023</strong> &mdash; Neural Implicit k-Space with Trainable Periodic Activation Functions for Cardiac MR Imaging
+            <span class="detail-meta">Master Interdisciplinary Project Advisor &middot; Published at BVM 2024 (Oral)</span>
+          </li>
+          <li>
+            <strong>Jul 2022 &ndash; Sep 2023</strong> &mdash; Self-supervised Low-rank plus Sparse Network for Radial MRI Reconstruction
+            <span class="detail-meta">Master Interdisciplinary Project Co-supervisor &middot; Published at NeurIPS 2023 Workshop</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Academic Service -->
+      <div class="subsection">
+        <h3 class="subsection-title">Academic Service</h3>
+        <p class="service-text">
+          Reviewer for
+          <strong>IEEE Transactions on Medical Imaging (TMI)</strong>,
+          <strong>Medical Image Analysis (MedIA)</strong>,
+          <strong>Magnetic Resonance in Medicine (MRM)</strong>,
+          <strong>IEEE Transactions on Biomedical Engineering (TBME)</strong>,
+          <strong>Advanced Science</strong>,
+          <strong>MICCAI</strong>,
+          <strong>ISMRM</strong>
+        </p>
+      </div>
+
+      <!-- Academic Footprint -->
+      <div class="subsection">
+        <h3 class="subsection-title">Academic Footprint</h3>
+        <div id="academic-map" class="academic-map"></div>
+        <div class="map-legend">
+          <span><span class="legend-dot dot-lived"></span>Lived / studied</span>
+          <span><span class="legend-dot dot-conference"></span>Conference / visit</span>
+          <span><span class="legend-dot dot-collaborator"></span>Collaborator</span>
+        </div>
+      </div>
+
+      <!-- Personal -->
+      <div class="subsection">
+        <h3 class="subsection-title">Beyond Research</h3>
+        <p class="personal-text">
+          I'm always happy to chat about MRI reconstruction, deep learning, travel,
+          birdwatching, photography, or just world peace. If you're working on something
+          related or just want to say hi &mdash;
+          <a href="mailto:wenqi.huang@tum.de">drop me a line</a>!
+          I can't promise a fast reply (spam sometimes buries the real emails),
+          but if I see it, I will respond.
+        </p>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- ====== FOOTER ====== -->
+  <div class="wave-divider wave-divider-footer" aria-hidden="true">
+    <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20.0L15,21.3L30,22.5L45,23.6L60,24.7L75,25.7L90,26.5L105,27.1L120,27.6L135,27.9L150,28.0L165,27.9L180,27.6L195,27.1L210,26.5L225,25.7L240,24.7L255,23.6L270,22.5L285,21.3L300,20.0L315,18.7L330,17.5L345,16.4L360,15.3L375,14.3L390,13.5L405,12.9L420,12.4L435,12.1L450,12.0L465,12.1L480,12.4L495,12.9L510,13.5L525,14.3L540,15.3L555,16.4L570,17.5L585,18.7L600,20.0L615,21.3L630,22.5L645,23.6L660,24.7L675,25.7L690,26.5L705,27.1L720,27.6L735,27.9L750,28.0L765,27.9L780,27.6L795,27.1L810,26.5L825,25.7L840,24.7L855,23.6L870,22.5L885,21.3L900,20.0L915,18.7L930,17.5L945,16.4L960,15.3L975,14.3L990,13.5L1005,12.9L1020,12.4L1035,12.1L1050,12.0L1065,12.1L1080,12.4L1095,12.9L1110,13.5L1125,14.3L1140,15.3L1155,16.4L1170,17.5L1185,18.7L1200,20.0" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><path d="M0,22.6L15,23.6L30,24.0L45,23.8L60,23.1L75,21.8L90,20.3L105,18.8L120,17.4L135,16.4L150,16.0L165,16.2L180,16.9L195,18.2L210,19.7L225,21.2L240,22.6L255,23.6L270,24.0L285,23.8L300,23.1L315,21.8L330,20.3L345,18.8L360,17.4L375,16.4L390,16.0L405,16.2L420,16.9L435,18.2L450,19.7L465,21.2L480,22.6L495,23.6L510,24.0L525,23.8L540,23.1L555,21.8L570,20.3L585,18.8L600,17.4L615,16.4L630,16.0L645,16.2L660,16.9L675,18.2L690,19.7L705,21.2L720,22.6L735,23.6L750,24.0L765,23.8L780,23.1L795,21.8L810,20.3L825,18.8L840,17.4L855,16.4L870,16.0L885,16.2L900,16.9L915,18.2L930,19.7L945,21.2L960,22.6L975,23.6L990,24.0L1005,23.8L1020,23.1L1035,21.8L1050,20.3L1065,18.8L1080,17.4L1095,16.4L1110,16.0L1125,16.2L1140,16.9L1155,18.2L1170,19.7L1185,21.2L1200,22.6" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.3"/><path d="M0,21.9L15,21.7L30,20.2L45,18.6L60,18.0L75,18.8L90,20.4L105,21.7L120,21.9L135,20.7L150,19.0L165,18.0L180,18.4L195,19.9L210,21.5L225,22.0L240,21.1L255,19.4L270,18.2L285,18.2L300,19.5L315,21.1L330,22.0L345,21.5L360,19.9L375,18.4L390,18.0L405,19.0L420,20.7L435,21.9L450,21.7L465,20.4L480,18.8L495,18.0L510,18.6L525,20.2L540,21.7L555,21.9L570,20.8L585,19.2L600,18.1L615,18.3L630,19.8L645,21.4L660,22.0L675,21.2L690,19.6L705,18.3L720,18.1L735,19.3L750,21.0L765,22.0L780,21.6L795,20.1L810,18.5L825,18.0L840,18.9L855,20.6L870,21.8L885,21.8L900,20.5L915,18.9L930,18.0L945,18.5L960,20.1L975,21.6L990,22.0L1005,21.0L1020,19.3L1035,18.1L1050,18.3L1065,19.6L1080,21.2L1095,22.0L1110,21.4L1125,19.8L1140,18.3L1155,18.1L1170,19.2L1185,20.8L1200,21.9" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.2"/></svg>
+  </div>
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
+        <a href="https://github.com/wenqihuang" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/wenqi-huang-tum/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:wenqi.huang@tum.de">Email</a>
+      </div>
+      <p class="footer-copy">&copy; <span id="footer-year"></span> Wenqi Huang</p>
+      <div class="footer-visitors">
+        <p class="footer-visitors-label">Visitor Map</p>
+        <a href="https://clustrmaps.com/site/1c9gg" title="Visitor Map" class="footer-clustrmaps"><img src="https://www.clustrmaps.com/map_v2.png?d=uWaLaz86939Us8zC5bV-VYPIQ0DB11K7SoTLO_yepzs&cl=e8e4de&co=9c9589&cmo=A8613D&cmn=d4915e&t=n" alt="Visitor Map" width="140" height="90" loading="lazy" onerror="this.closest('.footer-visitors').style.display='none'"></a>
+      </div>
+      <details class="theme-picker">
+        <summary class="theme-picker-toggle">Themes</summary>
+        <div class="theme-picker-options">
+          <button data-theme-file="theme-warm" class="theme-btn active">Warm</button>
+          <button data-theme-file="theme-ocean" class="theme-btn">Ocean</button>
+          <button data-theme-file="theme-sunset" class="theme-btn">Sunset</button>
+          <button data-theme-file="theme-cyber" class="theme-btn">Cyber</button>
+          <button data-theme-file="theme-terminal" class="theme-btn">Terminal</button>
+          <button data-theme-file="theme-paper" class="theme-btn">Paper</button>
+          <button data-theme-file="theme-retro" class="theme-btn">Retro</button>
+          <button data-theme-file="theme-scan" class="theme-btn">Scan</button>
+          <button data-theme-file="theme-ink" class="theme-btn">Ink</button>
+        </div>
+      </details>
+      <p class="footer-easter-egg">Have you found all the Easter eggs on this page?</p>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">&uarr;</button>
+
+  <!-- ====== INLINE JS ====== -->
+  <script>
+    // Force scroll to top on page load/refresh
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
+    // Dark mode toggle
+    (function() {
+      const toggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      const stored = localStorage.getItem('theme');
+      if (stored) {
+        html.setAttribute('data-theme', stored);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        html.setAttribute('data-theme', 'dark');
+      }
+      toggle.addEventListener('click', () => {
+        const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        html.classList.add('theme-switching');
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        setTimeout(() => html.classList.remove('theme-switching'), 600);
+      });
+    })();
+
+    // Active nav highlighting
+    (function() {
+      const sections = document.querySelectorAll('.section');
+      const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(link => link.classList.remove('active'));
+            const active = document.querySelector('.nav-links a[href="#' + entry.target.id + '"]');
+            if (active) active.classList.add('active');
+          }
+        });
+      }, { rootMargin: '-20% 0px -60% 0px' });
+      sections.forEach(s => observer.observe(s));
+    })();
+
+    // News expand/collapse — auto-hide items older than 1 year
+    (function() {
+      const btn = document.getElementById('news-toggle');
+      const list = document.querySelector('.news-list');
+      const items = list.querySelectorAll('.news-item');
+      const cutoff = new Date();
+      cutoff.setFullYear(cutoff.getFullYear() - 1);
+      let hasOld = false;
+      items.forEach(item => {
+        const dateStr = item.querySelector('.news-date').textContent.trim();
+        const mo = {Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+        const parts = dateStr.split(' ');
+        const year = parseInt(parts[1] || parts[0]);
+        const month = mo[parts[0]] !== undefined ? mo[parts[0]] : 0;
+        const itemDate = new Date(year, month);
+        if (itemDate < cutoff) {
+          item.classList.add('news-old');
+          hasOld = true;
+        }
+      });
+      if (!hasOld) btn.style.display = 'none';
+      btn.addEventListener('click', () => {
+        const expanded = list.classList.toggle('news-expanded');
+        btn.textContent = expanded ? '\u25B4 Show less' : '\u25BE Show older news';
+        if (expanded) {
+          // Draw VISTA masks on newly revealed items
+          if (window._drawVistaMasks) window._drawVistaMasks();
+        } else {
+          btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+    })();
+
+    // Auto year in footer
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // Back to top + nav shadow — single scroll listener
+    (function() {
+      const btn = document.getElementById('back-to-top');
+      const nav = document.getElementById('nav');
+      btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        btn.classList.toggle('visible', y > 400);
+        nav.classList.toggle('scrolled', y > 20);
+      }, { passive: true });
+    })();
+
+    // Nav logo: show name when hero is out of view
+    (function() {
+      const logo = document.querySelector('.nav-logo');
+      const hero = document.getElementById('about');
+      const obs = new IntersectionObserver(entries => {
+        logo.classList.toggle('scrolled', !entries[0].isIntersecting);
+      }, { threshold: 0 });
+      obs.observe(hero);
+    })();
+
+    // Theme picker
+    (function() {
+      var btns = document.querySelectorAll('.theme-btn');
+      var link = document.getElementById('theme-css');
+      var saved = localStorage.getItem('site-theme');
+      if (saved && link) {
+        link.href = 'css/' + saved + '.css';
+        btns.forEach(function(b) {
+          b.classList.toggle('active', b.getAttribute('data-theme-file') === saved);
+        });
+      }
+      btns.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          var file = btn.getAttribute('data-theme-file');
+          link.href = 'css/' + file + '.css';
+          localStorage.setItem('site-theme', file);
+          btns.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+        });
+      });
+    })();
+
+    // Close mobile nav on link click
+    document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('nav-toggle').checked = false;
+      });
+    });
+
+    // ---- k-Space trajectories: radial + spiral + EPI (canvas) ----
+    (function() {
+      const canvas = document.getElementById('spiral-canvas');
+      if (!canvas) return;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reducedMotion) { canvas.style.display = 'none'; return; }
+      const parent = canvas.parentElement;
+      const dpr = window.devicePixelRatio || 1;
+      let w, h;
+      // Three trajectories with independent motion
+      const trajR = 80; // radius of each trajectory shape
+      const traj = [
+        { type: 'radial',  angle: 0, vr: 0.003, x: -150, y: -30, vx: 0.3, vy: 0.2 },
+        { type: 'spiral',  angle: 0, vr: -0.002, x: 130, y: 20, vx: -0.25, vy: 0.3 },
+        { type: 'epi',     angle: 0, vr: 0.001, x: 20, y: -50, vx: 0.2, vy: -0.25 }
+      ];
+
+      function resize() {
+        requestAnimationFrame(function() {
+          w = parent.offsetWidth; h = parent.offsetHeight;
+          canvas.width = w * dpr; canvas.height = h * dpr;
+          canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+        });
+      }
+      resize();
+
+      function drawRadial(ctx, cx, cy, R, rot) {
+        const spokes = 12;
+        for (let i = 0; i < spokes; i++) {
+          const a = (i / spokes) * Math.PI + rot;
+          ctx.beginPath();
+          ctx.moveTo(cx - R * Math.cos(a), cy - R * Math.sin(a));
+          ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a));
+          ctx.stroke();
+        }
+      }
+
+      function drawSpiral(ctx, cx, cy, R, rot) {
+        const turns = 6, steps = turns * 40;
+        ctx.beginPath();
+        for (let i = 0; i <= steps; i++) {
+          const t = i / steps;
+          const theta = t * turns * 2 * Math.PI + rot;
+          const r = t * R;
+          const x = cx + r * Math.cos(theta);
+          const y = cy + r * Math.sin(theta);
+          i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+        }
+        ctx.stroke();
+      }
+
+      function drawEPI(ctx, cx, cy, R, rot) {
+        const lines = 12;
+        const cosR = Math.cos(rot), sinR = Math.sin(rot);
+        ctx.beginPath();
+        for (let i = 0; i < lines; i++) {
+          const y0 = -R + (i / (lines - 1)) * 2 * R;
+          const dir = i % 2 === 0 ? 1 : -1;
+          const x1 = dir > 0 ? -R : R;
+          const x2 = dir > 0 ? R : -R;
+          const px1 = cx + x1 * cosR - y0 * sinR;
+          const py1 = cy + x1 * sinR + y0 * cosR;
+          const px2 = cx + x2 * cosR - y0 * sinR;
+          const py2 = cy + x2 * sinR + y0 * cosR;
+          i === 0 ? ctx.moveTo(px1, py1) : ctx.lineTo(px1, py1);
+          ctx.lineTo(px2, py2);
+        }
+        ctx.stroke();
+      }
+
+      let paused = false;
+      document.addEventListener('visibilitychange', () => { paused = document.hidden; });
+      function frame() {
+        if (paused) { requestAnimationFrame(frame); return; }
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, w * dpr, h * dpr);
+        ctx.save();
+        ctx.scale(dpr, dpr);
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        ctx.strokeStyle = isDark ? 'rgba(224,160,112,0.08)' : 'rgba(168,97,61,0.045)';
+        ctx.lineWidth = 0.6;
+
+        // Move
+        traj.forEach(t => {
+          t.angle += t.vr;
+          t.x += t.vx; t.y += t.vy;
+          // Wall bounce
+          const bx = w / 2 - trajR - 10, by = h / 2 - trajR - 10;
+          if (t.x > bx || t.x < -bx) { t.vx *= -1; t.x = Math.max(-bx, Math.min(bx, t.x)); }
+          if (t.y > by || t.y < -by) { t.vy *= -1; t.y = Math.max(-by, Math.min(by, t.y)); }
+        });
+
+        // Collision between trajectories
+        for (let i = 0; i < traj.length; i++) {
+          for (let j = i + 1; j < traj.length; j++) {
+            const a = traj[i], b = traj[j];
+            const dx = a.x - b.x, dy = a.y - b.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            const minDist = trajR * 2;
+            if (dist < minDist && dist > 0) {
+              // Swap velocities along collision axis
+              const nx = dx / dist, ny = dy / dist;
+              const dvx = a.vx - b.vx, dvy = a.vy - b.vy;
+              const dot = dvx * nx + dvy * ny;
+              if (dot < 0) { // approaching
+                a.vx -= dot * nx; a.vy -= dot * ny;
+                b.vx += dot * nx; b.vy += dot * ny;
+              }
+              // Push apart
+              const overlap = (minDist - dist) / 2;
+              a.x += nx * overlap; a.y += ny * overlap;
+              b.x -= nx * overlap; b.y -= ny * overlap;
+            }
+          }
+        }
+
+        // Draw
+        traj.forEach(t => {
+          const cx = w / 2 + t.x, cy = h / 2 + t.y;
+          if (t.type === 'radial') drawRadial(ctx, cx, cy, trajR, t.angle);
+          else if (t.type === 'spiral') drawSpiral(ctx, cx, cy, trajR, t.angle);
+          else drawEPI(ctx, cx, cy, trajR, t.angle);
+        });
+
+        ctx.restore();
+        requestAnimationFrame(frame);
+      }
+      frame();
+      window.addEventListener('resize', resize);
+    })();
+
+    // ---- VISTA undersampling masks on news items ----
+    (function() {
+      function mulberry32(a) {
+        return function() {
+          a |= 0; a = a + 0x6D2B79F5 | 0;
+          var t = Math.imul(a ^ a >>> 15, 1 | a);
+          t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+          return ((t ^ t >>> 14) >>> 0) / 4294967296;
+        };
+      }
+      // Collect mask canvases for animation
+      window._vistaCanvases = [];
+      window._drawVistaMasks = function() {
+        const items = document.querySelectorAll('.news-item');
+        items.forEach((item, idx) => {
+          if (item.querySelector('.vista-mask')) return;
+          const dateEl = item.querySelector('.news-date');
+          const rect = dateEl.getBoundingClientRect();
+          const itemRect = item.getBoundingClientRect();
+          const dateW = rect.width + 16;
+          const itemH = itemRect.height;
+          if (itemH === 0) return;
+          const c = document.createElement('canvas');
+          c.className = 'vista-mask';
+          const dpr = window.devicePixelRatio || 1;
+          c.width = dateW * dpr; c.height = itemH * dpr;
+          c.style.width = dateW + 'px'; c.style.height = itemH + 'px';
+          item.prepend(c);
+          window._vistaCanvases.push({ canvas: c, idx: idx, w: dateW, h: itemH, dpr: dpr });
+        });
+      };
+      window._drawVistaMasks();
+
+      // Animate: all masks scroll right in sync, wrap around
+      (function() {
+        let shift = 0;
+        let vPaused = false;
+        document.addEventListener('visibilitychange', () => { vPaused = document.hidden; });
+        function drawFrame() {
+          if (vPaused) { requestAnimationFrame(drawFrame); return; }
+          shift += 0.03; // pixels per frame
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          const color = isDark ? 'rgba(224,160,112,0.5)' : 'rgba(168,97,61,0.5)';
+          const R = 6;
+          const spacing = 1.5;
+          window._vistaCanvases.forEach(({ canvas, idx, w, h, dpr }) => {
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, w * dpr, h * dpr);
+            ctx.save();
+            ctx.scale(dpr, dpr);
+            ctx.fillStyle = color;
+            const totalLines = Math.ceil(w / spacing) + R;
+            const offset = idx % R;
+            const pixelShift = shift % (R * spacing);
+            for (let col = -R; col < totalLines; col++) {
+              if ((col + offset) % R === 0) {
+                const x = col * spacing + pixelShift;
+                if (x >= 0 && x < w) {
+                  ctx.fillRect(x, 0, 1, h);
+                }
+              }
+            }
+            ctx.restore();
+          });
+          requestAnimationFrame(drawFrame);
+        }
+        drawFrame();
+      })();
+    })();
+
+    // ---- Console ASCII art Easter egg ----
+    console.log([
+      '%c',
+      '  Welcome to my k-space!',
+      '',
+      '  . . . . . . . . . . . . .',
+      '  . . . . . . . . . . . . .',
+      '  . . . . o o o o o . . . .',
+      '  . . . o o O O O o o . . .',
+      '  . . o O O # # # O O o . .',
+      '  . . o O # # # # # O o . .',
+      '  . . o O # # # # # O o . .',
+      '  . . o O O # # # O O o . .',
+      '  . . . o o O O O o o . . .',
+      '  . . . . o o o o o . . . .',
+      '  . . . . . . . . . . . . .',
+      '  . . . . . . . . . . . . .',
+      '',
+      '  F(image) = k-space',
+      '',
+      '  Wenqi Huang | wenqi.huang@tum.de',
+      '  Think we could collaborate? Drop me a line!',
+    ].join('\n'), 'color: #A8613D; font-family: monospace; font-size: 13px; line-height: 1.5;');
+
+    // ---- MRI glitch on rapid dark mode toggle ----
+    (function() {
+      let clicks = 0, timer = null;
+      const glitches = [
+        // Classic MRI hardware fails
+        { effect: 'skew(-1deg, 2deg) scale(0.99)', msg: '🧊 Quench detected — helium boil-off in progress!' },
+        { effect: 'skew(-2deg, 1deg) scale(0.98)', msg: '📡 RF interference — who opened the Faraday cage?!' },
+        { effect: 'skew(2deg, 1deg) scale(1.01)', msg: '⚠️ PNS limit exceeded — gradient slew rate too high!' },
+        // Funny scan-room scenarios
+        { effect: 'skew(1deg, -1deg) scale(1.02)', msg: '🏃 Severe motion artifact — the volunteer escaped the bore!' },
+        { effect: 'skew(1deg, 1deg) scale(1.03)', msg: '🪑 Ferromagnetic object detected — a chair is flying toward the magnet!' },
+        { effect: 'skew(-1deg, -1deg) scale(0.97)', msg: '😤 Patient breathed during breath-hold — 45 min scan ruined!' },
+        // k-Space & reconstruction humor (Wenqi's research)
+        { effect: 'skew(1deg, 2deg) scale(1.01)', msg: '🌀 Wrap-around artifact — your nose is now behind your head!' },
+        { effect: 'skew(-2deg, -1deg) scale(0.99)', msg: '📉 Loss = NaN — the unrolled network just unrolled itself!' },
+        { effect: 'skew(2deg, -1deg) scale(1.02)', msg: '🔥 CUDA out of memory — the reconstruction ate all the VRAM!' },
+        { effect: 'skew(-1deg, 2deg) scale(0.98)', msg: '🤖 Network hallucinating anatomy — knee in brain now!' },
+        { effect: 'skew(1deg, -2deg) scale(1.01)', msg: '⏳ Iterative recon still running — estimated finish: next week' },
+        { effect: 'skew(2deg, 2deg) scale(0.98)', msg: '🔄 Congratulations — you reconstructed noise!' },
+      ];
+      const toggle = document.getElementById('theme-toggle');
+      const origClick = toggle.onclick;
+      toggle.addEventListener('click', function() {
+        clicks++;
+        clearTimeout(timer);
+        timer = setTimeout(() => { clicks = 0; }, 1200);
+        if (clicks >= 5) {
+          clicks = 0;
+          const g = glitches[Math.floor(Math.random() * glitches.length)];
+          const body = document.body;
+          // Full-screen glitch overlay
+          const overlay = document.createElement('div');
+          overlay.style.cssText = 'position:fixed;inset:0;z-index:9999;pointer-events:none;' +
+            'background:rgba(0,0,0,0.92);display:flex;flex-direction:column;align-items:center;' +
+            'justify-content:center;animation:fadeIn 0.15s ease;';
+          // Scanlines
+          overlay.innerHTML = '<div style="position:absolute;inset:0;background:repeating-linear-gradient(' +
+            'to bottom,transparent,transparent 2px,rgba(255,0,0,0.03) 2px,rgba(255,0,0,0.03) 4px);"></div>' +
+            '<div style="position:relative;text-align:center;">' +
+            '<div style="font-family:var(--font-mono);font-size:0.75rem;color:#ff4444;letter-spacing:0.3em;' +
+            'text-transform:uppercase;margin-bottom:1rem;opacity:0.7;">⚠ SYSTEM ERROR ⚠</div>' +
+            '<div style="font-family:var(--font-mono);font-size:1.4rem;color:#ff6666;font-weight:700;' +
+            'text-shadow:0 0 20px rgba(255,68,68,0.5),2px 2px 0 rgba(255,0,0,0.3),-2px -2px 0 rgba(0,255,255,0.2);' +
+            'letter-spacing:0.05em;">' + g.msg + '</div>' +
+            '<div style="font-family:var(--font-mono);font-size:0.7rem;color:#666;margin-top:1.5rem;' +
+            'letter-spacing:0.1em;">SCAN ABORTED — RESTARTING...</div></div>';
+          document.documentElement.appendChild(overlay);
+          // Body glitch
+          body.style.transition = 'transform 0.05s';
+          let glitchInterval = setInterval(() => {
+            body.style.transform = 'translate(' + (Math.random()*4-2) + 'px,' + (Math.random()*4-2) + 'px)';
+          }, 50);
+          setTimeout(() => {
+            clearInterval(glitchInterval);
+            body.style.transform = '';
+            overlay.style.opacity = '0';
+            overlay.style.transition = 'opacity 0.8s';
+            setTimeout(() => overlay.remove(), 800);
+          }, 5000);
+        }
+      });
+    })();
+
+    // ---- "cardiac" secret: heartbeat color pulse ----
+    (function() {
+      let buffer = '';
+      const keyword = 'cardiac';
+      let beating = false;
+      document.addEventListener('keydown', e => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        buffer += e.key.toLowerCase();
+        if (buffer.length > keyword.length) buffer = buffer.slice(-keyword.length);
+        if (buffer === keyword && !beating) {
+          beating = true;
+          const style = document.createElement('style');
+          style.id = 'cardiac-style';
+          style.textContent = `
+            @keyframes heartbeat {
+              0%, 100% { background-color: var(--color-bg); }
+              8% { background-color: color-mix(in srgb, var(--color-accent) 6%, var(--color-bg)); }
+              16% { background-color: var(--color-bg); }
+              24% { background-color: color-mix(in srgb, var(--color-accent) 10%, var(--color-bg)); }
+              36% { background-color: var(--color-bg); }
+            }
+            body.cardiac-mode {
+              animation: heartbeat 1s ease-in-out infinite;
+            }
+          `;
+          document.head.appendChild(style);
+          document.body.classList.add('cardiac-mode');
+          // Stop after 5 seconds
+          setTimeout(() => {
+            document.body.classList.remove('cardiac-mode');
+            style.remove();
+            beating = false;
+            buffer = '';
+          }, 5000);
+        }
+      });
+    })();
+
+    // ---- Fourier divider — draw on scroll, then drift ----
+    (function() {
+      const divider = document.querySelector('.wave-divider');
+      if (!divider) return;
+      const paths = divider.querySelectorAll('svg path');
+      paths.forEach(p => p.style.animationPlayState = 'paused');
+      const obs = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting) {
+          paths.forEach(p => p.style.animationPlayState = 'running');
+          // After draw animation finishes, start continuous drift
+          setTimeout(() => {
+            let t = 0;
+            function drift() {
+              t += 0.008;
+              if (paths[1]) paths[1].style.transform = 'translateX(' + (Math.sin(t) * 10) + 'px)';
+              if (paths[2]) paths[2].style.transform = 'translateX(' + (Math.sin(t * 1.6) * 15) + 'px)';
+              requestAnimationFrame(drift);
+            }
+            drift();
+          }, 3000); // wait for draw animation to finish
+          obs.disconnect();
+        }
+      }, { threshold: 0.5 });
+      obs.observe(divider);
+    })();
+  </script>
+  <script>
+    // Lazy-load Leaflet JS when map section is near viewport
+    (function() {
+      var mapEl = document.getElementById('academic-map');
+      if (!mapEl) return;
+      var loaded = false;
+      var obs = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting && !loaded) {
+          loaded = true;
+          var s = document.createElement('script');
+          s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+          s.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
+          s.crossOrigin = '';
+          s.onload = function() { window._initMap && window._initMap(); };
+          document.body.appendChild(s);
+          obs.disconnect();
+        }
+      }, { rootMargin: '200px' });
+      obs.observe(mapEl);
+    })();
+  </script>
+  <script>
+    // ---- Academic Map (called after Leaflet lazy-loads) ----
+    window._initMap = function() {
+      const mapEl = document.getElementById('academic-map');
+      if (!mapEl || mapEl.offsetHeight === 0 || typeof L === 'undefined') return;
+      const map = L.map('academic-map', {
+        scrollWheelZoom: false,
+        attributionControl: true
+      }).setView([20, 0], 1);
+      setTimeout(function() { map.invalidateSize(); }, 200);
+
+      // Tile layer — use light style
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      const tileUrl = isDark
+        ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+        : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+      let tileLayer = L.tileLayer(tileUrl, {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      // Switch tiles on theme change
+      const obs = new MutationObserver(() => {
+        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const url = dark
+          ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+          : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+        tileLayer.setUrl(url);
+      });
+      obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+      function dot(color, r) {
+        return L.divIcon({
+          className: '',
+          html: '<div style="width:' + r*2 + 'px;height:' + r*2 + 'px;border-radius:50%;background:' + color + ';opacity:0.85;border:1.5px solid #fff;"></div>',
+          iconSize: [r*2, r*2],
+          iconAnchor: [r, r]
+        });
+      }
+
+      var accent = '#C47A50', blue = '#5A9BD5', green = '#7BC47B';
+
+      // Lived / Studied (accent)
+      var lived = [
+        [48.1351, 11.5820, 'Munich — TUM (PhD, 2021–present)'],
+        [22.5431, 114.0579, 'Shenzhen — SIAT, CAS (M.Sc., 2018–2021)'],
+        [31.2989, 120.5853, 'Suzhou — Soochow University (B.Eng., 2014–2018)'],
+        [39.9042, 116.4074, 'Beijing — UCAS (M.Sc., 2018–2021)'],
+      ];
+
+      // Conferences / Visits (blue)
+      var conferences = [
+        [37.4419, -122.1430, 'Stanford — Visiting Researcher (Jan–Mar 2025)'],
+        [34.8697, -111.7610, 'Sedona — ISMRM Workshop (2026)'],
+        [21.3069, -157.8583, 'Honolulu — ISMRM 2025'],
+        [36.8930, 27.2878, 'Kos Island — IPMI 2025'],
+        [1.3521, 103.8198, 'Singapore — ISMRM 2024'],
+        [-41.1335, -71.3103, 'Bariloche — IPMI 2023'],
+        [36.3504, 127.3845, 'Daejeon — MICCAI 2025'],
+        [41.8057, 123.4315, 'Shenyang'],
+        [51.7520, -1.2577, 'Oxford'],
+        [32.0603, 118.7969, 'Nanjing — Southeast University'],
+      ];
+
+      // Collaborators (green) — will be updated with research results
+      var collabs = [
+        [37.4419, -122.1430, 'Stanford University'],
+        [51.4988, -0.1749, 'Imperial College London / King\'s College London'],
+        [48.5216, 9.0576, 'University of Tübingen'],
+        [-33.4489, -70.6693, 'Pontificia Universidad Católica de Chile'],
+        [42.3601, -71.0589, 'MGH / Boston Children\'s Hospital'],
+        [37.7749, -122.4194, 'UCSF'],
+        [42.2808, -83.7430, 'University of Michigan'],
+        [22.5431, 114.0579, 'SIAT, Chinese Academy of Sciences'],
+        [30.5728, 114.3526, 'Innovation Academy for Precision Measurement Science and Technology, CAS'],
+      ];
+
+      lived.forEach(function(p) {
+        L.marker([p[0], p[1]], { icon: dot(accent, 7) }).addTo(map).bindPopup(p[2]);
+      });
+      conferences.forEach(function(p) {
+        L.marker([p[0], p[1]], { icon: dot(blue, 5) }).addTo(map).bindPopup(p[2]);
+      });
+      collabs.forEach(function(p) {
+        L.marker([p[0], p[1]], { icon: dot(green, 5) }).addTo(map).bindPopup(p[2]);
+      });
+    };
+  </script>
+
+</body>
+</html>

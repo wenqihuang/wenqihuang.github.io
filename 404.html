@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 — Signal Lost | Wenqi Huang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <style>
+    :root {
+      --bg: #FAF9F7;
+      --text: #1D1D1F;
+      --secondary: #636366;
+      --accent: #A8613D;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1A1917;
+        --text: #E8E8E3;
+        --secondary: #94938E;
+        --accent: #E0A070;
+      }
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+    canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      opacity: 0.06;
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+    }
+    .error-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 6rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 1rem;
+      animation: glitchText 3s ease-in-out infinite;
+    }
+    @keyframes glitchText {
+      0%, 100% { opacity: 1; }
+      92% { opacity: 1; }
+      93% { opacity: 0.3; transform: translateX(2px); }
+      94% { opacity: 1; transform: translateX(-1px); }
+      95% { opacity: 0.5; }
+      96% { opacity: 1; transform: translateX(0); }
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .subtitle {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--secondary);
+      margin-bottom: 2rem;
+      max-width: 400px;
+    }
+    .subtitle span {
+      display: block;
+      margin-top: 0.3rem;
+    }
+    a.home-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 0.6rem 1.5rem;
+      border: 1.5px solid var(--accent);
+      border-radius: 4px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    a.home-link:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+  </style>
+</head>
+<body>
+  <canvas id="noise"></canvas>
+  <div class="content">
+    <div class="error-code">404</div>
+    <h1>Signal Lost</h1>
+    <p class="subtitle">
+      The requested k-space data could not be found.
+      <span>Possible causes: incorrect trajectory, missing phase-encoding lines, or the volunteer left the scanner.</span>
+    </p>
+    <a href="/" class="home-link">← Reconstruct from homepage</a>
+  </div>
+
+  <script>
+    // Noise canvas — static MRI noise pattern
+    (function() {
+      const c = document.getElementById('noise');
+      const ctx = c.getContext('2d');
+      const dpr = window.devicePixelRatio || 1;
+      function draw() {
+        const w = window.innerWidth, h = window.innerHeight;
+        c.width = w * dpr; c.height = h * dpr;
+        c.style.width = w + 'px'; c.style.height = h + 'px';
+        ctx.scale(dpr, dpr);
+        const imageData = ctx.createImageData(w, h);
+        const data = imageData.data;
+        for (let i = 0; i < data.length; i += 4) {
+          const v = Math.random() * 255;
+          data[i] = data[i+1] = data[i+2] = v;
+          data[i+3] = 30;
+        }
+        ctx.putImageData(imageData, 0, 0);
+      }
+      draw();
+      window.addEventListener('resize', draw);
+    })();
+  </script>
+</body>
+</html>
