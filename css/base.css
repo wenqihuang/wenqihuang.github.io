@@ -881,35 +881,6 @@ h1, h2, h3 {
   color: var(--color-accent);
 }
 
-.footer-visitors {
-  margin-top: 0.5rem;
-  text-align: center;
-  opacity: 0.4;
-  transition: opacity 0.2s ease;
-}
-
-.footer-visitors:hover {
-  opacity: 0.8;
-}
-
-.footer-visitors-label {
-  font-size: var(--size-xs, 0.694rem);
-  color: var(--color-text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 0.4rem;
-}
-
-.footer-clustrmaps {
-  display: inline-block;
-}
-
-.footer-clustrmaps img {
-  width: 140px;
-  border-radius: 4px;
-}
-
-
 /* Theme picker — hidden in footer */
 .theme-picker {
   margin-top: 0.5rem;
