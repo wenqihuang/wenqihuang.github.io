@@ -1261,7 +1261,7 @@
         box.classList.add('is-open');
         box.removeAttribute('aria-hidden');
         document.body.style.overflow = 'hidden';
-        btnClose.focus();
+        btnClose.focus({ preventScroll: true });
         document.addEventListener('keydown', onKey);
       }
 
