@@ -533,8 +533,11 @@ h1, h2, h3 {
 
 /* --- Photo trigger (news item) --- */
 .news-photos {
+  -webkit-appearance: none;
+  appearance: none;
   display: inline-flex;
   align-items: center;
+  vertical-align: middle;
   gap: 0.35rem;
   margin-left: 0.3rem;
   padding: 0.05rem 0.55rem 0.05rem 0.45rem;
@@ -554,7 +557,6 @@ h1, h2, h3 {
   width: 13px;
   height: 13px;
   flex-shrink: 0;
-  transform-box: fill-box;
   transform-origin: center;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -580,14 +582,15 @@ h1, h2, h3 {
   justify-content: center;
   padding: 3rem 1rem 2rem;
   background: rgba(6, 6, 8, 0.95);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  overscroll-behavior: contain;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
 
 .lightbox.is-open {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   opacity: 1;
   visibility: visible;
   transition: opacity 0.3s ease, visibility 0s;
@@ -630,7 +633,6 @@ h1, h2, h3 {
 .lightbox-img {
   opacity: 0;
   transition: opacity 0.45s ease;
-  filter: drop-shadow(0 14px 40px rgba(0, 0, 0, 0.5));
 }
 
 .lightbox-img.is-loaded {
@@ -645,6 +647,8 @@ h1, h2, h3 {
 
 /* Controls — always light-on-dark, independent of theme */
 .lightbox-btn {
+  -webkit-appearance: none;
+  appearance: none;
   position: absolute;
   z-index: 2;
   display: flex;
@@ -705,6 +709,8 @@ h1, h2, h3 {
 }
 
 .lightbox-dot {
+  -webkit-appearance: none;
+  appearance: none;
   width: 7px;
   height: 7px;
   padding: 0;
