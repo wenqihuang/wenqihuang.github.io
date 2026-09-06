@@ -8,6 +8,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <script>
+    // Honour the theme chosen on the main site, before first paint
+    (function() {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t) document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { /* fall through to prefers-color-scheme */ }
+    })();
+  </script>
   <style>
     :root {
       --bg: #FAF9F7;
@@ -16,12 +25,18 @@
       --accent: #A8613D;
     }
     @media (prefers-color-scheme: dark) {
-      :root {
+      :root:not([data-theme="light"]) {
         --bg: #1A1917;
         --text: #E8E8E3;
         --secondary: #94938E;
         --accent: #E0A070;
       }
+    }
+    :root[data-theme="dark"] {
+      --bg: #1A1917;
+      --text: #E8E8E3;
+      --secondary: #94938E;
+      --accent: #E0A070;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {

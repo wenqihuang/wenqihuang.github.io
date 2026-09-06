@@ -24,7 +24,28 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" media="print" onload="this.media='all'">
   <!-- ?v= busts the CDN edge cache; bump it whenever a file in css/ changes -->
   <link rel="stylesheet" href="css/base.css?v=20260906">
-  <link rel="stylesheet" href="css/theme-warm.css?v=20260906" id="theme-css">
+  <script>
+    // Applies the saved theme before first paint, and emits the palette
+    // stylesheet itself so only the one actually in use is ever fetched.
+    // document.write is deliberate: it keeps the sheet render-blocking.
+    (function() {
+      var v = '?v=20260906';
+      var site = 'theme-warm';
+      var mode = null;
+      try {
+        mode = localStorage.getItem('theme');
+        var saved = localStorage.getItem('site-theme');
+        if (saved) site = saved;
+      } catch (e) { /* private mode: fall through to the defaults */ }
+      if (mode) {
+        document.documentElement.setAttribute('data-theme', mode);
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+      document.write('<link rel="stylesheet" href="css/' + site + '.css' + v + '" id="theme-css">');
+    })();
+  </script>
+  <noscript><link rel="stylesheet" href="css/theme-warm.css?v=20260906" id="theme-css"></noscript>
   <meta name="google-site-verification" content="39KJACaH5nxXK0I59ZdmhyQOw5RdZhPLmrWh38CW0CM">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="https://wenqihuang.me/">
@@ -582,12 +603,7 @@
     (function() {
       const toggle = document.getElementById('theme-toggle');
       const html = document.documentElement;
-      const stored = localStorage.getItem('theme');
-      if (stored) {
-        html.setAttribute('data-theme', stored);
-      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        html.setAttribute('data-theme', 'dark');
-      }
+      // data-theme is already set by the head script, before first paint
       toggle.addEventListener('click', () => {
         const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         html.classList.add('theme-switching');
@@ -680,7 +696,7 @@
       var cssV = '?v=20260906';
       var saved = localStorage.getItem('site-theme');
       if (saved && link) {
-        link.href = 'css/' + saved + '.css' + cssV;
+        // the head script already applied the href; just sync the button state
         btns.forEach(function(b) {
           b.classList.toggle('active', b.getAttribute('data-theme-file') === saved);
         });
@@ -773,11 +789,17 @@
         ctx.stroke();
       }
 
-      let paused = false;
-      document.addEventListener('visibilitychange', () => { paused = document.hidden; });
+      let rafId = null, onScreen = true;
+      function start() { if (rafId === null && onScreen && !document.hidden) rafId = requestAnimationFrame(frame); }
+      function stop() { if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; } }
+      document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+      new IntersectionObserver(function(entries) {
+        onScreen = entries[0].isIntersecting;
+        onScreen ? start() : stop();
+      }).observe(parent);
+      const ctx = canvas.getContext('2d');
       function frame() {
-        if (paused) { requestAnimationFrame(frame); return; }
-        const ctx = canvas.getContext('2d');
+        rafId = null;
         ctx.clearRect(0, 0, w * dpr, h * dpr);
         ctx.save();
         ctx.scale(dpr, dpr);
@@ -828,9 +850,9 @@
         });
 
         ctx.restore();
-        requestAnimationFrame(frame);
+        start();
       }
-      frame();
+      start();
       window.addEventListener('resize', resize);
     })();
 
@@ -867,13 +889,37 @@
       };
       window._drawVistaMasks();
 
+      // Rebuild the masks when a resize reflows the news items, otherwise the
+      // canvases keep the height they were created with
+      let resizeTimer = null;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+          document.querySelectorAll('.vista-mask').forEach(function(c) { c.remove(); });
+          window._vistaCanvases.length = 0;
+          window._drawVistaMasks();
+        }, 200);
+      });
+
       // Animate: all masks scroll right in sync, wrap around
       (function() {
+        // A static mask still reads as an undersampling pattern, so honour the
+        // motion preference by simply not animating it
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { drawOnce(); return; }
         let shift = 0;
-        let vPaused = false;
-        document.addEventListener('visibilitychange', () => { vPaused = document.hidden; });
+        let rafId = null, onScreen = true;
+        const news = document.getElementById('news');
+        function start() { if (rafId === null && onScreen && !document.hidden) rafId = requestAnimationFrame(drawFrame); }
+        function stop() { if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; } }
+        document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+        if (news) {
+          new IntersectionObserver(function(entries) {
+            onScreen = entries[0].isIntersecting;
+            onScreen ? start() : stop();
+          }).observe(news);
+        }
         function drawFrame() {
-          if (vPaused) { requestAnimationFrame(drawFrame); return; }
+          rafId = null;
           shift += 0.03; // pixels per frame
           const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
           const color = isDark ? 'rgba(224,160,112,0.5)' : 'rgba(168,97,61,0.5)';
@@ -898,10 +944,33 @@
             }
             ctx.restore();
           });
-          requestAnimationFrame(drawFrame);
+          start();
         }
-        drawFrame();
+        start();
       })();
+
+      // One static frame, for reduced-motion users and as the initial paint
+      function drawOnce() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const color = isDark ? 'rgba(224,160,112,0.5)' : 'rgba(168,97,61,0.5)';
+        const R = 6, spacing = 1.5;
+        window._vistaCanvases.forEach(function(m) {
+          const ctx = m.canvas.getContext('2d');
+          ctx.clearRect(0, 0, m.w * m.dpr, m.h * m.dpr);
+          ctx.save();
+          ctx.scale(m.dpr, m.dpr);
+          ctx.fillStyle = color;
+          const totalLines = Math.ceil(m.w / spacing) + R;
+          const offset = m.idx % R;
+          for (let col = -R; col < totalLines; col++) {
+            if ((col + offset) % R === 0) {
+              const x = col * spacing;
+              if (x >= 0 && x < m.w) ctx.fillRect(x, 0, 1, m.h);
+            }
+          }
+          ctx.restore();
+        });
+      }
     })();
 
     // ---- Console ASCII art Easter egg ----
@@ -949,8 +1018,12 @@
         { effect: 'skew(2deg, 2deg) scale(0.98)', msg: '🔄 Congratulations — you reconstructed noise!' },
       ];
       const toggle = document.getElementById('theme-toggle');
-      const origClick = toggle.onclick;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
       toggle.addEventListener('click', function() {
+        if (reducedMotion.matches) return;
+        // a body transform would reposition any open fixed overlay
+        const lb = document.getElementById('lightbox');
+        if (lb && lb.classList.contains('is-open')) return;
         clicks++;
         clearTimeout(timer);
         timer = setTimeout(() => { clicks = 0; }, 1200);
@@ -1033,23 +1106,35 @@
     (function() {
       const divider = document.querySelector('.wave-divider');
       if (!divider) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       const paths = divider.querySelectorAll('svg path');
       paths.forEach(p => p.style.animationPlayState = 'paused');
+      let rafId = null, onScreen = false, drifting = false;
+      let t = 0;
+      function drift() {
+        rafId = null;
+        t += 0.008;
+        if (paths[1]) paths[1].style.transform = 'translateX(' + (Math.sin(t) * 10) + 'px)';
+        if (paths[2]) paths[2].style.transform = 'translateX(' + (Math.sin(t * 1.6) * 15) + 'px)';
+        start();
+      }
+      function start() { if (drifting && rafId === null && onScreen && !document.hidden) rafId = requestAnimationFrame(drift); }
+      function stop() { if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; } }
+      document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+      // The divider is short, so watch it for drift but never run while it is
+      // scrolled away
       const obs = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) {
+        onScreen = entries[0].isIntersecting;
+        if (onScreen) {
           paths.forEach(p => p.style.animationPlayState = 'running');
-          // After draw animation finishes, start continuous drift
-          setTimeout(() => {
-            let t = 0;
-            function drift() {
-              t += 0.008;
-              if (paths[1]) paths[1].style.transform = 'translateX(' + (Math.sin(t) * 10) + 'px)';
-              if (paths[2]) paths[2].style.transform = 'translateX(' + (Math.sin(t * 1.6) * 15) + 'px)';
-              requestAnimationFrame(drift);
-            }
-            drift();
-          }, 3000); // wait for draw animation to finish
-          obs.disconnect();
+          if (!drifting) {
+            // wait for the draw animation to finish before drifting
+            setTimeout(() => { drifting = true; start(); }, 3000);
+          } else {
+            start();
+          }
+        } else {
+          stop();
         }
       }, { threshold: 0.5 });
       obs.observe(divider);
