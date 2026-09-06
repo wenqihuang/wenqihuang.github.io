@@ -85,18 +85,17 @@
   <nav class="nav" id="nav">
     <div class="nav-inner">
       <a href="#about" class="nav-logo"><span class="nav-logo-name">Wenqi Huang</span></a>
-      <input type="checkbox" id="nav-toggle" class="nav-toggle-input" aria-label="Toggle navigation">
-      <label for="nav-toggle" class="nav-toggle-label" aria-hidden="true">
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
-      </label>
-      <ul class="nav-links">
+      </button>
+      <ul class="nav-links" id="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#news">News</a></li>
         <li><a href="#publications">Publications</a></li>
         <li><a href="#presentations">Presentations</a></li>
         <li><a href="#more">&amp; More</a></li>
         <li>
-          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
             <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
             <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           </button>
@@ -615,11 +614,13 @@
       const toggle = document.getElementById('theme-toggle');
       const html = document.documentElement;
       // data-theme is already set by the head script, before first paint
+      toggle.setAttribute('aria-pressed', String(html.getAttribute('data-theme') === 'dark'));
       toggle.addEventListener('click', () => {
         const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         html.classList.add('theme-switching');
         html.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
+        toggle.setAttribute('aria-pressed', String(next === 'dark'));
         syncThemeColor();
         setTimeout(() => html.classList.remove('theme-switching'), 600);
       });
@@ -729,12 +730,23 @@
       });
     })();
 
-    // Close mobile nav on link click
-    document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('nav-toggle').checked = false;
+    // Mobile nav open/close
+    (function() {
+      const navToggle = document.getElementById('nav-toggle');
+      const setOpen = (open) => navToggle.setAttribute('aria-expanded', String(open));
+      navToggle.addEventListener('click', () => {
+        setOpen(navToggle.getAttribute('aria-expanded') !== 'true');
       });
-    });
+      document.querySelectorAll('.nav-links a[href^="#"]').forEach(link => {
+        link.addEventListener('click', () => setOpen(false));
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navToggle.getAttribute('aria-expanded') === 'true') {
+          setOpen(false);
+          navToggle.focus();
+        }
+      });
+    })();
 
     // ---- k-Space trajectories: radial + spiral + EPI (canvas) ----
     (function() {

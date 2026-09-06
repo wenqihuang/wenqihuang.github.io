@@ -147,11 +147,11 @@ h1, h2, h3 {
   max-width: 10rem;
 }
 
-.nav-toggle-input {
-  display: none;
-}
-
-.nav-toggle-label {
+.nav-toggle {
+  -webkit-appearance: none;
+  appearance: none;
+  background: none;
+  border: none;
   display: none;
   cursor: pointer;
   flex-direction: column;
@@ -163,7 +163,7 @@ h1, h2, h3 {
   align-items: center;
 }
 
-.nav-toggle-label span {
+.nav-toggle span {
   display: block;
   width: 20px;
   height: 2px;
@@ -1284,7 +1284,7 @@ h1, h2, h3 {
     --space-section: 2.5rem;
   }
 
-  .nav-toggle-label {
+  .nav-toggle {
     display: flex;
   }
 
@@ -1305,20 +1305,20 @@ h1, h2, h3 {
     transition: transform 0.35s ease-in, visibility 0s linear 0.35s;
   }
 
-  .nav-toggle-input:checked ~ .nav-links {
+  .nav-toggle[aria-expanded="true"] ~ .nav-links {
     transform: translateY(0);
     pointer-events: auto;
     visibility: visible;
     transition: transform 0.35s ease-out, visibility 0s linear 0s;
   }
 
-  .nav-toggle-input:checked ~ .nav-toggle-label span:nth-child(1) {
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
   }
-  .nav-toggle-input:checked ~ .nav-toggle-label span:nth-child(2) {
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) {
     opacity: 0;
   }
-  .nav-toggle-input:checked ~ .nav-toggle-label span:nth-child(3) {
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
   }
 
