@@ -13,7 +13,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://wenqihuang.me/images/og-card.jpg">
 
-  <link rel="dns-prefetch" href="https://a.basemaps.cartocdn.com">
+  <link rel="dns-prefetch" href="https://server.arcgisonline.com">
   <link rel="dns-prefetch" href="https://unpkg.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1087,23 +1087,20 @@
       }).setView([20, 0], 1);
       setTimeout(function() { map.invalidateSize(); }, 200);
 
-      // Tile layer — use light style
+      // Tile layer. Esri's gray canvas needs no API key; CARTO now watermarks
+      // unauthenticated tiles. Note Esri orders the path as {z}/{y}/{x}.
+      const TILES_LIGHT = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}';
+      const TILES_DARK = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}';
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      const tileUrl = isDark
-        ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-        : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
-      let tileLayer = L.tileLayer(tileUrl, {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> &copy; <a href="https://carto.com/">CARTO</a>',
-        maxZoom: 18
+      let tileLayer = L.tileLayer(isDark ? TILES_DARK : TILES_LIGHT, {
+        attribution: 'Tiles &copy; <a href="https://www.esri.com/">Esri</a>, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors',
+        maxZoom: 16
       }).addTo(map);
 
       // Switch tiles on theme change
       const obs = new MutationObserver(() => {
         const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        const url = dark
-          ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-          : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
-        tileLayer.setUrl(url);
+        tileLayer.setUrl(dark ? TILES_DARK : TILES_LIGHT);
       });
       obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
