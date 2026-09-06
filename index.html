@@ -136,12 +136,20 @@
       <h2 class="section-title">News</h2>
       <ul class="news-list">
         <li class="news-item">
+          <span class="news-date">Sep 2026</span>
+          <span class="news-text">Presenting two papers at <strong>MICCAI 2026</strong>: <a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener"><em>Gabor Primitives for Accelerated Cardiac Cine MRI Reconstruction</em></a> and <a href="https://arxiv.org/html/2608.18055v2" target="_blank" rel="noopener"><em>Primitive Representation Learning for Unsupervised Dynamic Contrast Enhanced MRI Reconstruction</em></a>. See you in Strasbourg!</span>
+        </li>
+        <li class="news-item">
+          <span class="news-date">Aug 2026</span>
+          <span class="news-text">Went to <strong>Mallorca</strong> for the total solar eclipse. Absolutely stunning.<button type="button" class="news-photos" id="eclipse-trigger" aria-label="View three eclipse photos"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="14.31" y1="8" x2="20.05" y2="17.94"/><line x1="9.69" y1="8" x2="21.17" y2="8"/><line x1="7.38" y1="12" x2="13.12" y2="2.06"/><line x1="9.69" y1="16" x2="3.95" y2="6.06"/><line x1="14.31" y1="16" x2="2.83" y2="16"/><line x1="16.62" y1="12" x2="10.88" y2="21.94"/></svg>Photos</button></span>
+        </li>
+        <li class="news-item">
           <span class="news-date">Jun 2026</span>
           <span class="news-text">New preprint out! <a href="https://arxiv.org/abs/2606.31521" target="_blank" rel="noopener"><em>Gaussian Primitives for Distortion-Corrected Diffusion MRI</em></a> &mdash; joint field-map and image estimation from rotated-view EPI, continuing our collaboration with Stanford and UCSF.</span>
         </li>
         <li class="news-item">
           <span class="news-date">May 2026</span>
-          <span class="news-text">Gave a contributed talk at the <a href="https://indico.tugraz.at/event/126/" target="_blank" rel="noopener"><strong>SFB MR-DYNAMO Workshop on Mathematical Methods in MRI</strong></a> in Graz &mdash; a great mix of applied mathematicians and MR folks.</span>
+          <span class="news-text">Gave a talk at the <a href="https://indico.tugraz.at/event/126/" target="_blank" rel="noopener"><strong>SFB MR-DYNAMO Workshop on Mathematical Methods in MRI</strong></a> in Graz.</span>
         </li>
         <li class="news-item">
           <span class="news-date">May 2026</span>
@@ -149,7 +157,7 @@
         </li>
         <li class="news-item">
           <span class="news-date">Mar 2026</span>
-          <span class="news-text">Two new preprints out! <a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener"><em>Gabor Primitives for Cardiac Cine MRI</em></a> and <a href="https://arxiv.org/abs/2603.03749" target="_blank" rel="noopener"><em>WSI-INR</em></a> (with Y. Wu et al.) &mdash; guess which conference ;)</span>
+          <span class="news-text">Two new preprints out! <a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener"><em>Gabor Primitives for Cardiac Cine MRI</em></a> and <a href="https://arxiv.org/abs/2603.03749" target="_blank" rel="noopener"><em>WSI-INR</em></a> (with Y. Wu et al.).</span>
         </li>
         <li class="news-item">
           <span class="news-date">Jan 2026</span>
@@ -1154,6 +1162,152 @@
         L.marker([p[0], p[1]], { icon: dot(green, 5) }).addTo(map).bindPopup(p[2]);
       });
     };
+  </script>
+
+  <!-- ====== PHOTO LIGHTBOX (eclipse, Mallorca 12 Aug 2026) ====== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Eclipse photos" aria-hidden="true">
+    <span class="lightbox-counter" id="lightbox-counter" aria-hidden="true"></span>
+    <button type="button" class="lightbox-btn lightbox-close" id="lightbox-close" aria-label="Close (Esc)">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button type="button" class="lightbox-btn lightbox-prev" id="lightbox-prev" aria-label="Previous photo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button type="button" class="lightbox-btn lightbox-next" id="lightbox-next" aria-label="Next photo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <figure class="lightbox-figure">
+      <div class="lightbox-frame">
+        <img class="lightbox-thumb" id="lightbox-thumb" src="" alt="" aria-hidden="true">
+        <img class="lightbox-img" id="lightbox-img" src="" alt="">
+      </div>
+      <figcaption class="lightbox-caption">
+        <span class="lightbox-dots" id="lightbox-dots"></span>
+      </figcaption>
+    </figure>
+  </div>
+
+  <script>
+    /* ====== Eclipse photo lightbox — Mallorca, 12 Aug 2026 ====== */
+    (function() {
+      const trigger = document.getElementById('eclipse-trigger');
+      const box = document.getElementById('lightbox');
+      if (!trigger || !box) return;
+
+      const PHOTOS = [
+        {
+          src: 'images/eclipse/eclipse-1.webp',
+          thumb: 'images/eclipse/eclipse-1-thumb.webp',
+          alt: 'Diamond ring at second contact, the last bead of sunlight shining through high cloud'
+        },
+        {
+          src: 'images/eclipse/eclipse-2.webp',
+          thumb: 'images/eclipse/eclipse-2-thumb.webp',
+          alt: 'Totality: the solar corona around the black lunar disk, with a pink prominence on the left edge'
+        },
+        {
+          src: 'images/eclipse/eclipse-3.webp',
+          thumb: 'images/eclipse/eclipse-3-thumb.webp',
+          alt: 'The partially eclipsed sun, a crescent, setting into the Mediterranean among sailing boats'
+        }
+      ];
+
+      const img = document.getElementById('lightbox-img');
+      const thumb = document.getElementById('lightbox-thumb');
+      const counter = document.getElementById('lightbox-counter');
+      const dotsWrap = document.getElementById('lightbox-dots');
+      const btnClose = document.getElementById('lightbox-close');
+      const btnPrev = document.getElementById('lightbox-prev');
+      const btnNext = document.getElementById('lightbox-next');
+
+      let index = 0;
+      let lastFocus = null;
+
+      const dots = PHOTOS.map((p, i) => {
+        const d = document.createElement('button');
+        d.type = 'button';
+        d.className = 'lightbox-dot';
+        d.setAttribute('aria-label', 'Photo ' + (i + 1) + ' of ' + PHOTOS.length);
+        d.addEventListener('click', () => show(i));
+        dotsWrap.appendChild(d);
+        return d;
+      });
+
+      function preload(i) {
+        const p = PHOTOS[(i + PHOTOS.length) % PHOTOS.length];
+        const im = new Image();
+        im.src = p.src;
+      }
+
+      function show(i) {
+        index = (i + PHOTOS.length) % PHOTOS.length;
+        const p = PHOTOS[index];
+        img.classList.remove('is-loaded');
+        thumb.src = p.thumb;
+        img.src = p.src;
+        img.alt = p.alt;
+        counter.textContent = (index + 1) + ' / ' + PHOTOS.length;
+        dots.forEach((d, j) => d.classList.toggle('is-active', j === index));
+        if (img.complete) img.classList.add('is-loaded');
+        preload(index + 1);
+        preload(index - 1);
+      }
+
+      img.addEventListener('load', () => img.classList.add('is-loaded'));
+
+      function open(i) {
+        lastFocus = document.activeElement;
+        show(i || 0);
+        box.classList.add('is-open');
+        box.removeAttribute('aria-hidden');
+        document.body.style.overflow = 'hidden';
+        btnClose.focus();
+        document.addEventListener('keydown', onKey);
+      }
+
+      function close() {
+        box.classList.remove('is-open');
+        box.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        document.removeEventListener('keydown', onKey);
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+
+      function onKey(e) {
+        if (e.key === 'Escape') { close(); }
+        else if (e.key === 'ArrowRight') { show(index + 1); }
+        else if (e.key === 'ArrowLeft') { show(index - 1); }
+        else if (e.key === 'Tab') {
+          // Keep focus inside the dialog
+          const focusable = box.querySelectorAll('button');
+          const first = focusable[0];
+          const last = focusable[focusable.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+      }
+
+      trigger.addEventListener('click', () => open(0));
+      btnClose.addEventListener('click', close);
+      btnPrev.addEventListener('click', () => show(index - 1));
+      btnNext.addEventListener('click', () => show(index + 1));
+      box.addEventListener('click', (e) => { if (e.target === box) close(); });
+
+      // Swipe on touch devices
+      let touchX = null;
+      box.addEventListener('touchstart', (e) => { touchX = e.changedTouches[0].clientX; }, { passive: true });
+      box.addEventListener('touchend', (e) => {
+        if (touchX === null) return;
+        const dx = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(dx) > 50) show(index + (dx < 0 ? 1 : -1));
+        touchX = null;
+      }, { passive: true });
+
+      // Warm the low-res bases once the page is idle, so the first open paints instantly
+      window.addEventListener('load', () => {
+        PHOTOS.forEach(p => { const im = new Image(); im.src = p.thumb; });
+      });
+    })();
   </script>
 
 </body>

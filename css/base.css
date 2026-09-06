@@ -531,6 +531,228 @@ h1, h2, h3 {
   text-decoration-color: currentColor;
 }
 
+/* --- Photo trigger (news item) --- */
+.news-photos {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-left: 0.3rem;
+  padding: 0.05rem 0.55rem 0.05rem 0.45rem;
+  border: 1px solid var(--color-divider);
+  border-radius: 999px;
+  background: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--size-sm, 0.833rem);
+  line-height: 1.5;
+  color: var(--color-accent);
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.news-photos svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.news-photos:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent-glow, transparent);
+  color: var(--color-accent-hover, var(--color-accent));
+}
+
+/* Aperture blades open on hover */
+.news-photos:hover svg {
+  transform: rotate(72deg);
+}
+
+/* --- Lightbox --- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem 2rem;
+  background: rgba(6, 6, 8, 0.95);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0s;
+}
+
+.lightbox-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  width: 100%;
+  margin: 0;
+}
+
+/* Fixed stage: both layers are object-fit: contain, so they align exactly and
+   the caption never jumps between portrait and landscape frames */
+.lightbox-frame {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 7.5rem);
+  height: calc(100dvh - 7.5rem);
+  pointer-events: none;
+}
+
+.lightbox-thumb,
+.lightbox-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Low-res base paints instantly — blur→sharp, like a k-space fill */
+.lightbox-thumb {
+  filter: blur(12px);
+  transform: scale(1.01);
+}
+
+.lightbox-img {
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  filter: drop-shadow(0 14px 40px rgba(0, 0, 0, 0.5));
+}
+
+.lightbox-img.is-loaded {
+  opacity: 1;
+}
+
+.lightbox-caption {
+  display: flex;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+/* Controls — always light-on-dark, independent of theme */
+.lightbox-btn {
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.lightbox-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.lightbox-btn:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7);
+  outline-offset: 2px;
+}
+
+.lightbox-close {
+  top: 1rem;
+  right: 1rem;
+}
+
+.lightbox-prev {
+  left: max(1rem, 3vw);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-next {
+  right: max(1rem, 3vw);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox-counter {
+  position: absolute;
+  z-index: 2;
+  top: 1.35rem;
+  left: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: var(--size-xs, 0.694rem);
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.lightbox-dots {
+  display: flex;
+  gap: 0.45rem;
+}
+
+.lightbox-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.lightbox-dot:hover {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.lightbox-dot.is-active {
+  background: rgba(255, 255, 255, 0.9);
+  transform: scale(1.3);
+}
+
+@media (max-width: 768px) {
+  .lightbox {
+    padding: 2.75rem 0.5rem 4.5rem;
+  }
+
+  .lightbox-frame {
+    height: calc(100vh - 10rem);
+    height: calc(100dvh - 10rem);
+  }
+
+  .lightbox-prev,
+  .lightbox-next {
+    top: auto;
+    bottom: 1rem;
+    transform: none;
+  }
+
+  .lightbox-prev { left: 1rem; }
+  .lightbox-next { right: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox,
+  .lightbox-img,
+  .news-photos svg {
+    transition: none;
+  }
+}
+
 /* --- Publications --- */
 .pub-list {
   display: flex;
