@@ -8,10 +8,12 @@
   <meta property="og:title" content="Wenqi Huang | PhD Student &mdash; AI in Healthcare and Medicine, TUM">
   <meta property="og:description" content="PhD student at TUM researching novel representations for fast MRI reconstruction.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://wenqihuang.me">
+  <meta property="og:url" content="https://wenqihuang.me/">
   <meta property="og:image" content="https://wenqihuang.me/images/og-card.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://wenqihuang.me/images/og-card.jpg">
+  <!-- kept in sync with the active palette's --color-bg by syncThemeColor() -->
+  <meta name="theme-color" content="#FAF9F7" id="theme-color">
 
   <link rel="dns-prefetch" href="https://server.arcgisonline.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -597,6 +599,17 @@
     }
     window.scrollTo(0, 0);
 
+    // Mobile address bar follows the palette actually in use, whichever of the
+    // nine it is, and whether dark came from the OS or the toggle
+    function syncThemeColor() {
+      var meta = document.getElementById('theme-color');
+      if (!meta) return;
+      var bg = getComputedStyle(document.documentElement).getPropertyValue('--color-bg').trim();
+      if (bg) meta.setAttribute('content', bg);
+    }
+    window.syncThemeColor = syncThemeColor;
+    syncThemeColor();
+
     // Dark mode toggle
     (function() {
       const toggle = document.getElementById('theme-toggle');
@@ -607,6 +620,7 @@
         html.classList.add('theme-switching');
         html.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
+        syncThemeColor();
         setTimeout(() => html.classList.remove('theme-switching'), 600);
       });
     })();
@@ -706,6 +720,11 @@
           localStorage.setItem('site-theme', file);
           btns.forEach(function(b) { b.classList.remove('active'); });
           btn.classList.add('active');
+          // the new sheet has to load before its --color-bg can be read
+          link.addEventListener('load', function once() {
+            link.removeEventListener('load', once);
+            syncThemeColor();
+          });
         });
       });
     })();
