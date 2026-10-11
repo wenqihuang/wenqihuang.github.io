@@ -23,6 +23,10 @@ Wenqi Huang (黄文麒) is a PhD student in Computer Science at the Technical Un
 - M.Sc., Pattern Recognition & Intelligent Systems, SIAT CAS (2018–2021)
 - B.Eng., Information Engineering, Soochow University (2014–2018)
 
+## Full Page
+- The whole homepage as Markdown (news, publications, talks, teaching): https://wenqihuang.me/index.md
+- CV (PDF): https://wenqihuang.me/files/Wenqi_Huang_CV.pdf
+
 ## Contact
 - Email: wenqi.huang@tum.de
 - Google Scholar: https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en
