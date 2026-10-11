@@ -10,7 +10,7 @@ Wenqi Huang (黄文麒) is a PhD student in Computer Science at the Technical Un
 - Scan-specific / Self-supervised Methods
 
 ## Selected First-Author Publications
-- Gabor Primitives for Accelerated Cardiac Cine MRI Reconstruction (arXiv, 2026)
+- Gabor Primitives for Accelerated Cardiac Cine MRI Reconstruction (MICCAI 2026, Spotlight)
 - Physics-Informed INRs for Joint B0 Estimation and Echo Planar Imaging (MICCAI 2025)
 - Subspace INRs for Real-Time Cardiac Cine MR Imaging (IPMI 2025)
 - Neural Implicit k-Space for Binning-free Non-Cartesian Cardiac MR Imaging (IPMI 2023, Oral)

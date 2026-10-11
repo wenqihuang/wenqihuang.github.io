@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>404 — Signal Lost | Wenqi Huang</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
-  <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
   <script>
     // Honour the theme chosen on the main site, before first paint
     (function() {
@@ -18,29 +15,32 @@
     })();
   </script>
   <style>
+    /* the site's self-hosted faces; absolute paths because this page answers any URL */
+    @font-face { font-family: "Source Sans 3"; font-weight: 200 900; font-display: swap; src: url("/fonts/source-sans-3.woff2") format("woff2"); }
+    @font-face { font-family: "Source Serif 4"; font-weight: 200 900; font-display: swap; src: url("/fonts/source-serif-4.woff2") format("woff2"); }
     :root {
-      --bg: #FAF9F7;
-      --text: #1D1D1F;
-      --secondary: #636366;
-      --accent: #A8613D;
+      --bg: #FAF8F4;
+      --text: #24211D;
+      --secondary: #5E5952;
+      --accent: #A4552B;
     }
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme="light"]) {
         --bg: #1A1917;
-        --text: #E8E8E3;
-        --secondary: #94938E;
+        --text: #ECE7DF;
+        --secondary: #B3ADA4;
         --accent: #E0A070;
       }
     }
     :root[data-theme="dark"] {
       --bg: #1A1917;
-      --text: #E8E8E3;
-      --secondary: #94938E;
+      --text: #ECE7DF;
+      --secondary: #B3ADA4;
       --accent: #E0A070;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Inter', -apple-system, sans-serif;
+      font-family: 'Source Sans 3', -apple-system, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
@@ -63,9 +63,9 @@
       z-index: 1;
     }
     .error-code {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Source Serif 4', Georgia, serif;
       font-size: 6rem;
-      font-weight: 700;
+      font-weight: 500;
       color: var(--accent);
       line-height: 1;
       margin-bottom: 1rem;
@@ -80,13 +80,14 @@
       96% { opacity: 1; transform: translateX(0); }
     }
     h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
       font-size: 1.5rem;
-      font-weight: 600;
+      font-weight: 500;
       margin-bottom: 0.5rem;
     }
     .subtitle {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
+      font-size: 0.9375rem;
+      line-height: 1.6;
       color: var(--secondary);
       margin-bottom: 2rem;
       max-width: 400px;
@@ -96,14 +97,17 @@
       margin-top: 0.3rem;
     }
     a.home-link {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
+      font-size: 0.875rem;
+      font-weight: 500;
       color: var(--accent);
       text-decoration: none;
       padding: 0.6rem 1.5rem;
-      border: 1.5px solid var(--accent);
-      border-radius: 4px;
+      border: 1px solid var(--accent);
+      border-radius: 999px;
       transition: background 0.2s ease, color 0.2s ease;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .error-code { animation: none; }
     }
     a.home-link:hover {
       background: var(--accent);
@@ -129,12 +133,12 @@
       const c = document.getElementById('noise');
       const ctx = c.getContext('2d');
       const dpr = window.devicePixelRatio || 1;
+      // noise is per device pixel; putImageData ignores transforms, so fill the whole backing store
       function draw() {
         const w = window.innerWidth, h = window.innerHeight;
-        c.width = w * dpr; c.height = h * dpr;
+        c.width = Math.round(w * dpr); c.height = Math.round(h * dpr);
         c.style.width = w + 'px'; c.style.height = h + 'px';
-        ctx.scale(dpr, dpr);
-        const imageData = ctx.createImageData(w, h);
+        const imageData = ctx.createImageData(c.width, c.height);
         const data = imageData.data;
         for (let i = 0; i < data.length; i += 4) {
           const v = Math.random() * 255;

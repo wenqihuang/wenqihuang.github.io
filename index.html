@@ -13,39 +13,30 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://wenqihuang.me/images/og-card.jpg">
   <!-- kept in sync with the active palette's --color-bg by syncThemeColor() -->
-  <meta name="theme-color" content="#FAF9F7" id="theme-color">
+  <meta name="theme-color" content="#FAF8F4" id="theme-color">
 
-  <link rel="dns-prefetch" href="https://server.arcgisonline.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400&family=Noto+Sans+SC:wght@400&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&text=%E9%BB%84%E6%96%87%E9%BA%92&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <!-- the two faces the first screen needs; the italic and the Chinese name load on use -->
+  <link rel="preload" href="fonts/source-sans-3.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/source-serif-4.woff2" as="font" type="font/woff2" crossorigin>
 
-  <link rel="stylesheet" href="vendor/leaflet/leaflet.css?v=1.9.4" media="print" onload="this.media='all'">
-  <!-- ?v= busts the CDN edge cache; bump it whenever a file in css/ changes -->
-  <link rel="stylesheet" href="css/base.css?v=20260906">
+  <!-- ?v= busts the CDN edge cache; bump it whenever css/style.css changes -->
+  <link rel="stylesheet" href="css/style.css?v=20261011">
   <script>
-    // Applies the saved theme before first paint, and emits the palette
-    // stylesheet itself so only the one actually in use is ever fetched.
-    // document.write is deliberate: it keeps the sheet render-blocking.
+    // Applies the saved light/dark mode before first paint, and marks
+    // that script runs (the dividers wait for it to draw them on)
+    document.documentElement.classList.add('js');
     (function() {
-      var v = '?v=20260906';
-      var site = 'theme-warm';
       var mode = null;
       try {
         mode = localStorage.getItem('theme');
-        var saved = localStorage.getItem('site-theme');
-        if (saved) site = saved;
-      } catch (e) { /* private mode: fall through to the defaults */ }
+      } catch (e) { /* private mode: fall through to the OS preference */ }
       if (mode) {
         document.documentElement.setAttribute('data-theme', mode);
       } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
         document.documentElement.setAttribute('data-theme', 'dark');
       }
-      document.write('<link rel="stylesheet" href="css/' + site + '.css' + v + '" id="theme-css">');
     })();
   </script>
-  <noscript><link rel="stylesheet" href="css/theme-warm.css?v=20260906"></noscript>
   <meta name="google-site-verification" content="39KJACaH5nxXK0I59ZdmhyQOw5RdZhPLmrWh38CW0CM">
   <link rel="icon" href="images/favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="https://wenqihuang.me/">
@@ -83,7 +74,7 @@
 
   <!-- ====== NAVIGATION ====== -->
   <nav class="nav" id="nav">
-    <div class="nav-inner">
+    <div class="wrap nav-inner">
       <a href="#about" class="nav-logo"><span class="nav-logo-name">Wenqi Huang</span></a>
       <button type="button" class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
         <span></span><span></span><span></span>
@@ -94,8 +85,9 @@
         <li><a href="#publications">Publications</a></li>
         <li><a href="#presentations">Presentations</a></li>
         <li><a href="#more">&amp; More</a></li>
+        <li><a href="files/Wenqi_Huang_CV.pdf" class="nav-cv" target="_blank" rel="noopener">CV</a></li>
         <li>
-          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
+          <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" aria-pressed="false">
             <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
             <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
           </button>
@@ -106,489 +98,244 @@
 
   <!-- ====== HERO / ABOUT ====== -->
   <header class="section hero" id="about">
-    <canvas class="hero-bg-pattern" id="spiral-canvas" aria-hidden="true"></canvas>
-    <div class="hero-content">
-      <div class="hero-photo">
-        <img src="images/profile.webp" alt="Wenqi Huang" class="profile-img anim-reconstruct" width="180" height="180" fetchpriority="high">
-        <span class="recon-label anim-recon-label">Reconstructing...</span>
+    <canvas class="traj" id="traj" aria-hidden="true"></canvas>
+    <div class="wrap hero-grid">
+      <div class="pf">
+        <button type="button" class="kphoto" id="kphoto" aria-pressed="false" aria-label="Show this photo in k-space">
+          <img src="images/profile.webp" alt="Wenqi Huang" width="224" height="224" fetchpriority="high">
+          <canvas width="128" height="128" aria-hidden="true"></canvas>
+        </button>
+        <span class="kcap boot" id="kcap" aria-live="polite">Reconstructing…</span>
       </div>
       <div class="hero-text">
-        <h1 class="hero-name anim-fade-up">Wenqi Huang <span class="hero-name-cn">黄文麒</span></h1>
-        <p class="hero-pronunciation anim-fade-up anim-delay-1">Pronounced: <em>WEN-chee HWAHNG</em></p>
-        <p class="hero-bio anim-fade-up anim-delay-2">
-          Hi there! I'm a PhD student at the
-          <a href="https://kiinformatik.mri.tum.de/en/chair-artificial-intelligence-healthcare-and-medicine" target="_blank" rel="noopener">Chair of AI in Healthcare and Medicine</a>,
-          Technical University of Munich (TUM), supervised by
-          <a href="https://www.professoren.tum.de/en/rueckert-daniel" target="_blank" rel="noopener">Prof. Daniel Rueckert</a>.
-          My research focuses on novel representations for fast MRI reconstruction, with minimal or no training data.
-        </p>
-        <p class="hero-bio hero-bio-personal anim-fade-up anim-delay-3">
-          Outside of research, my wife and I love exploring the world &mdash;
-          hiking trails, birdwatching spots, hidden towns, and great Chinese restaurants.
-          We collect fridge magnets and postcards from every place we visit.
-          Occasionally I'm also a photographer or cyclist. We wish for world peace.
-        </p>
-        <div class="hero-links anim-fade-up anim-delay-3">
-          <a href="https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en" target="_blank" rel="noopener" aria-label="Google Scholar" data-tooltip="Scholar">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24"><path fill="currentColor" d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-2a5 5 0 1 0 0-10 5 5 0 0 0 0 10zM1.5 9L12 0l10.5 9h-4v3.07A8.96 8.96 0 0 0 12 9.07a8.96 8.96 0 0 0-6.5 2.93V9h-4z"/></svg>
-          </a>
-          <a href="https://github.com/wenqihuang" target="_blank" rel="noopener" aria-label="GitHub" data-tooltip="GitHub">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-          </a>
-          <a href="https://www.linkedin.com/in/wenqi-huang-tum/" target="_blank" rel="noopener" aria-label="LinkedIn" data-tooltip="LinkedIn">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </a>
-          <a href="mailto:wenqi.huang@tum.de" aria-label="Email" data-tooltip="Email">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          </a>
-        </div>
+        <h1 class="nm">Wenqi Huang<span class="cn" lang="zh-CN">黄文麒</span></h1>
+        <p class="say">Pronounced <i><span class="nw">WEN-chee</span> HWAHNG</i></p>
+        <p class="bio"><span class="hero-hi">Hi there! </span>I’m a PhD student at the <a href="https://aim-lab.io" target="_blank" rel="noopener">Chair of AI in Healthcare and Medicine</a>, Technical University of Munich (TUM), supervised by <a href="https://www.professoren.tum.de/en/rueckert-daniel" target="_blank" rel="noopener">Prof. Daniel Rueckert</a>. My research focuses on novel representations for fast MRI reconstruction, with minimal or no training data.</p>
+        <p class="aside">Outside of research, my wife and I love exploring the world and collecting fridge magnets and postcards from every place we visit.</p>
+          <ul class="icons">
+            <li><a href="https://scholar.google.com/citations?user=to2zNj4AAAAJ&amp;hl=en" target="_blank" rel="noopener" aria-label="Google Scholar" data-tooltip="Scholar" data-print="Google Scholar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg></a></li>
+            <li><a href="https://github.com/wenqihuang" target="_blank" rel="noopener" aria-label="GitHub" data-tooltip="GitHub" data-print="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg></a></li>
+            <li><a href="https://www.linkedin.com/in/wenqi-huang-tum/" target="_blank" rel="noopener" aria-label="LinkedIn" data-tooltip="LinkedIn" data-print="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a></li>
+            <li><a href="mailto:wenqi.huang@tum.de" aria-label="Email" data-tooltip="Email" data-print="wenqi.huang@tum.de"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></a></li>
+            <li><a href="files/Wenqi_Huang_CV.pdf" class="hero-cv" target="_blank" rel="noopener" aria-label="CV (PDF)" data-tooltip="CV"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></a></li>
+          </ul>
       </div>
     </div>
   </header>
 
-  <main>
-    <!-- ====== FOURIER HARMONIC DIVIDER — 3 sine waves at f, 2.5f, 5.5f ====== -->
-    <div class="wave-divider" aria-hidden="true">
-      <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20.0L15,21.3L30,22.5L45,23.6L60,24.7L75,25.7L90,26.5L105,27.1L120,27.6L135,27.9L150,28.0L165,27.9L180,27.6L195,27.1L210,26.5L225,25.7L240,24.7L255,23.6L270,22.5L285,21.3L300,20.0L315,18.7L330,17.5L345,16.4L360,15.3L375,14.3L390,13.5L405,12.9L420,12.4L435,12.1L450,12.0L465,12.1L480,12.4L495,12.9L510,13.5L525,14.3L540,15.3L555,16.4L570,17.5L585,18.7L600,20.0L615,21.3L630,22.5L645,23.6L660,24.7L675,25.7L690,26.5L705,27.1L720,27.6L735,27.9L750,28.0L765,27.9L780,27.6L795,27.1L810,26.5L825,25.7L840,24.7L855,23.6L870,22.5L885,21.3L900,20.0L915,18.7L930,17.5L945,16.4L960,15.3L975,14.3L990,13.5L1005,12.9L1020,12.4L1035,12.1L1050,12.0L1065,12.1L1080,12.4L1095,12.9L1110,13.5L1125,14.3L1140,15.3L1155,16.4L1170,17.5L1185,18.7L1200,20.0" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><path d="M0,22.6L15,23.6L30,24.0L45,23.8L60,23.1L75,21.8L90,20.3L105,18.8L120,17.4L135,16.4L150,16.0L165,16.2L180,16.9L195,18.2L210,19.7L225,21.2L240,22.6L255,23.6L270,24.0L285,23.8L300,23.1L315,21.8L330,20.3L345,18.8L360,17.4L375,16.4L390,16.0L405,16.2L420,16.9L435,18.2L450,19.7L465,21.2L480,22.6L495,23.6L510,24.0L525,23.8L540,23.1L555,21.8L570,20.3L585,18.8L600,17.4L615,16.4L630,16.0L645,16.2L660,16.9L675,18.2L690,19.7L705,21.2L720,22.6L735,23.6L750,24.0L765,23.8L780,23.1L795,21.8L810,20.3L825,18.8L840,17.4L855,16.4L870,16.0L885,16.2L900,16.9L915,18.2L930,19.7L945,21.2L960,22.6L975,23.6L990,24.0L1005,23.8L1020,23.1L1035,21.8L1050,20.3L1065,18.8L1080,17.4L1095,16.4L1110,16.0L1125,16.2L1140,16.9L1155,18.2L1170,19.7L1185,21.2L1200,22.6" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.3"/><path d="M0,21.9L15,21.7L30,20.2L45,18.6L60,18.0L75,18.8L90,20.4L105,21.7L120,21.9L135,20.7L150,19.0L165,18.0L180,18.4L195,19.9L210,21.5L225,22.0L240,21.1L255,19.4L270,18.2L285,18.2L300,19.5L315,21.1L330,22.0L345,21.5L360,19.9L375,18.4L390,18.0L405,19.0L420,20.7L435,21.9L450,21.7L465,20.4L480,18.8L495,18.0L510,18.6L525,20.2L540,21.7L555,21.9L570,20.8L585,19.2L600,18.1L615,18.3L630,19.8L645,21.4L660,22.0L675,21.2L690,19.6L705,18.3L720,18.1L735,19.3L750,21.0L765,22.0L780,21.6L795,20.1L810,18.5L825,18.0L840,18.9L855,20.6L870,21.8L885,21.8L900,20.5L915,18.9L930,18.0L945,18.5L960,20.1L975,21.6L990,22.0L1005,21.0L1020,19.3L1035,18.1L1050,18.3L1065,19.6L1080,21.2L1095,22.0L1110,21.4L1125,19.8L1140,18.3L1155,18.1L1170,19.2L1185,20.8L1200,21.9" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.2"/></svg>
-    </div>
+  <main class="wrap">
+    <!-- ====== FOURIER HARMONIC DIVIDER: 3 sine waves at f, 2.5f, 5.5f ====== -->
+    <div class="wave" aria-hidden="true"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20.0L15,21.3L30,22.5L45,23.6L60,24.7L75,25.7L90,26.5L105,27.1L120,27.6L135,27.9L150,28.0L165,27.9L180,27.6L195,27.1L210,26.5L225,25.7L240,24.7L255,23.6L270,22.5L285,21.3L300,20.0L315,18.7L330,17.5L345,16.4L360,15.3L375,14.3L390,13.5L405,12.9L420,12.4L435,12.1L450,12.0L465,12.1L480,12.4L495,12.9L510,13.5L525,14.3L540,15.3L555,16.4L570,17.5L585,18.7L600,20.0L615,21.3L630,22.5L645,23.6L660,24.7L675,25.7L690,26.5L705,27.1L720,27.6L735,27.9L750,28.0L765,27.9L780,27.6L795,27.1L810,26.5L825,25.7L840,24.7L855,23.6L870,22.5L885,21.3L900,20.0L915,18.7L930,17.5L945,16.4L960,15.3L975,14.3L990,13.5L1005,12.9L1020,12.4L1035,12.1L1050,12.0L1065,12.1L1080,12.4L1095,12.9L1110,13.5L1125,14.3L1140,15.3L1155,16.4L1170,17.5L1185,18.7L1200,20.0" fill="none" stroke="currentColor"/></svg><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,22.6L15,23.6L30,24.0L45,23.8L60,23.1L75,21.8L90,20.3L105,18.8L120,17.4L135,16.4L150,16.0L165,16.2L180,16.9L195,18.2L210,19.7L225,21.2L240,22.6L255,23.6L270,24.0L285,23.8L300,23.1L315,21.8L330,20.3L345,18.8L360,17.4L375,16.4L390,16.0L405,16.2L420,16.9L435,18.2L450,19.7L465,21.2L480,22.6L495,23.6L510,24.0L525,23.8L540,23.1L555,21.8L570,20.3L585,18.8L600,17.4L615,16.4L630,16.0L645,16.2L660,16.9L675,18.2L690,19.7L705,21.2L720,22.6L735,23.6L750,24.0L765,23.8L780,23.1L795,21.8L810,20.3L825,18.8L840,17.4L855,16.4L870,16.0L885,16.2L900,16.9L915,18.2L930,19.7L945,21.2L960,22.6L975,23.6L990,24.0L1005,23.8L1020,23.1L1035,21.8L1050,20.3L1065,18.8L1080,17.4L1095,16.4L1110,16.0L1125,16.2L1140,16.9L1155,18.2L1170,19.7L1185,21.2L1200,22.6" fill="none" stroke="currentColor"/></svg><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,21.9L15,21.7L30,20.2L45,18.6L60,18.0L75,18.8L90,20.4L105,21.7L120,21.9L135,20.7L150,19.0L165,18.0L180,18.4L195,19.9L210,21.5L225,22.0L240,21.1L255,19.4L270,18.2L285,18.2L300,19.5L315,21.1L330,22.0L345,21.5L360,19.9L375,18.4L390,18.0L405,19.0L420,20.7L435,21.9L450,21.7L465,20.4L480,18.8L495,18.0L510,18.6L525,20.2L540,21.7L555,21.9L570,20.8L585,19.2L600,18.1L615,18.3L630,19.8L645,21.4L660,22.0L675,21.2L690,19.6L705,18.3L720,18.1L735,19.3L750,21.0L765,22.0L780,21.6L795,20.1L810,18.5L825,18.0L840,18.9L855,20.6L870,21.8L885,21.8L900,20.5L915,18.9L930,18.0L945,18.5L960,20.1L975,21.6L990,22.0L1005,21.0L1020,19.3L1035,18.1L1050,18.3L1065,19.6L1080,21.2L1095,22.0L1110,21.4L1125,19.8L1140,18.3L1155,18.1L1170,19.2L1185,20.8L1200,21.9" fill="none" stroke="currentColor"/></svg></div>
 
     <!-- ====== NEWS ====== -->
-    <section class="section" id="news">
-      <h2 class="section-title">News</h2>
-      <ul class="news-list">
-        <li class="news-item">
-          <span class="news-date">Sep 2026</span>
-          <span class="news-text">Presenting two papers at <strong>MICCAI 2026</strong>: <a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener"><em>Gabor Primitives for Accelerated Cardiac Cine MRI Reconstruction</em></a> and <a href="https://arxiv.org/html/2608.18055v2" target="_blank" rel="noopener"><em>Primitive Representation Learning for Unsupervised Dynamic Contrast Enhanced MRI Reconstruction</em></a>. See you in Strasbourg!</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Aug 2026</span>
-          <span class="news-text">Went to <strong>Mallorca</strong> for the total solar eclipse. Absolutely stunning.<button type="button" class="news-photos" id="eclipse-trigger" aria-label="View three eclipse photos"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="14.31" y1="8" x2="20.05" y2="17.94"/><line x1="9.69" y1="8" x2="21.17" y2="8"/><line x1="7.38" y1="12" x2="13.12" y2="2.06"/><line x1="9.69" y1="16" x2="3.95" y2="6.06"/><line x1="14.31" y1="16" x2="2.83" y2="16"/><line x1="16.62" y1="12" x2="10.88" y2="21.94"/></svg>Photos</button></span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Jun 2026</span>
-          <span class="news-text">New preprint out! <a href="https://arxiv.org/abs/2606.31521" target="_blank" rel="noopener"><em>Gaussian Primitives for Distortion-Corrected Diffusion MRI</em></a> &mdash; joint field-map and image estimation from rotated-view EPI, continuing our collaboration with Stanford and UCSF.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">May 2026</span>
-          <span class="news-text">Gave a talk at the <a href="https://indico.tugraz.at/event/126/" target="_blank" rel="noopener"><strong>SFB MR-DYNAMO Workshop on Mathematical Methods in MRI</strong></a> in Graz.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">May 2026</span>
-          <span class="news-text"><a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener"><em>Gabor Primitives for Cardiac Cine MRI</em></a> got provisionally accepted at <strong>MICCAI 2026</strong>!</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Mar 2026</span>
-          <span class="news-text">Two new preprints out! <a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener"><em>Gabor Primitives for Cardiac Cine MRI</em></a> and <a href="https://arxiv.org/abs/2603.03749" target="_blank" rel="noopener"><em>WSI-INR</em></a> (with Y. Wu et al.).</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Jan 2026</span>
-          <span class="news-text">Finally made it to Sedona in person for the <strong>ISMRM Workshop on Data Sampling &amp; Image Reconstruction</strong>! Presented our extended work on physics-informed INRs for EPI.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Nov 2025</span>
-          <span class="news-text"><a href="https://arxiv.org/abs/2501.09403" target="_blank" rel="noopener"><em>PISCO</em></a> (V. Spieker et al.) published in <strong>Medical Image Analysis</strong>. Also a new preprint: <a href="https://arxiv.org/abs/2511.03762" target="_blank" rel="noopener"><em>Reconstruction-free Segmentation</em></a> (Y. Zhang et al.)</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Sep 2025</span>
-          <span class="news-text">Two collaborative papers at <strong>MICCAI 2025 Workshops</strong> in Daejeon: <a href="https://arxiv.org/abs/2509.04888" target="_blank" rel="noopener"><em>INR Meets Multi-contrast MRI</em></a> (N. Niessen et al.) and <a href="https://link.springer.com/chapter/10.1007/978-3-032-06103-4_12" target="_blank" rel="noopener"><em>Neural Space-Time Modeling for Motion-Corrected MR Reconstruction</em></a> (A. Nurdinova et al.)</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Jul 2025</span>
-          <span class="news-text">Gave a guest lecture on INRs for MRI at the <strong>TUM Seminar on DL for Inverse Problems</strong>.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">May 2025</span>
-          <span class="news-text">Our Stanford collaboration on EPI is accepted at <strong>MICCAI 2025</strong> (early accept): <a href="https://arxiv.org/abs/2503.00230" target="_blank" rel="noopener"><em>Physics-Informed INRs for Joint B0 Estimation and EPI</em></a></span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">May 2025</span>
-          <span class="news-text">Oral presentation at <strong>ISMRM 2025</strong> in Honolulu &mdash; great to share our Subspace INR work with the MR community.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Apr 2025</span>
-          <span class="news-text">Spent a wonderful winter quarter (Jan&ndash;Mar) at <strong>Stanford University</strong> working with <a href="https://med.stanford.edu/profiles/kawin-setsompop" target="_blank" rel="noopener">Prof. Kawin Setsompop</a> on physics-informed EPI reconstruction.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Feb 2025</span>
-          <span class="news-text"><a href="https://arxiv.org/abs/2412.12742" target="_blank" rel="noopener"><em>Subspace INRs for Real-Time Cardiac Cine MRI</em></a> accepted at <strong>IPMI 2025</strong>!</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Jan 2025</span>
-          <span class="news-text">Honored to give an invited talk at <strong>NVIDIA Research Radar</strong> on our INR work for cardiac MR imaging.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Jul 2024</span>
-          <span class="news-text"><a href="https://arxiv.org/abs/2302.02504" target="_blank" rel="noopener"><em>Motion-compensated MR CINE Reconstruction</em></a> (J. Pan et al.) published in <strong>IEEE TMI</strong>.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Jun 2024</span>
-          <span class="news-text"><a href="https://arxiv.org/abs/2404.08350" target="_blank" rel="noopener"><em>Self-supervised k-Space Regularization</em></a> (V. Spieker et al.) accepted at <strong>MICCAI 2024</strong>.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Mar 2024</span>
-          <span class="news-text"><a href="https://arxiv.org/abs/2406.00192" target="_blank" rel="noopener"><em>Direct Cardiac Segmentation from Undersampled k-Space</em></a> (Y. Zhang et al.) accepted at <strong>ISBI 2024</strong>.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Feb 2024</span>
-          <span class="news-text">Presenting <em>TransGRAPPA</em> and <em>DE-NIK</em> (V. Spieker et al.) at <strong>ISMRM 2024</strong> in Singapore.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Jan 2024</span>
-          <span class="news-text">Proud to see my student&rsquo;s work accepted &mdash; <a href="https://link.springer.com/chapter/10.1007/978-3-658-44037-4_26" target="_blank" rel="noopener"><em>Neural Implicit k-Space with Trainable Periodic Activations</em></a> (PT Haft et al.) at <strong>BVM 2024</strong> as oral!</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Nov 2023</span>
-          <span class="news-text">Another student project published! <a href="https://openreview.net/forum?id=hUOHV4SKNw" target="_blank" rel="noopener"><em>Self-supervised L+S Network for Radial MRI</em></a> (A. Mancu et al.) at <strong>NeurIPS 2023 Workshop</strong>.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Nov 2023</span>
-          <span class="news-text">Presented Neural Implicit k-Space at <strong>JIS Summit 2023</strong> (virtual).</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Oct 2023</span>
-          <span class="news-text"><a href="https://www.sciencedirect.com/science/article/pii/S1361841523002773" target="_blank" rel="noopener"><em>Unrolled Motion-compensated Reconstruction for Cardiac CINE</em></a> (J. Pan et al.) accepted at <strong>Medical Image Analysis</strong>.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Jun 2023</span>
-          <span class="news-text">Oral at <strong>IPMI 2023</strong> in beautiful Bariloche! Presenting <a href="https://arxiv.org/abs/2212.08479" target="_blank" rel="noopener"><em>Neural Implicit k-Space</em></a>.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Jun 2023</span>
-          <span class="news-text">Busy MICCAI season &mdash; three collaborative papers accepted: <a href="https://arxiv.org/abs/2308.08830" target="_blank" rel="noopener"><em>ICoNIK</em></a> (V. Spieker et al.), <a href="https://link.springer.com/chapter/10.1007/978-3-031-53767-7_5" target="_blank" rel="noopener"><em>Generalised INRs for Registration</em></a> (V. Zimmer et al.), and <a href="https://arxiv.org/abs/2309.16831" target="_blank" rel="noopener"><em>Uncertainty Propagation</em></a> (L. Feiner et al.)</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Jan 2023</span>
-          <span class="news-text">Oral accepted at the <strong>ISMRM Workshop</strong> in Sedona &mdash; couldn&rsquo;t attend due to visa issues, but Prof. Rueckert kindly presented on my behalf.</span>
-        </li>
-        <li class="news-item">
-          <span class="news-date">Sep 2022</span>
-          <span class="news-text">Gave an invited talk at <strong>SIAM MDS 2022</strong> (virtual) on algorithm unrolling for MRI reconstruction.</span>
-        </li>
-      </ul>
-      <button class="news-toggle" id="news-toggle">&#x25BE; Show older news</button>
+    <section class="section sec news" id="news">
+      <h2 class="sh">News</h2>
+      <ol class="rows news-list" id="news-list">
+        <li class="row news-item" style="--k:0"><div class="meta"><span class="d">Sep 2026</span></div><div class="x">Presenting two papers at <strong>MICCAI 2026</strong>: <a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener"><em>Gabor Primitives for Accelerated Cardiac Cine MRI Reconstruction</em></a> and <a href="https://arxiv.org/html/2608.18055v2" target="_blank" rel="noopener"><em>Primitive Representation Learning for Unsupervised Dynamic Contrast Enhanced MRI Reconstruction</em></a>. See you in Strasbourg!</div></li>
+        <li class="row news-item" style="--k:1"><div class="meta"><span class="d">Aug 2026</span></div><div class="x">Went to <strong>Mallorca</strong> for the total solar eclipse. Absolutely stunning.<button type="button" class="news-photos" id="eclipse-trigger" aria-label="View three eclipse photos"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="14.31" y1="8" x2="20.05" y2="17.94"/><line x1="9.69" y1="8" x2="21.17" y2="8"/><line x1="7.38" y1="12" x2="13.12" y2="2.06"/><line x1="9.69" y1="16" x2="3.95" y2="6.06"/><line x1="14.31" y1="16" x2="2.83" y2="16"/><line x1="16.62" y1="12" x2="10.88" y2="21.94"/></svg>Photos</button></div></li>
+        <li class="row news-item" style="--k:2"><div class="meta"><span class="d">Jun 2026</span></div><div class="x">New preprint out! <a href="https://arxiv.org/abs/2606.31521" target="_blank" rel="noopener"><em>Gaussian Primitives for <span class="nw">Distortion-Corrected</span> Diffusion MRI</em></a> &mdash; joint <span class="nw">field-map</span> and image estimation from <span class="nw">rotated-view</span> EPI, continuing our collaboration with Stanford and UCSF.</div></li>
+        <li class="row news-item" style="--k:3"><div class="meta"><span class="d">May 2026</span></div><div class="x">Gave a talk at the <a href="https://indico.tugraz.at/event/126/" target="_blank" rel="noopener"><strong>SFB <span class="nw">MR-DYNAMO</span> Workshop on Mathematical Methods in MRI</strong></a> in Graz.</div></li>
+        <li class="row news-item" style="--k:4"><div class="meta"><span class="d">May 2026</span></div><div class="x"><a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener"><em>Gabor Primitives for Cardiac Cine MRI</em></a> got provisionally accepted at <strong>MICCAI 2026</strong>!</div></li>
+        <li class="row news-item" style="--k:5"><div class="meta"><span class="d">Mar 2026</span></div><div class="x">Two new preprints out! <a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener"><em>Gabor Primitives for Cardiac Cine MRI</em></a> and <a href="https://arxiv.org/abs/2603.03749" target="_blank" rel="noopener"><em><span class="nw">WSI-INR</span></em></a> (with Y. Wu et al.).</div></li>
+        <li class="row news-item" style="--k:0"><div class="meta"><span class="d">Jan 2026</span></div><div class="x">Finally made it to Sedona in person for the <strong>ISMRM Workshop on Data Sampling &amp; Image Reconstruction</strong>! Presented our extended work on <span class="nw">physics-informed</span> INRs for EPI.</div></li>
+        <li class="row news-item" style="--k:1"><div class="meta"><span class="d">Nov 2025</span></div><div class="x"><a href="https://arxiv.org/abs/2501.09403" target="_blank" rel="noopener"><em>PISCO</em></a> (V. Spieker et al.) published in <strong>Medical Image Analysis</strong>. Also a new preprint: <a href="https://arxiv.org/abs/2511.03762" target="_blank" rel="noopener"><em><span class="nw">Reconstruction-free</span> Segmentation</em></a> (Y. Zhang et al.)</div></li>
+        <li class="row news-item" style="--k:2"><div class="meta"><span class="d">Sep 2025</span></div><div class="x">Two collaborative papers at <strong>MICCAI 2025 Workshops</strong> in Daejeon: <a href="https://arxiv.org/abs/2509.04888" target="_blank" rel="noopener"><em>INR Meets <span class="nw">Multi-contrast</span> MRI</em></a> (N. Niessen et al.) and <a href="https://link.springer.com/chapter/10.1007/978-3-032-06103-4_12" target="_blank" rel="noopener"><em>Neural <span class="nw">Space-Time</span> Modeling for <span class="nw">Motion-Corrected</span> MR Reconstruction</em></a> (A. Nurdinova et al.)</div></li>
+        <li class="row news-item" style="--k:3"><div class="meta"><span class="d">Jul 2025</span></div><div class="x">Gave a guest lecture on INRs for MRI at the <strong>TUM Seminar on DL for Inverse Problems</strong>.</div></li>
+        <li class="row news-item" style="--k:4"><div class="meta"><span class="d">May 2025</span></div><div class="x">Our Stanford collaboration on EPI is accepted at <strong>MICCAI 2025</strong> (early accept): <a href="https://arxiv.org/abs/2503.00230" target="_blank" rel="noopener"><em><span class="nw">Physics-Informed</span> INRs for Joint B0 Estimation and EPI</em></a></div></li>
+        <li class="row news-item" style="--k:5"><div class="meta"><span class="d">May 2025</span></div><div class="x">Oral presentation at <strong>ISMRM 2025</strong> in Honolulu &mdash; great to share our Subspace INR work with the MR community.</div></li>
+        <li class="row news-item" style="--k:0"><div class="meta"><span class="d">Apr 2025</span></div><div class="x">Spent a wonderful winter quarter (Jan&ndash;Mar) at <strong>Stanford University</strong> working with <a href="https://med.stanford.edu/profiles/kawin-setsompop" target="_blank" rel="noopener">Prof. Kawin Setsompop</a> on <span class="nw">physics-informed</span> EPI reconstruction.</div></li>
+        <li class="row news-item" style="--k:1"><div class="meta"><span class="d">Feb 2025</span></div><div class="x"><a href="https://arxiv.org/abs/2412.12742" target="_blank" rel="noopener"><em>Subspace INRs for <span class="nw">Real-Time</span> Cardiac Cine MRI</em></a> accepted at <strong>IPMI 2025</strong>!</div></li>
+        <li class="row news-item" style="--k:2"><div class="meta"><span class="d">Jan 2025</span></div><div class="x">Honored to give an invited talk at <strong>NVIDIA Research Radar</strong> on our INR work for cardiac MR imaging.</div></li>
+        <li class="row news-item" style="--k:3"><div class="meta"><span class="d">Jul 2024</span></div><div class="x"><a href="https://arxiv.org/abs/2302.02504" target="_blank" rel="noopener"><em><span class="nw">Motion-compensated</span> MR CINE Reconstruction</em></a> (J. Pan et al.) published in <strong>IEEE TMI</strong>.</div></li>
+        <li class="row news-item" style="--k:4"><div class="meta"><span class="d">Jun 2024</span></div><div class="x"><a href="https://arxiv.org/abs/2404.08350" target="_blank" rel="noopener"><em><span class="nw">Self-supervised</span> <span class="nw">k-Space</span> Regularization</em></a> (V. Spieker et al.) accepted at <strong>MICCAI 2024</strong>.</div></li>
+        <li class="row news-item" style="--k:5"><div class="meta"><span class="d">Mar 2024</span></div><div class="x"><a href="https://arxiv.org/abs/2406.00192" target="_blank" rel="noopener"><em>Direct Cardiac Segmentation from Undersampled <span class="nw">k-Space</span></em></a> (Y. Zhang et al.) accepted at <strong>ISBI 2024</strong>.</div></li>
+        <li class="row news-item" style="--k:0"><div class="meta"><span class="d">Feb 2024</span></div><div class="x">Presenting <em>TransGRAPPA</em> and <em><span class="nw">DE-NIK</span></em> (V. Spieker et al.) at <strong>ISMRM 2024</strong> in Singapore.</div></li>
+        <li class="row news-item" style="--k:1"><div class="meta"><span class="d">Jan 2024</span></div><div class="x">Proud to see my student&rsquo;s work accepted &mdash; <a href="https://link.springer.com/chapter/10.1007/978-3-658-44037-4_26" target="_blank" rel="noopener"><em>Neural Implicit <span class="nw">k-Space</span> with Trainable Periodic Activations</em></a> (PT Haft et al.) at <strong>BVM 2024</strong> as oral!</div></li>
+        <li class="row news-item" style="--k:2"><div class="meta"><span class="d">Nov 2023</span></div><div class="x">Another student project published! <a href="https://openreview.net/forum?id=hUOHV4SKNw" target="_blank" rel="noopener"><em><span class="nw">Self-supervised</span> L+S Network for Radial MRI</em></a> (A. Mancu et al.) at <strong>NeurIPS 2023 Workshop</strong>.</div></li>
+        <li class="row news-item" style="--k:3"><div class="meta"><span class="d">Nov 2023</span></div><div class="x">Presented Neural Implicit <span class="nw">k-Space</span> at <strong>JIS Summit 2023</strong> (virtual).</div></li>
+        <li class="row news-item" style="--k:4"><div class="meta"><span class="d">Oct 2023</span></div><div class="x"><a href="https://www.sciencedirect.com/science/article/pii/S1361841523002773" target="_blank" rel="noopener"><em>Unrolled <span class="nw">Motion-compensated</span> Reconstruction for Cardiac CINE</em></a> (J. Pan et al.) accepted at <strong>Medical Image Analysis</strong>.</div></li>
+        <li class="row news-item" style="--k:5"><div class="meta"><span class="d">Jun 2023</span></div><div class="x">Oral at <strong>IPMI 2023</strong> in beautiful Bariloche! Presenting <a href="https://arxiv.org/abs/2212.08479" target="_blank" rel="noopener"><em>Neural Implicit <span class="nw">k-Space</span></em></a>.</div></li>
+        <li class="row news-item" style="--k:0"><div class="meta"><span class="d">Jun 2023</span></div><div class="x">Busy MICCAI season &mdash; three collaborative papers accepted: <a href="https://arxiv.org/abs/2308.08830" target="_blank" rel="noopener"><em>ICoNIK</em></a> (V. Spieker et al.), <a href="https://link.springer.com/chapter/10.1007/978-3-031-53767-7_5" target="_blank" rel="noopener"><em>Generalised INRs for Registration</em></a> (V. Zimmer et al.), and <a href="https://arxiv.org/abs/2309.16831" target="_blank" rel="noopener"><em>Uncertainty Propagation</em></a> (L. Feiner et al.)</div></li>
+        <li class="row news-item" style="--k:1"><div class="meta"><span class="d">Jan 2023</span></div><div class="x">Oral accepted at the <strong>ISMRM Workshop</strong> in Sedona &mdash; couldn&rsquo;t attend due to visa issues, but Prof. Rueckert kindly presented on my behalf.</div></li>
+        <li class="row news-item" style="--k:2"><div class="meta"><span class="d">Sep 2022</span></div><div class="x">Gave an invited talk at <strong>SIAM MDS 2022</strong> (virtual) on algorithm unrolling for MRI reconstruction.</div></li>
+      </ol>
+      <button type="button" class="older" id="news-toggle" aria-expanded="false" aria-controls="news-list">Show older news ↓</button>
     </section>
 
     <!-- ====== PUBLICATIONS ====== -->
-    <section class="section" id="publications">
-      <h2 class="section-title">Selected Publications</h2>
-      <p class="section-subtitle">Full list on <a href="https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a>.</p>
-
-      <div class="pub-list">
-
-        <article class="pub-card">
-          <div class="pub-content">
-            <h3 class="pub-title">Gabor Primitives for Accelerated Cardiac Cine MRI Reconstruction</h3>
-            <p class="pub-authors">W Huang, V Spieker, N Stolt-Ansó, N Niessen, M Dannecker, SG Kafali, S Kurugol, JA Schnabel, D Rueckert</p>
-            <p class="pub-venue"><span class="pub-tag tag-preprint">Preprint</span> arXiv, 2026</p>
-            <div class="pub-links">
-              <a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener">Paper</a>
-              <a href="https://github.com/wenqihuang/FastGaborMRI" target="_blank" rel="noopener">Code</a>
-            </div>
+    <section class="section sec pubs" id="publications">
+      <div class="shw"><h2 class="sh">Selected Publications</h2><a class="sub" href="https://scholar.google.com/citations?user=to2zNj4AAAAJ&amp;hl=en" target="_blank" rel="noopener">Full list on Google Scholar ↗</a></div>
+      <ol class="rows">
+        <li class="row">
+          <div class="meta"><span class="v">MICCAI 2026</span><span class="flag">Spotlight</span></div>
+          <div class="x">
+            <a class="t" href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener">Gabor Primitives for Accelerated Cardiac Cine MRI Reconstruction</a>
+            <p class="au"><span class="me">W&nbsp;Huang</span>, V&nbsp;Spieker, N&nbsp;<span class="nw">Stolt-Ansó</span>, N&nbsp;Niessen, M&nbsp;Dannecker, SG&nbsp;Kafali, S&nbsp;Kurugol, JA&nbsp;Schnabel, D&nbsp;Rueckert</p>
+            <p class="ln"><a href="https://arxiv.org/abs/2603.05681" target="_blank" rel="noopener">Paper<span aria-hidden="true"> ↗</span></a><a href="https://github.com/wenqihuang/FastGaborMRI" target="_blank" rel="noopener">Code<span aria-hidden="true"> ↗</span></a></p>
           </div>
-        </article>
-
-        <article class="pub-card">
-          <div class="pub-content">
-            <h3 class="pub-title">Physics-Informed Implicit Neural Representations for Joint B0 Estimation and Echo Planar Imaging</h3>
-            <p class="pub-authors">W Huang, N Wang, C Liao, Y Lin, M Gao, D Rueckert, K Setsompop</p>
-            <p class="pub-venue"><span class="pub-tag tag-poster">Poster</span> MICCAI 2025</p>
-            <div class="pub-links">
-              <a href="https://arxiv.org/abs/2503.00230" target="_blank" rel="noopener">Paper</a>
-              <span class="pub-link-soon">Code coming soon</span>
-            </div>
+        </li>
+        <li class="row">
+          <div class="meta"><span class="v">MICCAI 2025</span></div>
+          <div class="x">
+            <a class="t" href="https://arxiv.org/abs/2503.00230" target="_blank" rel="noopener"><span class="nw">Physics-Informed</span> Implicit Neural Representations for Joint B0 Estimation and Echo Planar Imaging</a>
+            <p class="au"><span class="me">W&nbsp;Huang</span>, N&nbsp;Wang, C&nbsp;Liao, Y&nbsp;Lin, M&nbsp;Gao, D&nbsp;Rueckert, K&nbsp;Setsompop</p>
+            <p class="ln"><a href="https://arxiv.org/abs/2503.00230" target="_blank" rel="noopener">Paper<span aria-hidden="true"> ↗</span></a><a href="https://github.com/wenqihuang/PINR" target="_blank" rel="noopener">Code<span aria-hidden="true"> ↗</span></a></p>
           </div>
-        </article>
-
-        <article class="pub-card">
-          <div class="pub-content">
-            <h3 class="pub-title">Subspace Implicit Neural Representations for Real-Time Cardiac Cine MR Imaging</h3>
-            <p class="pub-authors">W Huang, V Spieker, S Xu, G Cruz, C Prieto, JA Schnabel, K Hammernik, T Kuestner, D Rueckert</p>
-            <p class="pub-venue"><span class="pub-tag tag-poster">Poster</span> IPMI 2025</p>
-            <div class="pub-links">
-              <a href="https://arxiv.org/abs/2412.12742" target="_blank" rel="noopener">Paper</a>
-              <a href="https://github.com/wenqihuang/SubspaceINR-CMR" target="_blank" rel="noopener">Code</a>
-            </div>
+        </li>
+        <li class="row">
+          <div class="meta"><span class="v">IPMI 2025</span></div>
+          <div class="x">
+            <a class="t" href="https://arxiv.org/abs/2412.12742" target="_blank" rel="noopener">Subspace Implicit Neural Representations for <span class="nw">Real-Time</span> Cardiac Cine MR Imaging</a>
+            <p class="au"><span class="me">W&nbsp;Huang</span>, V&nbsp;Spieker, S&nbsp;Xu, G&nbsp;Cruz, C&nbsp;Prieto, JA&nbsp;Schnabel, K&nbsp;Hammernik, T&nbsp;Kuestner, D&nbsp;Rueckert</p>
+            <p class="ln"><a href="https://arxiv.org/abs/2412.12742" target="_blank" rel="noopener">Paper<span aria-hidden="true"> ↗</span></a><a href="https://github.com/wenqihuang/SubspaceINR-CMR" target="_blank" rel="noopener">Code<span aria-hidden="true"> ↗</span></a></p>
           </div>
-        </article>
-
-        <article class="pub-card">
-          <div class="pub-content">
-            <h3 class="pub-title">Neural Implicit k-Space for Binning-free Non-Cartesian Cardiac MR Imaging</h3>
-            <p class="pub-authors">W Huang, H Li, J Pan, G Cruz, D Rueckert, K Hammernik</p>
-            <p class="pub-venue"><span class="pub-tag tag-oral">Oral</span> IPMI 2023</p>
-            <div class="pub-links">
-              <a href="https://arxiv.org/abs/2212.08479" target="_blank" rel="noopener">Paper</a>
-              <a href="https://github.com/wenqihuang/NIK_MRI" target="_blank" rel="noopener">Code</a>
-            </div>
+        </li>
+        <li class="row">
+          <div class="meta"><span class="v">IPMI 2023</span><span class="flag">Oral</span></div>
+          <div class="x">
+            <a class="t" href="https://arxiv.org/abs/2212.08479" target="_blank" rel="noopener">Neural Implicit <span class="nw">k-Space</span> for <span class="nw">Binning-free</span> <span class="nw">Non-Cartesian</span> Cardiac MR Imaging</a>
+            <p class="au"><span class="me">W&nbsp;Huang</span>, H&nbsp;Li, J&nbsp;Pan, G&nbsp;Cruz, D&nbsp;Rueckert, K&nbsp;Hammernik</p>
+            <p class="ln"><a href="https://arxiv.org/abs/2212.08479" target="_blank" rel="noopener">Paper<span aria-hidden="true"> ↗</span></a><a href="https://github.com/wenqihuang/NIK_MRI" target="_blank" rel="noopener">Code<span aria-hidden="true"> ↗</span></a></p>
           </div>
-        </article>
-
-        <article class="pub-card">
-          <div class="pub-content">
-            <h3 class="pub-title">Deep Low-Rank Plus Sparse Network for Dynamic MR Imaging</h3>
-            <p class="pub-authors">W Huang, Z Ke, ZX Cui, J Cheng, Z Qiu, S Jia, L Ying, Y Zhu, D Liang</p>
-            <p class="pub-venue"><span class="pub-tag tag-journal">Journal</span> Medical Image Analysis, 2021</p>
-            <div class="pub-links">
-              <a href="https://arxiv.org/abs/2010.13677" target="_blank" rel="noopener">Paper</a>
-              <a href="https://github.com/wenqihuang/LS-Net-Dynamic-MRI" target="_blank" rel="noopener">Code</a>
-            </div>
+        </li>
+        <li class="row">
+          <div class="meta"><span class="v"><abbr title="Medical Image Analysis">MedIA</abbr> 2021</span></div>
+          <div class="x">
+            <a class="t" href="https://arxiv.org/abs/2010.13677" target="_blank" rel="noopener">Deep <span class="nw">Low-Rank</span> Plus Sparse Network for Dynamic MR Imaging</a>
+            <p class="au"><span class="me">W&nbsp;Huang</span>, Z&nbsp;Ke, ZX&nbsp;Cui, J&nbsp;Cheng, Z&nbsp;Qiu, S&nbsp;Jia, L&nbsp;Ying, Y&nbsp;Zhu, D&nbsp;Liang</p>
+            <p class="ln"><a href="https://arxiv.org/abs/2010.13677" target="_blank" rel="noopener">Paper<span aria-hidden="true"> ↗</span></a><a href="https://github.com/wenqihuang/LS-Net-Dynamic-MRI" target="_blank" rel="noopener">Code<span aria-hidden="true"> ↗</span></a></p>
           </div>
-        </article>
-
-        <article class="pub-card">
-          <div class="pub-content">
-            <h3 class="pub-title">Learned Low-Rank Priors in Dynamic MR Imaging</h3>
-            <p class="pub-authors">Z Ke*, W Huang*, ZX Cui, J Cheng, S Jia, H Wang, X Liu, H Zheng, L Ying, Y Zhu, D Liang</p>
-            <p class="pub-venue"><span class="pub-tag tag-journal">Journal</span> IEEE Transactions on Medical Imaging, 2021</p>
-            <div class="pub-links">
-              <a href="https://arxiv.org/abs/2006.12090" target="_blank" rel="noopener">Paper</a>
-              <a href="https://github.com/Keziwen/SLR-Net" target="_blank" rel="noopener">Code</a>
-            </div>
+        </li>
+        <li class="row">
+          <div class="meta"><span class="v"><abbr title="IEEE Transactions on Medical Imaging">IEEE TMI</abbr> 2021</span></div>
+          <div class="x">
+            <a class="t" href="https://arxiv.org/abs/2006.12090" target="_blank" rel="noopener">Learned <span class="nw">Low-Rank</span> Priors in Dynamic MR Imaging</a>
+            <p class="au">Z&nbsp;Ke*, <span class="me">W&nbsp;Huang*</span>, ZX&nbsp;Cui, J&nbsp;Cheng, S&nbsp;Jia, H&nbsp;Wang, X&nbsp;Liu, H&nbsp;Zheng, L&nbsp;Ying, Y&nbsp;Zhu, D&nbsp;Liang</p>
+            <p class="ln"><a href="https://arxiv.org/abs/2006.12090" target="_blank" rel="noopener">Paper<span aria-hidden="true"> ↗</span></a><a href="https://github.com/Keziwen/SLR-Net" target="_blank" rel="noopener">Code<span aria-hidden="true"> ↗</span></a></p>
           </div>
-        </article>
-
-      </div>
+        </li>
+      </ol>
     </section>
 
     <!-- ====== PRESENTATIONS ====== -->
-    <section class="section" id="presentations">
-      <h2 class="section-title">Presentations</h2>
-
-      <ul class="pres-list">
-        <li class="pres-item">
-          <span class="pres-date">May 2026</span>
-          <div class="pres-content">
-            <span class="pres-tag tag-oral">Oral</span>
-            <strong>SFB MR-DYNAMO Workshop on Mathematical Methods in MRI</strong> <span class="pres-location">&middot; Graz</span>
-            <span class="pres-title">Gabor Primitives for Accelerated Cardiac Cine MRI Reconstruction</span>
-          </div>
+    <section class="section sec talks" id="presentations">
+      <h2 class="sh">Presentations</h2>
+      <ol class="rows">
+        <li class="row">
+          <div class="meta"><span class="d">Oct 2026</span><span class="flag quiet">Poster</span></div>
+          <div class="x"><p class="ev"><b>MICCAI 2026 <span class="nw">OFF-GRID</span> Workshop</b><span class="loc">&nbsp;&middot; Strasbourg</span></p><p class="tt">Primitive Representation Learning for Unsupervised Dynamic Contrast Enhanced MRI Reconstruction</p></div>
         </li>
-        <li class="pres-item">
-          <span class="pres-date">Jan 2026</span>
-          <div class="pres-content">
-            <span class="pres-tag tag-poster">Poster</span>
-            <strong>ISMRM Workshop on Data Sampling &amp; Image Reconstruction</strong> <span class="pres-location">&middot; Sedona</span>
-            <span class="pres-title">Joint B&#x2080; Estimation and Distortion-Free Reconstruction from Rotated-View EPI</span>
-          </div>
+        <li class="row">
+          <div class="meta"><span class="d">Sep 2026</span><span class="flag">Spotlight</span></div>
+          <div class="x"><p class="ev"><b>MICCAI 2026</b><span class="loc">&nbsp;&middot; Strasbourg</span></p><p class="tt">Gabor Primitives for Accelerated Cardiac Cine MRI Reconstruction</p></div>
         </li>
-        <li class="pres-item">
-          <span class="pres-date">Jul 2025</span>
-          <div class="pres-content">
-            <span class="pres-tag tag-invited">Invited</span>
-            <strong>Seminar on DL for Inverse Problems in Medical Imaging</strong> <span class="pres-location">&middot; Munich</span>
-            <span class="pres-title">Implicit Neural Representations for MRI Reconstruction</span>
-          </div>
+        <li class="row">
+          <div class="meta"><span class="d">May 2026</span><span class="flag">Oral</span></div>
+          <div class="x"><p class="ev"><b>SFB <span class="nw">MR-DYNAMO</span> Workshop on Mathematical Methods in MRI</b><span class="loc">&nbsp;&middot; Graz</span></p><p class="tt">Gabor Primitives for Accelerated Cardiac Cine MRI Reconstruction</p></div>
         </li>
-        <li class="pres-item">
-          <span class="pres-date">Jun 2025</span>
-          <div class="pres-content">
-            <span class="pres-tag tag-poster">Poster</span>
-            <strong>IPMI 2025</strong> <span class="pres-location">&middot; Kos Island</span>
-            <span class="pres-title">Subspace INRs for Real-Time Cardiac Cine MRI (extended full paper)</span>
-          </div>
+        <li class="row">
+          <div class="meta"><span class="d">Jan 2026</span><span class="flag quiet">Poster</span></div>
+          <div class="x"><p class="ev"><b>ISMRM Workshop on Data Sampling &amp; Image Reconstruction</b><span class="loc">&nbsp;&middot; Sedona</span></p><p class="tt">Joint B&#x2080; Estimation and <span class="nw">Distortion-Free</span> Reconstruction from <span class="nw">Rotated-View</span> EPI</p></div>
         </li>
-        <li class="pres-item">
-          <span class="pres-date">May 2025</span>
-          <div class="pres-content">
-            <span class="pres-tag tag-oral">Oral</span>
-            <strong>ISMRM 2025</strong> <span class="pres-location">&middot; Honolulu</span>
-            <span class="pres-title">Subspace INRs for Real-Time Cardiac Cine MRI (abstract)</span>
-          </div>
+        <li class="row">
+          <div class="meta"><span class="d">Jul 2025</span><span class="flag">Invited</span></div>
+          <div class="x"><p class="ev"><b>Seminar on DL for Inverse Problems in Medical Imaging</b><span class="loc">&nbsp;&middot; Munich</span></p><p class="tt">Implicit Neural Representations for MRI Reconstruction</p></div>
         </li>
-        <li class="pres-item">
-          <span class="pres-date">Jan 2025</span>
-          <div class="pres-content">
-            <span class="pres-tag tag-invited">Invited</span>
-            <strong>NVIDIA Research Radar Talk</strong> <span class="pres-location">&middot; Online</span>
-            <span class="pres-title">Implicit Neural Representations for Non-Cartesian Cardiac MR Imaging</span>
-          </div>
+        <li class="row">
+          <div class="meta"><span class="d">Jun 2025</span><span class="flag quiet">Poster</span></div>
+          <div class="x"><p class="ev"><b>IPMI 2025</b><span class="loc">&nbsp;&middot; Kos Island</span></p><p class="tt">Subspace INRs for <span class="nw">Real-Time</span> Cardiac Cine MRI (extended full paper)</p></div>
         </li>
-        <li class="pres-item">
-          <span class="pres-date">May 2024</span>
-          <div class="pres-content">
-            <span class="pres-tag tag-poster">Poster</span>
-            <strong>ISMRM 2024</strong> <span class="pres-location">&middot; Singapore</span>
-            <span class="pres-title">TransGRAPPA: Self-supervised Transformer Network for k-Space Interpolation</span>
-          </div>
+        <li class="row">
+          <div class="meta"><span class="d">May 2025</span><span class="flag">Oral</span></div>
+          <div class="x"><p class="ev"><b>ISMRM 2025</b><span class="loc">&nbsp;&middot; Honolulu</span></p><p class="tt">Subspace INRs for <span class="nw">Real-Time</span> Cardiac Cine MRI (abstract)</p></div>
         </li>
-        <li class="pres-item">
-          <span class="pres-date">Nov 2023</span>
-          <div class="pres-content">
-            <span class="pres-tag tag-oral">Oral</span>
-            <strong>JIS Summit 2023</strong> <span class="pres-location">&middot; Virtual</span>
-            <span class="pres-title">Neural Implicit k-Space for Binning-free Non-Cartesian Cardiac MR Imaging</span>
-          </div>
+        <li class="row">
+          <div class="meta"><span class="d">Jan 2025</span><span class="flag">Invited</span></div>
+          <div class="x"><p class="ev"><b>NVIDIA Research Radar Talk</b><span class="loc">&nbsp;&middot; Online</span></p><p class="tt">Implicit Neural Representations for <span class="nw">Non-Cartesian</span> Cardiac MR Imaging</p></div>
         </li>
-        <li class="pres-item">
-          <span class="pres-date">Jun 2023</span>
-          <div class="pres-content">
-            <span class="pres-tag tag-oral">Oral</span>
-            <strong>IPMI 2023</strong> <span class="pres-location">&middot; Bariloche</span>
-            <span class="pres-title">Neural Implicit k-Space for Binning-free Non-Cartesian Cardiac MR Imaging</span>
-          </div>
+        <li class="row">
+          <div class="meta"><span class="d">May 2024</span><span class="flag quiet">Poster</span></div>
+          <div class="x"><p class="ev"><b>ISMRM 2024</b><span class="loc">&nbsp;&middot; Singapore</span></p><p class="tt">TransGRAPPA: <span class="nw">Self-supervised</span> Transformer Network for <span class="nw">k-Space</span> Interpolation</p></div>
         </li>
-        <li class="pres-item">
-          <span class="pres-date">Jan 2023</span>
-          <div class="pres-content">
-            <span class="pres-tag tag-oral">Oral</span>
-            <strong>ISMRM Workshop on Data Sampling &amp; Image Reconstruction</strong> <span class="pres-location">&middot; Sedona</span>
-            <span class="pres-title">Universal K-Space Interpolation Network for Non-Cartesian CINE Imaging</span>
-          </div>
+        <li class="row">
+          <div class="meta"><span class="d">Nov 2023</span><span class="flag">Oral</span></div>
+          <div class="x"><p class="ev"><b>JIS Summit 2023</b><span class="loc">&nbsp;&middot; Virtual</span></p><p class="tt">Neural Implicit <span class="nw">k-Space</span> for <span class="nw">Binning-free</span> <span class="nw">Non-Cartesian</span> Cardiac MR Imaging</p></div>
         </li>
-        <li class="pres-item">
-          <span class="pres-date">Sep 2022</span>
-          <div class="pres-content">
-            <span class="pres-tag tag-invited">Invited</span>
-            <strong>SIAM MDS 2022</strong> <span class="pres-location">&middot; Virtual</span>
-            <span class="pres-title">Algorithm Unrolling: Key for Physics-Based Learning in MRI Reconstruction</span>
-          </div>
+        <li class="row">
+          <div class="meta"><span class="d">Jun 2023</span><span class="flag">Oral</span></div>
+          <div class="x"><p class="ev"><b>IPMI 2023</b><span class="loc">&nbsp;&middot; Bariloche</span></p><p class="tt">Neural Implicit <span class="nw">k-Space</span> for <span class="nw">Binning-free</span> <span class="nw">Non-Cartesian</span> Cardiac MR Imaging</p></div>
         </li>
-      </ul>
+        <li class="row">
+          <div class="meta"><span class="d">Jan 2023</span><span class="flag">Oral</span></div>
+          <div class="x"><p class="ev"><b>ISMRM Workshop on Data Sampling &amp; Image Reconstruction</b><span class="loc">&nbsp;&middot; Sedona</span></p><p class="tt">Universal <span class="nw">K-Space</span> Interpolation Network for <span class="nw">Non-Cartesian</span> CINE Imaging</p></div>
+        </li>
+        <li class="row">
+          <div class="meta"><span class="d">Sep 2022</span><span class="flag">Invited</span></div>
+          <div class="x"><p class="ev"><b>SIAM MDS 2022</b><span class="loc">&nbsp;&middot; Virtual</span></p><p class="tt">Algorithm Unrolling: Key for <span class="nw">Physics-Based</span> Learning in MRI Reconstruction</p></div>
+        </li>
+      </ol>
     </section>
 
     <!-- ====== MORE ====== -->
-    <section class="section" id="more">
-      <h2 class="section-title">&amp; More</h2>
+    <div class="section" id="more">
+      <section class="sec" id="education">
+        <h2 class="sh">Education</h2>
+        <ol class="rows">
+        <li class="row"><div class="meta"><span class="d">2021 &ndash; present</span></div><div class="x"><p class="ev"><b>PhD in Computer Science</b>, Technical University of Munich (TUM), Germany</p><p class="dt">Topic: Advanced Algorithms for Fast MRI &middot; Supervisor: Prof. Daniel Rueckert</p></div></li>
+        <li class="row"><div class="meta"><span class="d">Jan &ndash; Mar 2025</span></div><div class="x"><p class="ev"><b>Visiting Student Researcher</b>, Stanford University, USA</p><p class="dt">Supervisor: Prof. Kawin Setsompop</p></div></li>
+        <li class="row"><div class="meta"><span class="d">2018 &ndash; 2021</span></div><div class="x"><p class="ev"><b>M.Sc. in Pattern Recognition &amp; Intelligent Systems</b>, Shenzhen Institute of Advanced Technology, Chinese Academy of Sciences</p><p class="dt">Supervisor: Prof. Dong Liang</p></div></li>
+        <li class="row"><div class="meta"><span class="d">2014 &ndash; 2018</span></div><div class="x"><p class="ev"><b>B.Eng. in Information Engineering</b>, Soochow University, China</p></div></li>
+        </ol>
+      </section>
 
-      <!-- Education -->
-      <div class="subsection">
-        <h3 class="subsection-title">Education</h3>
-        <div class="timeline">
-          <div class="timeline-item timeline-current">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <span class="timeline-date">2021 &ndash; present</span>
-              <strong>PhD in Computer Science</strong>
-              <span class="timeline-place">Technical University of Munich (TUM), Germany</span>
-              <span class="timeline-detail">Topic: Advanced Algorithms for Fast MRI &middot; Supervisor: Prof. Daniel Rueckert</span>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <span class="timeline-date">Jan &ndash; Mar 2025</span>
-              <strong>Visiting Student Researcher</strong>
-              <span class="timeline-place">Stanford University, USA</span>
-              <span class="timeline-detail">Supervisor: Prof. Kawin Setsompop</span>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <span class="timeline-date">2018 &ndash; 2021</span>
-              <strong>M.Sc. in Pattern Recognition &amp; Intelligent Systems</strong>
-              <span class="timeline-place">Shenzhen Institute of Advanced Technology, Chinese Academy of Sciences</span>
-              <span class="timeline-detail">Supervisor: Prof. Dong Liang</span>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="timeline-content">
-              <span class="timeline-date">2014 &ndash; 2018</span>
-              <strong>B.Eng. in Information Engineering</strong>
-              <span class="timeline-place">Soochow University, China</span>
-            </div>
-          </div>
+      <section class="sec" id="teaching">
+        <h2 class="sh">Teaching &amp; Supervision</h2>
+        <ol class="rows">
+        <li class="row"><div class="meta"><span class="d">Oct&nbsp;2026 &ndash; Mar&nbsp;2027</span></div><div class="x"><p class="ev">Master&rsquo;s Seminar: AI Research in the Large Language Models Era (IN2107)</p><p class="dt"><span class="nw">Co-organizer</span> with Nil&nbsp;<span class="nw">Stolt-Ansó</span> &middot; Winter Semester 2026/27, TUM</p></div></li>
+        <li class="row"><div class="meta"><span class="d">Jul 2025</span></div><div class="x"><p class="ev">Guest Lecture: Implicit Neural Representations for MRI Reconstruction</p><p class="dt">Seminar on Deep Learning for Inverse Problems in Medical Imaging, TUM</p></div></li>
+        <li class="row"><div class="meta"><span class="d">Oct&nbsp;2023 &ndash; Sep&nbsp;2024</span></div><div class="x"><p class="ev">Applied Deep Learning in Medicine: Implicit Neural Representations for MRI</p><p class="dt">Master Practical Course Supervisor &middot; Winter Semester 2023/24 &amp; Summer Semester 2024, TUM</p></div></li>
+        <li class="row"><div class="meta"><span class="d">Sep &ndash; Dec&nbsp;2023</span></div><div class="x"><p class="ev">Neural Implicit <span class="nw">k-Space</span> with Trainable Periodic Activation Functions for Cardiac MR Imaging</p><p class="dt">Master Interdisciplinary Project Advisor &middot; Published at BVM 2024 (Oral)</p></div></li>
+        <li class="row"><div class="meta"><span class="d">Jul&nbsp;2022 &ndash; Sep&nbsp;2023</span></div><div class="x"><p class="ev"><span class="nw">Self-supervised</span> <span class="nw">Low-rank</span> plus Sparse Network for Radial MRI Reconstruction</p><p class="dt">Master Interdisciplinary Project <span class="nw">Co-supervisor</span> &middot; Published at NeurIPS 2023 Workshop</p></div></li>
+        </ol>
+      </section>
+
+      <section class="sec" id="service">
+        <h2 class="sh">Academic Service</h2>
+        <ol class="rows">
+        <li class="row"><div class="meta"><span class="d">Reviewer</span></div><div class="x"><p class="ev">IEEE Transactions on Medical Imaging (TMI), Medical Image Analysis (MedIA), Magnetic Resonance in Medicine (MRM), IEEE Transactions on Biomedical Engineering (TBME), Advanced Science, MICCAI, ISMRM</p></div></li>
+        </ol>
+      </section>
+
+      <section class="sec" id="footprint">
+        <h2 class="sh">Academic Footprint</h2>
+        <div class="dotmap" id="dotmap">
+          <canvas aria-hidden="true"></canvas>
+          <div class="dotmap-pins" role="group" aria-label="Places"></div>
+          <div class="dotmap-tip" role="tooltip" hidden></div>
         </div>
-      </div>
+        <p class="legend"><span><i class="dot-lived"></i>Lived / studied</span><span><i class="dot-conference"></i>Conference / visit</span><span><i class="dot-collaborator"></i>Collaborator</span></p>
+      </section>
 
-      <!-- Teaching -->
-      <div class="subsection">
-        <h3 class="subsection-title">Teaching &amp; Supervision</h3>
-        <ul class="detail-list">
-          <li>
-            <strong>Jul 2025</strong> &mdash; Guest Lecture: Implicit Neural Representations for MRI Reconstruction
-            <span class="detail-meta">Seminar on Deep Learning for Inverse Problems in Medical Imaging, TUM</span>
-          </li>
-          <li>
-            <strong>WiSe 2023/24 &amp; SoSe 2024</strong> &mdash; Applied Deep Learning in Medicine: Implicit Neural Representations for MRI
-            <span class="detail-meta">Master Practical Course Supervisor, TUM</span>
-          </li>
-          <li>
-            <strong>Sep &ndash; Dec 2023</strong> &mdash; Neural Implicit k-Space with Trainable Periodic Activation Functions for Cardiac MR Imaging
-            <span class="detail-meta">Master Interdisciplinary Project Advisor &middot; Published at BVM 2024 (Oral)</span>
-          </li>
-          <li>
-            <strong>Jul 2022 &ndash; Sep 2023</strong> &mdash; Self-supervised Low-rank plus Sparse Network for Radial MRI Reconstruction
-            <span class="detail-meta">Master Interdisciplinary Project Co-supervisor &middot; Published at NeurIPS 2023 Workshop</span>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Academic Service -->
-      <div class="subsection">
-        <h3 class="subsection-title">Academic Service</h3>
-        <p class="service-text">
-          Reviewer for
-          <strong>IEEE Transactions on Medical Imaging (TMI)</strong>,
-          <strong>Medical Image Analysis (MedIA)</strong>,
-          <strong>Magnetic Resonance in Medicine (MRM)</strong>,
-          <strong>IEEE Transactions on Biomedical Engineering (TBME)</strong>,
-          <strong>Advanced Science</strong>,
-          <strong>MICCAI</strong>,
-          <strong>ISMRM</strong>
-        </p>
-      </div>
-
-      <!-- Academic Footprint -->
-      <div class="subsection">
-        <h3 class="subsection-title">Academic Footprint</h3>
-        <div id="academic-map" class="academic-map"></div>
-        <div class="map-legend">
-          <span><span class="legend-dot dot-lived"></span>Lived / studied</span>
-          <span><span class="legend-dot dot-conference"></span>Conference / visit</span>
-          <span><span class="legend-dot dot-collaborator"></span>Collaborator</span>
-        </div>
-      </div>
-
-      <!-- Personal -->
-      <div class="subsection">
-        <h3 class="subsection-title">Beyond Research</h3>
-        <p class="personal-text">
-          I'm always happy to chat about MRI reconstruction, deep learning, travel,
-          birdwatching, photography, or just world peace. If you're working on something
-          related or just want to say hi &mdash;
-          <a href="mailto:wenqi.huang@tum.de">drop me a line</a>!
-          I can't promise a fast reply (spam sometimes buries the real emails),
-          but if I see it, I will respond.
-        </p>
-      </div>
-
-    </section>
+      <section class="sec" id="beyond">
+        <h2 class="sh">Beyond Research</h2>
+        <p class="prose">I’m always happy to chat about MRI reconstruction, deep learning, travel, birdwatching, photography, or just world peace. If you’re working on something related or just want to say hi &mdash; <a href="mailto:wenqi.huang@tum.de">drop me a line</a>! I can’t promise a fast reply (spam sometimes buries the real emails), but if I see it, I will respond.</p>
+      </section>
+    </div>
   </main>
 
   <!-- ====== FOOTER ====== -->
-  <div class="wave-divider wave-divider-footer" aria-hidden="true">
-    <svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20.0L15,21.3L30,22.5L45,23.6L60,24.7L75,25.7L90,26.5L105,27.1L120,27.6L135,27.9L150,28.0L165,27.9L180,27.6L195,27.1L210,26.5L225,25.7L240,24.7L255,23.6L270,22.5L285,21.3L300,20.0L315,18.7L330,17.5L345,16.4L360,15.3L375,14.3L390,13.5L405,12.9L420,12.4L435,12.1L450,12.0L465,12.1L480,12.4L495,12.9L510,13.5L525,14.3L540,15.3L555,16.4L570,17.5L585,18.7L600,20.0L615,21.3L630,22.5L645,23.6L660,24.7L675,25.7L690,26.5L705,27.1L720,27.6L735,27.9L750,28.0L765,27.9L780,27.6L795,27.1L810,26.5L825,25.7L840,24.7L855,23.6L870,22.5L885,21.3L900,20.0L915,18.7L930,17.5L945,16.4L960,15.3L975,14.3L990,13.5L1005,12.9L1020,12.4L1035,12.1L1050,12.0L1065,12.1L1080,12.4L1095,12.9L1110,13.5L1125,14.3L1140,15.3L1155,16.4L1170,17.5L1185,18.7L1200,20.0" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.5"/><path d="M0,22.6L15,23.6L30,24.0L45,23.8L60,23.1L75,21.8L90,20.3L105,18.8L120,17.4L135,16.4L150,16.0L165,16.2L180,16.9L195,18.2L210,19.7L225,21.2L240,22.6L255,23.6L270,24.0L285,23.8L300,23.1L315,21.8L330,20.3L345,18.8L360,17.4L375,16.4L390,16.0L405,16.2L420,16.9L435,18.2L450,19.7L465,21.2L480,22.6L495,23.6L510,24.0L525,23.8L540,23.1L555,21.8L570,20.3L585,18.8L600,17.4L615,16.4L630,16.0L645,16.2L660,16.9L675,18.2L690,19.7L705,21.2L720,22.6L735,23.6L750,24.0L765,23.8L780,23.1L795,21.8L810,20.3L825,18.8L840,17.4L855,16.4L870,16.0L885,16.2L900,16.9L915,18.2L930,19.7L945,21.2L960,22.6L975,23.6L990,24.0L1005,23.8L1020,23.1L1035,21.8L1050,20.3L1065,18.8L1080,17.4L1095,16.4L1110,16.0L1125,16.2L1140,16.9L1155,18.2L1170,19.7L1185,21.2L1200,22.6" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.3"/><path d="M0,21.9L15,21.7L30,20.2L45,18.6L60,18.0L75,18.8L90,20.4L105,21.7L120,21.9L135,20.7L150,19.0L165,18.0L180,18.4L195,19.9L210,21.5L225,22.0L240,21.1L255,19.4L270,18.2L285,18.2L300,19.5L315,21.1L330,22.0L345,21.5L360,19.9L375,18.4L390,18.0L405,19.0L420,20.7L435,21.9L450,21.7L465,20.4L480,18.8L495,18.0L510,18.6L525,20.2L540,21.7L555,21.9L570,20.8L585,19.2L600,18.1L615,18.3L630,19.8L645,21.4L660,22.0L675,21.2L690,19.6L705,18.3L720,18.1L735,19.3L750,21.0L765,22.0L780,21.6L795,20.1L810,18.5L825,18.0L840,18.9L855,20.6L870,21.8L885,21.8L900,20.5L915,18.9L930,18.0L945,18.5L960,20.1L975,21.6L990,22.0L1005,21.0L1020,19.3L1035,18.1L1050,18.3L1065,19.6L1080,21.2L1095,22.0L1110,21.4L1125,19.8L1140,18.3L1155,18.1L1170,19.2L1185,20.8L1200,21.9" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.2"/></svg>
-  </div>
   <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-links">
-        <a href="https://scholar.google.com/citations?user=to2zNj4AAAAJ&hl=en" target="_blank" rel="noopener">Scholar</a>
-        <a href="https://github.com/wenqihuang" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/in/wenqi-huang-tum/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="mailto:wenqi.huang@tum.de">Email</a>
+    <div class="wrap">
+      <div class="wave" aria-hidden="true"><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,20.0L15,21.3L30,22.5L45,23.6L60,24.7L75,25.7L90,26.5L105,27.1L120,27.6L135,27.9L150,28.0L165,27.9L180,27.6L195,27.1L210,26.5L225,25.7L240,24.7L255,23.6L270,22.5L285,21.3L300,20.0L315,18.7L330,17.5L345,16.4L360,15.3L375,14.3L390,13.5L405,12.9L420,12.4L435,12.1L450,12.0L465,12.1L480,12.4L495,12.9L510,13.5L525,14.3L540,15.3L555,16.4L570,17.5L585,18.7L600,20.0L615,21.3L630,22.5L645,23.6L660,24.7L675,25.7L690,26.5L705,27.1L720,27.6L735,27.9L750,28.0L765,27.9L780,27.6L795,27.1L810,26.5L825,25.7L840,24.7L855,23.6L870,22.5L885,21.3L900,20.0L915,18.7L930,17.5L945,16.4L960,15.3L975,14.3L990,13.5L1005,12.9L1020,12.4L1035,12.1L1050,12.0L1065,12.1L1080,12.4L1095,12.9L1110,13.5L1125,14.3L1140,15.3L1155,16.4L1170,17.5L1185,18.7L1200,20.0" fill="none" stroke="currentColor"/></svg><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,22.6L15,23.6L30,24.0L45,23.8L60,23.1L75,21.8L90,20.3L105,18.8L120,17.4L135,16.4L150,16.0L165,16.2L180,16.9L195,18.2L210,19.7L225,21.2L240,22.6L255,23.6L270,24.0L285,23.8L300,23.1L315,21.8L330,20.3L345,18.8L360,17.4L375,16.4L390,16.0L405,16.2L420,16.9L435,18.2L450,19.7L465,21.2L480,22.6L495,23.6L510,24.0L525,23.8L540,23.1L555,21.8L570,20.3L585,18.8L600,17.4L615,16.4L630,16.0L645,16.2L660,16.9L675,18.2L690,19.7L705,21.2L720,22.6L735,23.6L750,24.0L765,23.8L780,23.1L795,21.8L810,20.3L825,18.8L840,17.4L855,16.4L870,16.0L885,16.2L900,16.9L915,18.2L930,19.7L945,21.2L960,22.6L975,23.6L990,24.0L1005,23.8L1020,23.1L1035,21.8L1050,20.3L1065,18.8L1080,17.4L1095,16.4L1110,16.0L1125,16.2L1140,16.9L1155,18.2L1170,19.7L1185,21.2L1200,22.6" fill="none" stroke="currentColor"/></svg><svg viewBox="0 0 1200 40" preserveAspectRatio="none"><path d="M0,21.9L15,21.7L30,20.2L45,18.6L60,18.0L75,18.8L90,20.4L105,21.7L120,21.9L135,20.7L150,19.0L165,18.0L180,18.4L195,19.9L210,21.5L225,22.0L240,21.1L255,19.4L270,18.2L285,18.2L300,19.5L315,21.1L330,22.0L345,21.5L360,19.9L375,18.4L390,18.0L405,19.0L420,20.7L435,21.9L450,21.7L465,20.4L480,18.8L495,18.0L510,18.6L525,20.2L540,21.7L555,21.9L570,20.8L585,19.2L600,18.1L615,18.3L630,19.8L645,21.4L660,22.0L675,21.2L690,19.6L705,18.3L720,18.1L735,19.3L750,21.0L765,22.0L780,21.6L795,20.1L810,18.5L825,18.0L840,18.9L855,20.6L870,21.8L885,21.8L900,20.5L915,18.9L930,18.0L945,18.5L960,20.1L975,21.6L990,22.0L1005,21.0L1020,19.3L1035,18.1L1050,18.3L1065,19.6L1080,21.2L1095,22.0L1110,21.4L1125,19.8L1140,18.3L1155,18.1L1170,19.2L1185,20.8L1200,21.9" fill="none" stroke="currentColor"/></svg></div>
+      <div class="foot">
+        <p class="copy">&copy; <span id="footer-year"></span> <span class="nw">Wenqi Huang</span></p>
+        <p class="flinks"><a href="https://scholar.google.com/citations?user=to2zNj4AAAAJ&amp;hl=en" target="_blank" rel="noopener">Scholar</a><a href="https://github.com/wenqihuang" target="_blank" rel="noopener">GitHub</a><a href="https://www.linkedin.com/in/wenqi-huang-tum/" target="_blank" rel="noopener">LinkedIn</a><a href="mailto:wenqi.huang@tum.de">Email</a><a href="files/Wenqi_Huang_CV.pdf" target="_blank" rel="noopener">CV</a></p>
       </div>
-      <p class="footer-copy">&copy; <span id="footer-year"></span> Wenqi Huang</p>
-      <details class="theme-picker">
-        <summary class="theme-picker-toggle">Themes</summary>
-        <div class="theme-picker-options">
-          <button data-theme-file="theme-warm" class="theme-btn active">Warm</button>
-          <button data-theme-file="theme-ocean" class="theme-btn">Ocean</button>
-          <button data-theme-file="theme-sunset" class="theme-btn">Sunset</button>
-          <button data-theme-file="theme-cyber" class="theme-btn">Cyber</button>
-          <button data-theme-file="theme-terminal" class="theme-btn">Terminal</button>
-          <button data-theme-file="theme-paper" class="theme-btn">Paper</button>
-          <button data-theme-file="theme-retro" class="theme-btn">Retro</button>
-          <button data-theme-file="theme-scan" class="theme-btn">Scan</button>
-          <button data-theme-file="theme-ink" class="theme-btn">Ink</button>
-        </div>
-      </details>
-      <p class="footer-easter-egg">Have you found all the Easter eggs on this page?</p>
+      <p class="egg">Have you found all the Easter eggs on this page?</p>
     </div>
   </footer>
 
-  <button class="back-to-top" id="back-to-top" aria-label="Back to top">&uarr;</button>
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Back to top">&uarr;</button>
 
   <!-- ====== INLINE JS ====== -->
   <script>
@@ -598,31 +345,58 @@
     }
     window.scrollTo(0, 0);
 
-    // Mobile address bar follows the palette actually in use, whichever of the
-    // nine it is, and whether dark came from the OS or the toggle
+    // Mobile address bar follows the palette in use, whether dark came from
+    // the OS or the toggle
     function syncThemeColor() {
       var meta = document.getElementById('theme-color');
       if (!meta) return;
       var bg = getComputedStyle(document.documentElement).getPropertyValue('--color-bg').trim();
       if (bg) meta.setAttribute('content', bg);
     }
-    window.syncThemeColor = syncThemeColor;
     syncThemeColor();
 
     // Dark mode toggle
     (function() {
       const toggle = document.getElementById('theme-toggle');
       const html = document.documentElement;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      let current = null;
       // data-theme is already set by the head script, before first paint
       toggle.setAttribute('aria-pressed', String(html.getAttribute('data-theme') === 'dark'));
       toggle.addEventListener('click', () => {
         const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        const apply = () => {
+          html.setAttribute('data-theme', next);
+          try { localStorage.setItem('theme', next); } catch (e) { /* private mode */ }
+          toggle.setAttribute('aria-pressed', String(next === 'dark'));
+          syncThemeColor();
+        };
+        // Freeze per-element transitions so the new palette lands at once;
+        // the crossfade itself comes from the view transition
         html.classList.add('theme-switching');
-        html.setAttribute('data-theme', next);
-        localStorage.setItem('theme', next);
-        toggle.setAttribute('aria-pressed', String(next === 'dark'));
-        syncThemeColor();
-        setTimeout(() => html.classList.remove('theme-switching'), 600);
+        if (document.startViewTransition && !reducedMotion.matches) {
+          const vt = current = document.startViewTransition(apply);
+          // a quick second click skips this one; only the latest cleans up
+          vt.finished.finally(() => {
+            if (current === vt) {
+              current = null;
+              html.classList.remove('theme-switching');
+            }
+          });
+        } else {
+          apply();
+          void html.offsetHeight; // commit the new palette before transitions return
+          html.classList.remove('theme-switching');
+        }
+      });
+      // While the crossfade runs the browser hands every click to <html>.
+      // Pass on the ones aimed at the toggle, so quick repeat clicks (and the
+      // 5-click Easter egg) still land.
+      document.addEventListener('click', (e) => {
+        if (!current || e.target !== html) return;
+        const r = toggle.getBoundingClientRect();
+        if (e.clientX >= r.left && e.clientX <= r.right &&
+            e.clientY >= r.top && e.clientY <= r.bottom) toggle.click();
       });
     })();
 
@@ -642,41 +416,45 @@
       sections.forEach(s => observer.observe(s));
     })();
 
-    // News expand/collapse — auto-hide items older than 1 year
+    // News expand/collapse: the five newest items show, the rest wait behind
+    // the button (the list is kept newest first)
     (function() {
+      const VISIBLE = 5;
       const btn = document.getElementById('news-toggle');
       const list = document.querySelector('.news-list');
       const items = list.querySelectorAll('.news-item');
-      const cutoff = new Date();
-      cutoff.setFullYear(cutoff.getFullYear() - 1);
-      let hasOld = false;
-      items.forEach(item => {
-        const dateStr = item.querySelector('.news-date').textContent.trim();
-        const mo = {Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
-        const parts = dateStr.split(' ');
-        const year = parseInt(parts[1] || parts[0]);
-        const month = mo[parts[0]] !== undefined ? mo[parts[0]] : 0;
-        const itemDate = new Date(year, month);
-        if (itemDate < cutoff) {
-          item.classList.add('news-old');
-          hasOld = true;
-        }
+      items.forEach((item, i) => {
+        if (i >= VISIBLE) item.classList.add('news-old');
       });
-      if (!hasOld) btn.style.display = 'none';
+      if (items.length <= VISIBLE) btn.style.display = 'none';
       btn.addEventListener('click', () => {
         const expanded = list.classList.toggle('news-expanded');
-        btn.textContent = expanded ? '\u25B4 Show less' : '\u25BE Show older news';
-        if (expanded) {
-          // Draw VISTA masks on newly revealed items
-          if (window._drawVistaMasks) window._drawVistaMasks();
-        } else {
-          btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
+        btn.setAttribute('aria-expanded', String(expanded));
+        btn.textContent = expanded ? 'Show less \u2191' : 'Show older news \u2193';
+        if (!expanded) btn.scrollIntoView({ behavior: 'smooth', block: 'center' });
       });
     })();
 
     // Auto year in footer
     document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // Browsers without text-wrap: pretty (Firefox) could end a block on one
+    // short word; tie it to the word before (titles tie their own last two
+    // words in the markup, so they are left out).
+    if (!(window.CSS && CSS.supports('text-wrap', 'pretty'))) {
+      document.querySelectorAll('.bio, .aside, .news .x, .au, .ev, .dt, .prose').forEach(el => {
+        const walk = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+        let node = null, m = null, tail = '';
+        for (let n; (n = walk.nextNode());) {
+          const hit = /[ \t\n]+([^ \t\n]+[ \t\n]*)$/.exec(n.data);
+          if (hit) { node = n; m = hit; tail = hit[1]; } else if (node) tail += n.data;
+        }
+        tail = tail.trim();
+        if (!node || tail.length > 16 || /[ \t\n]/.test(tail)) return;
+        const end = m.index + m[0].length - m[1].length;
+        node.data = node.data.slice(0, m.index) + ' ' + node.data.slice(end);
+      });
+    }
 
     // Back to top + nav shadow — single scroll listener
     (function() {
@@ -702,34 +480,6 @@
       obs.observe(hero);
     })();
 
-    // Theme picker
-    (function() {
-      var btns = document.querySelectorAll('.theme-btn');
-      var link = document.getElementById('theme-css');
-      var cssV = '?v=20260906';
-      var saved = localStorage.getItem('site-theme');
-      if (saved && link) {
-        // the head script already applied the href; just sync the button state
-        btns.forEach(function(b) {
-          b.classList.toggle('active', b.getAttribute('data-theme-file') === saved);
-        });
-      }
-      btns.forEach(function(btn) {
-        btn.addEventListener('click', function() {
-          var file = btn.getAttribute('data-theme-file');
-          link.href = 'css/' + file + '.css' + cssV;
-          localStorage.setItem('site-theme', file);
-          btns.forEach(function(b) { b.classList.remove('active'); });
-          btn.classList.add('active');
-          // the new sheet has to load before its --color-bg can be read
-          link.addEventListener('load', function once() {
-            link.removeEventListener('load', once);
-            syncThemeColor();
-          });
-        });
-      });
-    })();
-
     // Mobile nav open/close
     (function() {
       const navToggle = document.getElementById('nav-toggle');
@@ -747,261 +497,6 @@
         }
       });
     })();
-
-    // ---- k-Space trajectories: radial + spiral + EPI (canvas) ----
-    (function() {
-      const canvas = document.getElementById('spiral-canvas');
-      if (!canvas) return;
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reducedMotion) { canvas.style.display = 'none'; return; }
-      const parent = canvas.parentElement;
-      const dpr = window.devicePixelRatio || 1;
-      let w, h;
-      // Three trajectories with independent motion
-      const trajR = 80; // radius of each trajectory shape
-      const traj = [
-        { type: 'radial',  angle: 0, vr: 0.003, x: -150, y: -30, vx: 0.3, vy: 0.2 },
-        { type: 'spiral',  angle: 0, vr: -0.002, x: 130, y: 20, vx: -0.25, vy: 0.3 },
-        { type: 'epi',     angle: 0, vr: 0.001, x: 20, y: -50, vx: 0.2, vy: -0.25 }
-      ];
-
-      function resize() {
-        requestAnimationFrame(function() {
-          w = parent.offsetWidth; h = parent.offsetHeight;
-          canvas.width = w * dpr; canvas.height = h * dpr;
-          canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
-        });
-      }
-      resize();
-
-      function drawRadial(ctx, cx, cy, R, rot) {
-        const spokes = 12;
-        for (let i = 0; i < spokes; i++) {
-          const a = (i / spokes) * Math.PI + rot;
-          ctx.beginPath();
-          ctx.moveTo(cx - R * Math.cos(a), cy - R * Math.sin(a));
-          ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a));
-          ctx.stroke();
-        }
-      }
-
-      function drawSpiral(ctx, cx, cy, R, rot) {
-        const turns = 6, steps = turns * 40;
-        ctx.beginPath();
-        for (let i = 0; i <= steps; i++) {
-          const t = i / steps;
-          const theta = t * turns * 2 * Math.PI + rot;
-          const r = t * R;
-          const x = cx + r * Math.cos(theta);
-          const y = cy + r * Math.sin(theta);
-          i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-        }
-        ctx.stroke();
-      }
-
-      function drawEPI(ctx, cx, cy, R, rot) {
-        const lines = 12;
-        const cosR = Math.cos(rot), sinR = Math.sin(rot);
-        ctx.beginPath();
-        for (let i = 0; i < lines; i++) {
-          const y0 = -R + (i / (lines - 1)) * 2 * R;
-          const dir = i % 2 === 0 ? 1 : -1;
-          const x1 = dir > 0 ? -R : R;
-          const x2 = dir > 0 ? R : -R;
-          const px1 = cx + x1 * cosR - y0 * sinR;
-          const py1 = cy + x1 * sinR + y0 * cosR;
-          const px2 = cx + x2 * cosR - y0 * sinR;
-          const py2 = cy + x2 * sinR + y0 * cosR;
-          i === 0 ? ctx.moveTo(px1, py1) : ctx.lineTo(px1, py1);
-          ctx.lineTo(px2, py2);
-        }
-        ctx.stroke();
-      }
-
-      let rafId = null, onScreen = true;
-      function start() { if (rafId === null && onScreen && !document.hidden) rafId = requestAnimationFrame(frame); }
-      function stop() { if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; } }
-      document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
-      new IntersectionObserver(function(entries) {
-        onScreen = entries[0].isIntersecting;
-        onScreen ? start() : stop();
-      }).observe(parent);
-      const ctx = canvas.getContext('2d');
-      function frame() {
-        rafId = null;
-        ctx.clearRect(0, 0, w * dpr, h * dpr);
-        ctx.save();
-        ctx.scale(dpr, dpr);
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        ctx.strokeStyle = isDark ? 'rgba(224,160,112,0.08)' : 'rgba(168,97,61,0.045)';
-        ctx.lineWidth = 0.6;
-
-        // Move
-        traj.forEach(t => {
-          t.angle += t.vr;
-          t.x += t.vx; t.y += t.vy;
-          // Wall bounce
-          const bx = w / 2 - trajR - 10, by = h / 2 - trajR - 10;
-          if (t.x > bx || t.x < -bx) { t.vx *= -1; t.x = Math.max(-bx, Math.min(bx, t.x)); }
-          if (t.y > by || t.y < -by) { t.vy *= -1; t.y = Math.max(-by, Math.min(by, t.y)); }
-        });
-
-        // Collision between trajectories
-        for (let i = 0; i < traj.length; i++) {
-          for (let j = i + 1; j < traj.length; j++) {
-            const a = traj[i], b = traj[j];
-            const dx = a.x - b.x, dy = a.y - b.y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            const minDist = trajR * 2;
-            if (dist < minDist && dist > 0) {
-              // Swap velocities along collision axis
-              const nx = dx / dist, ny = dy / dist;
-              const dvx = a.vx - b.vx, dvy = a.vy - b.vy;
-              const dot = dvx * nx + dvy * ny;
-              if (dot < 0) { // approaching
-                a.vx -= dot * nx; a.vy -= dot * ny;
-                b.vx += dot * nx; b.vy += dot * ny;
-              }
-              // Push apart
-              const overlap = (minDist - dist) / 2;
-              a.x += nx * overlap; a.y += ny * overlap;
-              b.x -= nx * overlap; b.y -= ny * overlap;
-            }
-          }
-        }
-
-        // Draw
-        traj.forEach(t => {
-          const cx = w / 2 + t.x, cy = h / 2 + t.y;
-          if (t.type === 'radial') drawRadial(ctx, cx, cy, trajR, t.angle);
-          else if (t.type === 'spiral') drawSpiral(ctx, cx, cy, trajR, t.angle);
-          else drawEPI(ctx, cx, cy, trajR, t.angle);
-        });
-
-        ctx.restore();
-        start();
-      }
-      start();
-      window.addEventListener('resize', resize);
-    })();
-
-    // ---- VISTA undersampling masks on news items ----
-    (function() {
-      function mulberry32(a) {
-        return function() {
-          a |= 0; a = a + 0x6D2B79F5 | 0;
-          var t = Math.imul(a ^ a >>> 15, 1 | a);
-          t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
-          return ((t ^ t >>> 14) >>> 0) / 4294967296;
-        };
-      }
-      // Collect mask canvases for animation
-      window._vistaCanvases = [];
-      window._drawVistaMasks = function() {
-        const items = document.querySelectorAll('.news-item');
-        items.forEach((item, idx) => {
-          if (item.querySelector('.vista-mask')) return;
-          const dateEl = item.querySelector('.news-date');
-          const rect = dateEl.getBoundingClientRect();
-          const itemRect = item.getBoundingClientRect();
-          const dateW = rect.width + 16;
-          const itemH = itemRect.height;
-          if (itemH === 0) return;
-          const c = document.createElement('canvas');
-          c.className = 'vista-mask';
-          const dpr = window.devicePixelRatio || 1;
-          c.width = dateW * dpr; c.height = itemH * dpr;
-          c.style.width = dateW + 'px'; c.style.height = itemH + 'px';
-          item.prepend(c);
-          window._vistaCanvases.push({ canvas: c, idx: idx, w: dateW, h: itemH, dpr: dpr });
-        });
-      };
-      window._drawVistaMasks();
-
-      // Rebuild the masks when a resize reflows the news items, otherwise the
-      // canvases keep the height they were created with
-      let resizeTimer = null;
-      window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-          document.querySelectorAll('.vista-mask').forEach(function(c) { c.remove(); });
-          window._vistaCanvases.length = 0;
-          window._drawVistaMasks();
-        }, 200);
-      });
-
-      // Animate: all masks scroll right in sync, wrap around
-      (function() {
-        // A static mask still reads as an undersampling pattern, so honour the
-        // motion preference by simply not animating it
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { drawOnce(); return; }
-        let shift = 0;
-        let rafId = null, onScreen = true;
-        const news = document.getElementById('news');
-        function start() { if (rafId === null && onScreen && !document.hidden) rafId = requestAnimationFrame(drawFrame); }
-        function stop() { if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; } }
-        document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
-        if (news) {
-          new IntersectionObserver(function(entries) {
-            onScreen = entries[0].isIntersecting;
-            onScreen ? start() : stop();
-          }).observe(news);
-        }
-        function drawFrame() {
-          rafId = null;
-          shift += 0.03; // pixels per frame
-          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-          const color = isDark ? 'rgba(224,160,112,0.5)' : 'rgba(168,97,61,0.5)';
-          const R = 6;
-          const spacing = 1.5;
-          window._vistaCanvases.forEach(({ canvas, idx, w, h, dpr }) => {
-            const ctx = canvas.getContext('2d');
-            ctx.clearRect(0, 0, w * dpr, h * dpr);
-            ctx.save();
-            ctx.scale(dpr, dpr);
-            ctx.fillStyle = color;
-            const totalLines = Math.ceil(w / spacing) + R;
-            const offset = idx % R;
-            const pixelShift = shift % (R * spacing);
-            for (let col = -R; col < totalLines; col++) {
-              if ((col + offset) % R === 0) {
-                const x = col * spacing + pixelShift;
-                if (x >= 0 && x < w) {
-                  ctx.fillRect(x, 0, 1, h);
-                }
-              }
-            }
-            ctx.restore();
-          });
-          start();
-        }
-        start();
-      })();
-
-      // One static frame, for reduced-motion users and as the initial paint
-      function drawOnce() {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        const color = isDark ? 'rgba(224,160,112,0.5)' : 'rgba(168,97,61,0.5)';
-        const R = 6, spacing = 1.5;
-        window._vistaCanvases.forEach(function(m) {
-          const ctx = m.canvas.getContext('2d');
-          ctx.clearRect(0, 0, m.w * m.dpr, m.h * m.dpr);
-          ctx.save();
-          ctx.scale(m.dpr, m.dpr);
-          ctx.fillStyle = color;
-          const totalLines = Math.ceil(m.w / spacing) + R;
-          const offset = m.idx % R;
-          for (let col = -R; col < totalLines; col++) {
-            if ((col + offset) % R === 0) {
-              const x = col * spacing;
-              if (x >= 0 && x < m.w) ctx.fillRect(x, 0, 1, m.h);
-            }
-          }
-          ctx.restore();
-        });
-      }
-    })();
-
     // ---- Console ASCII art Easter egg ----
     console.log([
       '%c',
@@ -1131,149 +626,364 @@
       });
     })();
 
-    // ---- Fourier divider — draw on scroll, then drift ----
+    // ---- Fourier dividers: drawn on when they come into view, then drifting (CSS) ----
     (function() {
-      const divider = document.querySelector('.wave-divider');
-      if (!divider) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      const paths = divider.querySelectorAll('svg path');
-      paths.forEach(p => p.style.animationPlayState = 'paused');
-      let rafId = null, onScreen = false, drifting = false;
-      let t = 0;
-      function drift() {
-        rafId = null;
-        t += 0.008;
-        if (paths[1]) paths[1].style.transform = 'translateX(' + (Math.sin(t) * 10) + 'px)';
-        if (paths[2]) paths[2].style.transform = 'translateX(' + (Math.sin(t * 1.6) * 15) + 'px)';
-        start();
+      const io = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+      }), { threshold: 0.5 });
+      document.querySelectorAll('.wave').forEach(w => io.observe(w));
+    })();
+  </script>
+  <script>
+  (function () {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ---- photo -> its own k-space (2D FFT of a 128 x 128 greyscale copy) ----
+    const btn = document.getElementById('kphoto'), cap = document.getElementById('kcap');
+    const img = btn.querySelector('img'), cv = btn.querySelector('canvas'), N = 128;
+    let ready = false;
+    function fft(re, im) {
+      const n = re.length;
+      for (let i = 1, j = 0; i < n; i++) {
+        let bit = n >> 1;
+        for (; j & bit; bit >>= 1) j ^= bit;
+        j ^= bit;
+        if (i < j) { let t = re[i]; re[i] = re[j]; re[j] = t; t = im[i]; im[i] = im[j]; im[j] = t; }
       }
-      function start() { if (drifting && rafId === null && onScreen && !document.hidden) rafId = requestAnimationFrame(drift); }
-      function stop() { if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; } }
-      document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
-      // The divider is short, so watch it for drift but never run while it is
-      // scrolled away
-      const obs = new IntersectionObserver(entries => {
-        onScreen = entries[0].isIntersecting;
-        if (onScreen) {
-          paths.forEach(p => p.style.animationPlayState = 'running');
-          if (!drifting) {
-            // wait for the draw animation to finish before drifting
-            setTimeout(() => { drifting = true; start(); }, 3000);
-          } else {
-            start();
+      for (let len = 2; len <= n; len <<= 1) {
+        const a = -2 * Math.PI / len, wr = Math.cos(a), wi = Math.sin(a), h = len >> 1;
+        for (let i = 0; i < n; i += len) {
+          let cr = 1, ci = 0;
+          for (let k = 0; k < h; k++) {
+            const p = i + k, q = p + h, br = re[q] * cr - im[q] * ci, bi = re[q] * ci + im[q] * cr;
+            re[q] = re[p] - br; im[q] = im[p] - bi; re[p] += br; im[p] += bi;
+            const t = cr * wr - ci * wi; ci = cr * wi + ci * wr; cr = t;
           }
-        } else {
-          stop();
         }
-      }, { threshold: 0.5 });
-      obs.observe(divider);
-    })();
+      }
+    }
+    function compute() {
+      if (ready) return true;
+      if (!img.complete || !img.naturalWidth) return false;
+      const tmp = document.createElement('canvas'); tmp.width = tmp.height = N;
+      const tc = tmp.getContext('2d'); tc.drawImage(img, 0, 0, N, N);
+      const px = tc.getImageData(0, 0, N, N).data;
+      const re = new Float64Array(N * N), im = new Float64Array(N * N);
+      for (let i = 0; i < N * N; i++) re[i] = 0.299 * px[4 * i] + 0.587 * px[4 * i + 1] + 0.114 * px[4 * i + 2];
+      const rr = new Float64Array(N), ri = new Float64Array(N);
+      for (let pass = 0; pass < 2; pass++) for (let a = 0; a < N; a++) {
+        for (let b = 0; b < N; b++) { const k = pass ? b * N + a : a * N + b; rr[b] = re[k]; ri[b] = im[k]; }
+        fft(rr, ri);
+        for (let b = 0; b < N; b++) { const k = pass ? b * N + a : a * N + b; re[k] = rr[b]; im[k] = ri[b]; }
+      }
+      const mag = new Float64Array(N * N);
+      for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+        const k = ((y + N / 2) % N) * N + ((x + N / 2) % N);
+        mag[y * N + x] = Math.log1p(Math.hypot(re[k], im[k]));
+      }
+      const sorted = Float64Array.from(mag).sort();
+      const vlo = sorted[Math.floor(0.05 * sorted.length)], vhi = sorted[Math.floor(0.998 * sorted.length)];
+      const out = cv.getContext('2d').createImageData(N, N), lo = [28, 25, 22], hi = [251, 238, 221];
+      for (let i = 0; i < N * N; i++) {
+        const t = Math.pow(Math.min(1, Math.max(0, (mag[i] - vlo) / (vhi - vlo))), 1.3);
+        for (let c = 0; c < 3; c++) out.data[4 * i + c] = lo[c] + (hi[c] - lo[c]) * t;
+        out.data[4 * i + 3] = 255;
+      }
+      cv.getContext('2d').putImageData(out, 0, 0);
+      ready = true;
+      return true;
+    }
+    function set(k) {
+      if (k && !compute()) return;
+      btn.classList.toggle('is-k', k);
+      btn.setAttribute('aria-pressed', String(k));
+      cap.classList.remove('boot');
+      cap.style.opacity = k ? '1' : '0';
+      cap.textContent = 'k-space, |F(image)|';
+    }
+    let via = '';
+    btn.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') set(true); });
+    btn.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') set(false); });
+    btn.addEventListener('pointerdown', e => { via = e.pointerType; });
+    btn.addEventListener('click', () => { if (via !== 'mouse') set(!btn.classList.contains('is-k')); via = ''; });
+
+    // ---- k-space trajectories drifting behind the hero: radial, spiral, EPI ----
+    const canvas = document.getElementById('traj');
+    if (reduce) { canvas.hidden = true; return; }
+    const zone = canvas.parentElement, ctx = canvas.getContext('2d');
+    // the stroke follows the palette, light or dark
+    const strokeOf = () => getComputedStyle(document.documentElement).getPropertyValue('--traj').trim();
+    let stroke = strokeOf();
+    new MutationObserver(() => { stroke = strokeOf(); }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    const R = 64;
+    const traj = [
+      { type: 'radial', a: 0, va: 0.003, x: -170, y: -10, vx: 0.28, vy: 0.18 },
+      { type: 'spiral', a: 0, va: -0.002, x: 150, y: 20, vx: -0.22, vy: 0.26 },
+      { type: 'epi', a: 0, va: 0.001, x: 30, y: -40, vx: 0.18, vy: -0.22 }
+    ];
+    let w = 0, h = 0, dpr = 1;
+    function size() {
+      dpr = window.devicePixelRatio || 1; w = zone.clientWidth; h = zone.clientHeight;
+      canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    }
+    function shape(t, cx, cy) {
+      ctx.beginPath();
+      if (t.type === 'radial') {
+        for (let i = 0; i < 12; i++) { const a = i / 12 * Math.PI + t.a; ctx.moveTo(cx - R * Math.cos(a), cy - R * Math.sin(a)); ctx.lineTo(cx + R * Math.cos(a), cy + R * Math.sin(a)); }
+      } else if (t.type === 'spiral') {
+        for (let i = 0; i <= 240; i++) { const s = i / 240, th = s * 12 * Math.PI + t.a, x = cx + s * R * Math.cos(th), y = cy + s * R * Math.sin(th); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+      } else {
+        const c = Math.cos(t.a), sn = Math.sin(t.a);
+        for (let i = 0; i < 12; i++) {
+          const y0 = -R + i / 11 * 2 * R, x1 = i % 2 ? R : -R, x2 = -x1;
+          const p = [cx + x1 * c - y0 * sn, cy + x1 * sn + y0 * c], q = [cx + x2 * c - y0 * sn, cy + x2 * sn + y0 * c];
+          i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); ctx.lineTo(q[0], q[1]);
+        }
+      }
+      ctx.stroke();
+    }
+    // 30 frames a second is plenty for drift this slow; motion is time based,
+    // so the speed stays the same at any frame rate
+    let raf = null, visible = true, last = 0;
+    function frame(now) {
+      raf = null;
+      if (now - last < 32) { start(); return; }
+      const k = last ? Math.min(4, (now - last) / 16.7) : 1;
+      last = now;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, w, h);
+      ctx.strokeStyle = stroke; ctx.lineWidth = 0.6;
+      for (const t of traj) {
+        t.a += t.va * k; t.x += t.vx * k; t.y += t.vy * k;
+        const bx = w / 2 - R - 8, by = h / 2 - R - 8;
+        if (Math.abs(t.x) > bx) { t.vx *= -1; t.x = Math.sign(t.x) * bx; }
+        if (Math.abs(t.y) > by) { t.vy *= -1; t.y = Math.sign(t.y) * by; }
+      }
+      for (let i = 0; i < 3; i++) for (let j = i + 1; j < 3; j++) {
+        const a = traj[i], b = traj[j], dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy);
+        if (d > 0 && d < 2 * R) {
+          const nx = dx / d, ny = dy / d, dot = (a.vx - b.vx) * nx + (a.vy - b.vy) * ny;
+          if (dot < 0) { a.vx -= dot * nx; a.vy -= dot * ny; b.vx += dot * nx; b.vy += dot * ny; }
+          const o = (2 * R - d) / 2; a.x += nx * o; a.y += ny * o; b.x -= nx * o; b.y -= ny * o;
+        }
+      }
+      for (const t of traj) shape(t, w / 2 + t.x, h / 2 + t.y);
+      start();
+    }
+    function start() { if (raf === null && visible && !document.hidden) raf = requestAnimationFrame(frame); }
+    new ResizeObserver(size).observe(zone);
+    new IntersectionObserver(e => { visible = e[0].isIntersecting; visible ? start() : (cancelAnimationFrame(raf), raf = null); }).observe(zone);
+    document.addEventListener('visibilitychange', start);
+    size(); start();
+  })();
   </script>
   <script>
-    // Lazy-load Leaflet JS when map section is near viewport
+    // ---- Academic footprint: dot-matrix world map ----
+    // Land is a 2.5 degree sampling grid rasterised from Natural Earth 1:110m
+    // (equirectangular, 80N to 55S, one bit per cell). On first view a readout
+    // line sweeps the grid row by row, like an EPI acquisition, and each place
+    // lights up as the line passes its latitude.
     (function() {
-      var mapEl = document.getElementById('academic-map');
-      if (!mapEl) return;
-      var loaded = false;
-      var obs = new IntersectionObserver(function(entries) {
-        if (entries[0].isIntersecting && !loaded) {
-          loaded = true;
-          var s = document.createElement('script');
-          s.src = 'vendor/leaflet/leaflet.js?v=1.9.4';
-          s.onload = function() { window._initMap && window._initMap(); };
-          document.body.appendChild(s);
-          obs.disconnect();
-        }
-      }, { rootMargin: '200px' });
-      obs.observe(mapEl);
-    })();
-  </script>
-  <script>
-    // ---- Academic Map (called after Leaflet lazy-loads) ----
-    window._initMap = function() {
-      const mapEl = document.getElementById('academic-map');
-      if (!mapEl || mapEl.offsetHeight === 0 || typeof L === 'undefined') return;
-      const map = L.map('academic-map', {
-        scrollWheelZoom: false,
-        attributionControl: true
-      }).setView([20, 0], 1);
-      setTimeout(function() { map.invalidateSize(); }, 200);
+      const root = document.getElementById('dotmap');
+      if (!root) return;
+      const canvas = root.querySelector('canvas');
+      const layer = root.querySelector('.dotmap-pins');
+      const tip = root.querySelector('.dotmap-tip');
+      const COLS = 144, ROWS = 54, LAT_TOP = 80, LAT_SPAN = 135;
+      const MASK = atob('AAAAEn////8AD8AAAAPAAAAAAAAA/b8P//8AAAABoAf4AYAAAAAD5P+Af/8AAAAHAP//YIAAAEAD/u/wP/4AADAGH/////sAg////v94P/wAA/8P////////9/////5+H8HAB///////////A/////48HwHAH///////////B////+BwDgAAPv/////////8AeD//+B+AAACPn///////42AAIAf//x/AAACHP///////gOAAAAP//7/wAAPP////////4MAAAAH////wAAD/////////8AAAAAD///84AAD/////////4AAAAAD///+AAAB/////////gAAAAAD///4AAAP+/Hv/////MAAAAAD///wAAAPl//3////8IAAAAAD///AAAAPAv/3////IIAAAAAB///AAAAG8B//////s4AAAAAA//+AAAAH+AP/////DgAAAAAAf/8AAAAP/v//////gAAAAAAAP8EAAAAf////////gAAAAAAAH4EAAAA////z////AAAAAAAAB4AAAAB///3/H//+gAAAAAAAA4jAAAB///7/D+f4AAAAAAAAA/gQAAB///7+B8fwAAAAAAAAAPwAAAB///98B4PggAAAAAAAAB4AAAB////wAwHwgAAAAAAAAAY4AAB////4AwFwQAAAAAAAAAP/AAA////wA4EAYAAAAAAAAAB/4AAf///wAICCAAAAAAAAAAB/8AAAH//gAAPGAAAAAAAAAAD/8AAAD//AAAHeEAAAAAAAAAD//AAAH/+AAADOhAAAAAAAAAH//4AAD/8AAABth8AAAAAAAAH//8AAB/8AAAA4AeAAAAAAAAD//8AAB/8AAAAEIPAAAAAAAAB//4AAB/8AAAAABAAAAAAAAAB//4AAB/8QAAAALkAAAAAAAAA//4AAB/8wAAAAfsAAAAAAAAAP/wAAB/5wAAAA/+AAAAAAAAAP/wAAB/xwAAAD//AAAAAAAAAP/AAAA/xgAAAH//gAAAAAAAAP+AAAA/gAAAAH//gAAAAAAAAf+AAAA/gAAAAD//wAAAAAAAAf8AAAAfAAAAAD//gAAAAAAAAf4AAAAeAAAAADw/gAAAAAAAAfgAAAAAAAAAAAAPAEAAAAAAA/gAAAAAAAAAAAAGACAAAAAAA+AAAAAAAAAAAAACAGAAAAAAA8AAAAAAAAAAAAAAAYAAAAAAA4AAAAAAAAAAAAAAAQAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAA');
+      const isLand = (r, c) => {
+        const i = r * COLS + c;
+        return (MASK.charCodeAt(i >> 3) & (0x80 >> (i & 7))) !== 0;
+      };
 
-      // Tile layer. Esri's gray canvas needs no API key; CARTO now watermarks
-      // unauthenticated tiles. Note Esri orders the path as {z}/{y}/{x}.
-      const TILES_LIGHT = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}';
-      const TILES_DARK = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}';
-      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-      let tileLayer = L.tileLayer(isDark ? TILES_DARK : TILES_LIGHT, {
-        attribution: 'Tiles &copy; <a href="https://www.esri.com/">Esri</a>, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a> contributors',
-        maxZoom: 16
-      }).addTo(map);
+      const KIND = { lived: 'Lived / studied', conference: 'Conference / visit', collaborator: 'Collaborator' };
+      // [lat, lon, kind, label, current]; current places get a halo
+      const PLACES = [
+        [48.1351, 11.5820, 'lived', 'Munich: TUM (PhD, 2021 to present)', true],
+        [22.5431, 114.0579, 'lived', 'Shenzhen: SIAT, CAS (M.Sc., 2018 to 2021)'],
+        [31.2989, 120.5853, 'lived', 'Suzhou: Soochow University (B.Eng., 2014 to 2018)'],
+        [39.9042, 116.4074, 'lived', 'Beijing: UCAS (M.Sc., 2018 to 2021)'],
+        [54.3233, 10.1228, 'lived', 'Kiel: home since Sep 2026', true],
+        [37.4419, -122.1430, 'conference', 'Stanford: Visiting Researcher (Jan to Mar 2025)'],
+        [48.5734, 7.7521, 'conference', 'Strasbourg: MICCAI 2026'],
+        [47.0707, 15.4395, 'conference', 'Graz: SFB MR-DYNAMO Workshop 2026'],
+        [34.8697, -111.7610, 'conference', 'Sedona: ISMRM Workshop 2026'],
+        [21.3069, -157.8583, 'conference', 'Honolulu: ISMRM 2025'],
+        [36.8930, 27.2878, 'conference', 'Kos Island: IPMI 2025'],
+        [1.3521, 103.8198, 'conference', 'Singapore: ISMRM 2024'],
+        [-41.1335, -71.3103, 'conference', 'Bariloche: IPMI 2023'],
+        [36.3504, 127.3845, 'conference', 'Daejeon: MICCAI 2025 Workshops'],
+        [41.8057, 123.4315, 'conference', 'Shenyang'],
+        [51.7520, -1.2577, 'conference', 'Oxford'],
+        [32.0603, 118.7969, 'conference', 'Nanjing: Southeast University'],
+        [37.4419, -122.1430, 'collaborator', 'Stanford University'],
+        [51.4988, -0.1749, 'collaborator', 'Imperial College London / King\'s College London'],
+        [48.5216, 9.0576, 'collaborator', 'University of Tübingen'],
+        [-33.4489, -70.6693, 'collaborator', 'Pontificia Universidad Católica de Chile'],
+        [42.3601, -71.0589, 'collaborator', 'MGH / Boston Children\'s Hospital'],
+        [37.7749, -122.4194, 'collaborator', 'UCSF'],
+        [42.2808, -83.7430, 'collaborator', 'University of Michigan'],
+        [22.5431, 114.0579, 'collaborator', 'SIAT, Chinese Academy of Sciences'],
+        [30.5728, 114.3526, 'collaborator', 'Innovation Academy for Precision Measurement Science and Technology, CAS'],
+        [35.1815, 136.9066, 'collaborator', 'Nagoya University'],
+      ];
 
-      // Switch tiles on theme change
-      const obs = new MutationObserver(() => {
-        const dark = document.documentElement.getAttribute('data-theme') === 'dark';
-        tileLayer.setUrl(dark ? TILES_DARK : TILES_LIGHT);
+      // Places closer than 6px on a 700px-wide map sit side by side, 9px apart.
+      // Grouping happens in that fixed frame so the layout never reflows.
+      const REF_W = 700, REF_H = REF_W * ROWS / COLS, SWEEP = 1100;
+      const pins = PLACES.map((p, i) => ({ p, i, x: (p[1] + 180) / 360, y: (LAT_TOP - p[0]) / LAT_SPAN }));
+      const parent = pins.map((_, i) => i);
+      const find = i => (parent[i] === i ? i : (parent[i] = find(parent[i])));
+      pins.forEach((a, i) => pins.forEach((b, j) => {
+        if (j > i && Math.hypot((a.x - b.x) * REF_W, (a.y - b.y) * REF_H) < 6) parent[find(j)] = find(i);
+      }));
+      const groups = {};
+      pins.forEach((pin, i) => (groups[find(i)] = groups[find(i)] || []).push(pin));
+      Object.values(groups).forEach(g => {
+        g.sort((a, b) => a.x - b.x);
+        const cx = g.reduce((t, q) => t + q.x, 0) / g.length;
+        const cy = g.reduce((t, q) => t + q.y, 0) / g.length;
+        g.forEach((q, k) => { q.gx = cx; q.gy = cy; q.dx = (k - (g.length - 1) / 2) * 9; });
       });
-      obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
-      function dot(color, r) {
-        return L.divIcon({
-          className: '',
-          html: '<div style="width:' + r*2 + 'px;height:' + r*2 + 'px;border-radius:50%;background:' + color + ';opacity:0.85;border:1.5px solid #fff;"></div>',
-          iconSize: [r*2, r*2],
-          iconAnchor: [r, r]
+      pins.forEach(pin => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'pin' + (pin.p[4] ? ' is-home' : '');
+        b.dataset.kind = pin.p[2];
+        b.style.setProperty('--x', (pin.gx * 100).toFixed(3) + '%');
+        b.style.setProperty('--y', (pin.gy * 100).toFixed(3) + '%');
+        b.style.setProperty('--dx', pin.dx + 'px');
+        // light up when the ease-out sweep reaches this row
+        b.style.setProperty('--delay', ((1 - Math.sqrt(1 - pin.gy)) * SWEEP).toFixed(0) + 'ms');
+        b.setAttribute('aria-label', KIND[pin.p[2]] + ': ' + pin.p[3]);
+        b.tabIndex = -1;
+        pin.el = b;
+      });
+      // Tab enters the map once; arrow keys then walk the places west to east
+      const order = pins.slice().sort((a, b) => (a.gx * REF_W + a.dx) - (b.gx * REF_W + b.dx));
+      order.forEach(pin => layer.appendChild(pin.el));
+      order[0].el.tabIndex = 0;
+
+      const at = pin => ({ x: pin.gx * root.clientWidth + pin.dx, y: pin.gy * root.clientHeight });
+      const near = (x, y, r) => pins
+        .map(pin => ({ pin, d: Math.hypot(at(pin).x - x, at(pin).y - y) }))
+        .filter(o => o.d <= r)
+        .sort((a, b) => a.d - b.d)
+        .map(o => o.pin);
+
+      function showTip(list) {
+        tip.textContent = '';
+        list.slice(0, 5).forEach(pin => {
+          const row = document.createElement('span');
+          const dot = document.createElement('i');
+          row.className = 'tip-row';
+          dot.className = 'tip-dot';
+          dot.dataset.kind = pin.p[2];
+          row.append(dot, document.createTextNode(pin.p[3]));
+          tip.appendChild(row);
         });
+        tip.hidden = false;
+        const a = at(list[0]), w = tip.offsetWidth, h = tip.offsetHeight;
+        let top = a.y - h - 12;
+        if (top < 0) top = a.y + 12;
+        tip.style.left = Math.min(Math.max(a.x - w / 2, 0), root.clientWidth - w) + 'px';
+        tip.style.top = top + 'px';
+      }
+      const hideTip = () => { tip.hidden = true; };
+      const local = e => { const r = root.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; };
+
+      root.addEventListener('pointermove', e => {
+        if (e.pointerType === 'touch') return;
+        const list = near(...local(e), 10);
+        list.length ? showTip(list) : hideTip();
+      });
+      root.addEventListener('pointerleave', hideTip);
+      root.addEventListener('click', e => {
+        if (e.detail === 0) return;  // keyboard activation; focus already shows the tip
+        const list = near(...local(e), 18);  // fingers get a wider reach
+        list.length ? showTip(list) : hideTip();
+      });
+      document.addEventListener('click', e => { if (!root.contains(e.target)) hideTip(); });
+      layer.addEventListener('focusin', e => {
+        const pin = pins.find(q => q.el === e.target);
+        if (pin) showTip([pin]);
+      });
+      layer.addEventListener('focusout', hideTip);
+      layer.addEventListener('keydown', e => {
+        const k = order.findIndex(q => q.el === document.activeElement);
+        if (k < 0) return;
+        let n = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = (k + 1) % order.length;
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = (k - 1 + order.length) % order.length;
+        else if (e.key === 'Home') n = 0;
+        else if (e.key === 'End') n = order.length - 1;
+        else if (e.key === 'Escape') hideTip();
+        if (n === null) return;
+        e.preventDefault();
+        order[k].el.tabIndex = -1;
+        order[n].el.tabIndex = 0;
+        order[n].el.focus();
+      });
+
+      // ---- the dot grid ----
+      const ctx = canvas.getContext('2d');
+      let shownRows = 0, sweepY = -1;
+      const rgb = v => { v = v.trim().replace('#', ''); return [0, 2, 4].map(i => parseInt(v.slice(i, i + 2), 16)); };
+      const mix = (a, b, t) => 'rgb(' + a.map((x, i) => Math.round(x * t + b[i] * (1 - t))).join(',') + ')';
+      function draw() {
+        const w = root.clientWidth, h = root.clientHeight;
+        if (!w || !h) return;
+        const dpr = window.devicePixelRatio || 1;
+        const cw = Math.round(w * dpr), ch = Math.round(h * dpr);
+        if (canvas.width !== cw || canvas.height !== ch) { canvas.width = cw; canvas.height = ch; }
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        ctx.clearRect(0, 0, w, h);
+        const cs = getComputedStyle(document.documentElement);
+        const ink = rgb(cs.getPropertyValue('--color-text'));
+        const bg = rgb(cs.getPropertyValue('--color-bg'));
+        const dx = w / COLS, dy = h / ROWS;
+        const rad = Math.max(0.6, Math.min(dx, dy) * 0.3);
+        const land = new Path2D(), sea = new Path2D();
+        for (let r = 0; r < shownRows; r++) {
+          const y = (r + 0.5) * dy;
+          for (let c = 0; c < COLS; c++) {
+            const x = (c + 0.5) * dx;
+            const path = isLand(r, c) ? land : sea;
+            path.moveTo(x + rad, y);
+            path.arc(x, y, rad, 0, 2 * Math.PI);
+          }
+        }
+        ctx.fillStyle = mix(ink, bg, 0.06); ctx.fill(sea);
+        ctx.fillStyle = mix(ink, bg, 0.26); ctx.fill(land);
+        if (sweepY >= 0) {
+          ctx.fillStyle = mix(rgb(cs.getPropertyValue('--color-accent')), bg, 0.7);
+          ctx.fillRect(0, sweepY, w, 1);
+        }
       }
 
-      var accent = '#C47A50', blue = '#5A9BD5', green = '#7BC47B';
+      function acquire() {
+        root.classList.add('is-live');
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          shownRows = ROWS; draw(); return;
+        }
+        const t0 = performance.now();
+        (function frame(now) {
+          const t = Math.min(1, (now - t0) / SWEEP);
+          const e = 1 - (1 - t) * (1 - t);  // ease-out
+          shownRows = Math.ceil(e * ROWS);
+          sweepY = t < 1 ? e * root.clientHeight : -1;
+          draw();
+          if (t < 1) requestAnimationFrame(frame);
+        })(t0);
+      }
 
-      // Lived / Studied (accent)
-      var lived = [
-        [48.1351, 11.5820, 'Munich: TUM (PhD, 2021 to present)'],
-        [22.5431, 114.0579, 'Shenzhen: SIAT, CAS (M.Sc., 2018 to 2021)'],
-        [31.2989, 120.5853, 'Suzhou: Soochow University (B.Eng., 2014 to 2018)'],
-        [39.9042, 116.4074, 'Beijing: UCAS (M.Sc., 2018 to 2021)'],
-      ];
-
-      // Conferences / Visits (blue)
-      var conferences = [
-        [37.4419, -122.1430, 'Stanford: Visiting Researcher (Jan to Mar 2025)'],
-        [47.0707, 15.4395, 'Graz: SFB MR-DYNAMO Workshop 2026'],
-        [34.8697, -111.7610, 'Sedona: ISMRM Workshop 2026'],
-        [21.3069, -157.8583, 'Honolulu: ISMRM 2025'],
-        [36.8930, 27.2878, 'Kos Island: IPMI 2025'],
-        [1.3521, 103.8198, 'Singapore: ISMRM 2024'],
-        [-41.1335, -71.3103, 'Bariloche: IPMI 2023'],
-        [36.3504, 127.3845, 'Daejeon: MICCAI 2025 Workshops'],
-        [41.8057, 123.4315, 'Shenyang'],
-        [51.7520, -1.2577, 'Oxford'],
-        [32.0603, 118.7969, 'Nanjing: Southeast University'],
-      ];
-
-      // Collaborators (green) — will be updated with research results
-      var collabs = [
-        [37.4419, -122.1430, 'Stanford University'],
-        [51.4988, -0.1749, 'Imperial College London / King\'s College London'],
-        [48.5216, 9.0576, 'University of Tübingen'],
-        [-33.4489, -70.6693, 'Pontificia Universidad Católica de Chile'],
-        [42.3601, -71.0589, 'MGH / Boston Children\'s Hospital'],
-        [37.7749, -122.4194, 'UCSF'],
-        [42.2808, -83.7430, 'University of Michigan'],
-        [22.5431, 114.0579, 'SIAT, Chinese Academy of Sciences'],
-        [30.5728, 114.3526, 'Innovation Academy for Precision Measurement Science and Technology, CAS'],
-        [35.1815, 136.9066, 'Nagoya University'],
-      ];
-
-      lived.forEach(function(p) {
-        L.marker([p[0], p[1]], { icon: dot(accent, 7) }).addTo(map).bindPopup(p[2]);
-      });
-      conferences.forEach(function(p) {
-        L.marker([p[0], p[1]], { icon: dot(blue, 5) }).addTo(map).bindPopup(p[2]);
-      });
-      collabs.forEach(function(p) {
-        L.marker([p[0], p[1]], { icon: dot(green, 5) }).addTo(map).bindPopup(p[2]);
-      });
-    };
+      new IntersectionObserver((entries, obs) => {
+        if (entries[0].isIntersecting) { obs.disconnect(); acquire(); }
+      }, { threshold: 0.3 }).observe(root);
+      new ResizeObserver(draw).observe(root);
+      // redraw in the new palette inside the theme switch, before its new frame is captured
+      new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    })();
   </script>
 
   <!-- ====== PHOTO LIGHTBOX (eclipse, Mallorca 12 Aug 2026) ====== -->
@@ -1290,8 +1000,8 @@
     </button>
     <figure class="lightbox-figure">
       <div class="lightbox-frame">
-        <img class="lightbox-thumb" id="lightbox-thumb" src="" alt="" aria-hidden="true">
-        <img class="lightbox-img" id="lightbox-img" src="" alt="">
+        <img class="lightbox-thumb" id="lightbox-thumb" alt="" aria-hidden="true">
+        <img class="lightbox-img" id="lightbox-img" alt="">
       </div>
       <figcaption class="lightbox-caption">
         <span class="lightbox-dots" id="lightbox-dots"></span>
@@ -1368,7 +1078,8 @@
       img.addEventListener('load', () => img.classList.add('is-loaded'));
 
       function open(i) {
-        lastFocus = document.activeElement;
+        // Safari does not focus a button on click, so fall back to the trigger
+        lastFocus = document.activeElement !== document.body ? document.activeElement : trigger;
         show(i || 0);
         box.classList.add('is-open');
         box.removeAttribute('aria-hidden');
@@ -1428,6 +1139,5 @@
       trigger.addEventListener('touchstart', warm, { passive: true });
     })();
   </script>
-
 </body>
 </html>
