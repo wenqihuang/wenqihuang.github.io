@@ -9,12 +9,12 @@
   <meta property="og:description" content="PhD student at TUM researching novel representations for fast MRI reconstruction.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://wenqihuang.me/">
-  <meta property="og:image" content="https://wenqihuang.me/images/og-card.jpg?v=20261011">
+  <meta property="og:image" content="https://wenqihuang.me/images/og-card.jpg?v=20261011.2">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="Wenqi Huang, PhD student at TUM: photo, name and a short research bio">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="https://wenqihuang.me/images/og-card.jpg?v=20261011">
+  <meta name="twitter:image" content="https://wenqihuang.me/images/og-card.jpg?v=20261011.2">
   <!-- kept in sync with the active palette's --color-bg by syncThemeColor() -->
   <meta name="theme-color" content="#FAF8F4" id="theme-color">
 
@@ -26,9 +26,9 @@
     /* =========================================================
        The site's only stylesheet, inlined so the first paint needs no extra request
 
-       Grid   112 meta column · 24 gutter · 480 text column (616 content)
+       Grid   120 meta column · 16 gutter · 480 text column (616 content); photo 112
               phones: 72 · 16
-       Type   30/36 name · 18/24 headings · 15/24 text · 13/20 meta · 11/16 tags
+       Type   30/36 name · 20/28 headings · 16/24 text · 14/20 meta · 11/16 tags
               serif (Source Serif 4) for names of things: the name, headings, paper titles
               sans (Source Sans 3) for prose and metadata
        Space  4px steps (8 12 16 24 48 64), measured from cap height to baseline:
@@ -134,9 +134,11 @@
       --font-cn: "Noto Serif SC", "Songti SC", serif;
       --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 
-      --col: 112px;
-      --gut: 24px;
+      /* 120 + 16: the text axis stays at 136 while 14px date ranges fit the meta column */
+      --col: 120px;
+      --gut: 16px;
       --axis: calc(var(--col) + var(--gut));
+      --photo: 112px;
       --nav-h: 56px;
       --hair: 1px;
       --size-xs: 11px;
@@ -188,7 +190,7 @@
       margin: 0;
       background: var(--color-bg);
       color: var(--color-text);
-      font: 400 15px/24px var(--font-sans);
+      font: 400 16px/24px var(--font-sans);
       font-kerning: normal;
       font-variant-ligatures: common-ligatures;
       -webkit-font-smoothing: antialiased;
@@ -218,7 +220,7 @@
       padding: 8px 12px;
       background: var(--color-text);
       color: var(--color-bg);
-      font-size: 13px;
+      font-size: 14px;
       line-height: 20px;
     }
 
@@ -301,7 +303,7 @@
     }
 
     .nav .nav-logo {
-      font: 500 15px/24px var(--font-serif);
+      font: 500 16px/24px var(--font-serif);
       letter-spacing: -0.005em;
       color: var(--color-text);
     }
@@ -331,7 +333,7 @@
       display: inline-flex;
       align-items: center;
       min-height: 32px;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 20px;
       font-weight: 500;
       color: var(--color-text-secondary);
@@ -453,8 +455,8 @@
     .kphoto {
       position: relative;
       display: block;
-      width: var(--col);
-      height: var(--col);
+      width: var(--photo);
+      height: var(--photo);
       padding: 0;
       border: 0;
       border-radius: 4px;
@@ -521,7 +523,7 @@
     .nm .cn {
       margin-left: 8px;
       font-family: var(--font-cn);
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 400;
       line-height: 1;
       letter-spacing: 0.04em;
@@ -530,7 +532,7 @@
 
     .say {
       margin-top: 12px;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 20px;
       color: var(--color-text-tertiary);
     }
@@ -630,7 +632,7 @@
 
     .sh {
       margin-bottom: 16px;
-      font: 500 18px/24px var(--font-serif);
+      font: 500 20px/28px var(--font-serif);
       letter-spacing: -0.005em;
       color: var(--color-text);
     }
@@ -653,7 +655,7 @@
     }
 
     .shw .sub {
-      font-size: 13px;
+      font-size: 14px;
       line-height: 20px;
       color: var(--color-text-secondary);
       transition: color 0.2s ease;
@@ -674,7 +676,7 @@
     }
 
     .meta {
-      font-size: 13px;
+      font-size: 14px;
       line-height: 20px;
       color: var(--color-text-tertiary);
       font-variant-numeric: tabular-nums;
@@ -697,7 +699,7 @@
     /* paper titles are serif at text size everywhere */
     .t {
       display: block;
-      font: 500 15px/24px var(--font-serif);
+      font: 500 16px/24px var(--font-serif);
       letter-spacing: -0.003em;
       color: var(--color-text);
       transition: color 0.2s ease;
@@ -707,7 +709,7 @@
 
     .au {
       margin-top: 12px;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 20px;
       color: var(--color-text-secondary);
     }
@@ -717,7 +719,7 @@
     .ln { display: flex; flex-wrap: wrap; gap: 0 16px; margin-top: 12px; }
 
     .ln a {
-      font-size: 13px;
+      font-size: 14px;
       line-height: 20px;
       font-weight: 500;
       color: var(--color-text-secondary);
@@ -740,13 +742,13 @@
 
     .tt {
       margin-top: 8px;
-      font: 400 15px/24px var(--font-serif);
+      font: 400 16px/24px var(--font-serif);
       color: var(--color-text-secondary);
     }
 
     .dt {
       margin-top: 8px;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 20px;
       color: var(--color-text-secondary);
     }
@@ -811,7 +813,7 @@
       border-radius: 999px;
       box-shadow: inset 0 0 0 var(--hair) var(--color-divider);
       background: none;
-      font: 400 13px/20px var(--font-sans);
+      font: 400 14px/20px var(--font-sans);
       color: var(--color-text-secondary);
       cursor: pointer;
       transition: box-shadow 0.2s ease, color 0.2s ease;
@@ -834,7 +836,7 @@
       padding: 0;
       border: 0;
       background: none;
-      font: 400 13px/20px var(--font-sans);
+      font: 400 14px/20px var(--font-sans);
       color: var(--color-text-secondary);
       cursor: pointer;
       transition: color 0.2s ease;
@@ -1116,8 +1118,8 @@
       border: 1px solid var(--color-divider);
       border-radius: 6px;
       box-shadow: var(--shadow-md);
-      font-size: 0.75rem;
-      line-height: 1.45;
+      font-size: 14px;
+      line-height: 20px;
       color: var(--color-text);
       pointer-events: none;
     }
@@ -1147,7 +1149,7 @@
       flex-wrap: wrap;
       gap: 4px 24px;
       margin-top: 16px;
-      font-size: 13px;
+      font-size: 14px;
       line-height: 20px;
       color: var(--color-text-secondary);
     }
@@ -1180,20 +1182,20 @@
     }
 
     .copy {
-      font-size: 13px;
+      font-size: 14px;
       line-height: 20px;
       color: var(--color-text-tertiary);
       font-variant-numeric: tabular-nums;
     }
 
-    /* "© 2026 Wenqi Huang" is within a pixel of the 112px column, so engines disagree on whether
+    /* "© 2026 Wenqi Huang" is about as wide as the meta column, so engines disagree on whether
        it fits; the name always takes its own line instead */
     .copy .nw { display: block; }
 
     .flinks { display: flex; flex-wrap: wrap; gap: 4px 16px; }
 
     .flinks a {
-      font-size: 13px;
+      font-size: 14px;
       line-height: 20px;
       font-weight: 500;
       color: var(--color-text-secondary);
@@ -1230,7 +1232,7 @@
       box-shadow: inset 0 0 0 var(--hair) var(--color-divider);
       background: var(--color-bg);
       color: var(--color-text-secondary);
-      font: 400 15px/1 var(--font-sans);
+      font: 400 16px/1 var(--font-sans);
       cursor: pointer;
       opacity: 0;
       visibility: hidden;
@@ -1250,7 +1252,7 @@
 
     /* --- Phones: 72 + 16 columns, rows stack --- */
     @media screen and (max-width: 640px) {
-      :root { --col: 72px; --gut: 16px; }
+      :root { --col: 72px; --gut: 16px; --photo: 72px; }
 
       .wrap { padding-inline: 16px; }
 
@@ -1283,7 +1285,7 @@
       }
 
       .nav-links li { box-shadow: inset 0 var(--hair) 0 var(--color-divider); }
-      .nav-links a { min-height: 44px; font-size: 15px; line-height: 24px; }
+      .nav-links a { min-height: 44px; font-size: 16px; line-height: 24px; }
       .nav-links a::after { display: none; }
       .nav-links a.nav-cv { min-height: 44px; padding: 0; border-radius: 0; box-shadow: none; }
       .theme-toggle { width: 44px; height: 44px; margin: 0 0 0 -14px; }
